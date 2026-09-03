@@ -51,7 +51,7 @@ button,textarea{font:inherit}button{color:inherit}
 .model-body{padding:8px;overflow:auto;max-height:calc(min(470px,66vh) - 48px);scrollbar-width:none}.model-body::-webkit-scrollbar{display:none}
 .model-row{width:100%;min-height:48px;border:0;border-radius:13px;background:transparent;padding:7px 9px;text-align:left;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;color:#5f5752;transition:background .14s ease,transform .12s ease}.model-row+.model-row{margin-top:3px}.model-row:active{transform:scale(.985)}.model-row.selected{background:rgba(220,227,210,.52)}.model-name{font-size:12px;font-weight:600;line-height:1.25}.model-desc{font-size:9.5px;color:#9b9189;line-height:1.35;margin-top:3px}.model-check{display:grid;place-items:center;font-size:15px;line-height:1;color:#687457;background:transparent}
 .model-navs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.model-nav{min-height:50px;border:0;border-radius:14px;padding:8px 10px;text-align:left;color:#6d625d;background:rgba(246,233,230,.38)}.model-nav.more-nav{background:rgba(220,227,210,.36)}.model-nav strong{display:block;font-size:11px;font-weight:600;line-height:1.15}.model-nav small{display:block;margin-top:4px;color:#9a9088;font-size:9px;line-height:1.2}.model-nav.more-nav{position:relative;padding-right:24px}.model-nav.more-nav::after{content:"›";position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:17px;color:#9a9088}
-.more-view-title{font-size:9px;color:#a0958d;letter-spacing:.08em;margin:6px 5px 5px}.model-note{font-size:9px;color:#9b9189;line-height:1.45;padding:6px 5px 1px}.model-popover::after{content:"";position:absolute;left:34px;bottom:-5px;width:10px;height:10px;background:color-mix(in srgb,var(--paper-2) 93%,transparent);border-right:1px solid rgba(100,82,72,.06);border-bottom:1px solid rgba(100,82,72,.06);transform:rotate(45deg);border-radius:2px}
+.more-model-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.more-model-chip{height:46px;border:0;border-radius:13px;background:rgba(246,233,230,.30);font-size:11px;color:#655c57;display:flex;align-items:center;justify-content:center;gap:6px}.more-model-chip.selected{background:rgba(220,227,210,.58);color:#59634e;font-weight:600}.more-model-chip .chip-check{font-size:12px;color:#687457}.more-view-title{font-size:9px;color:#a0958d;letter-spacing:.08em;margin:6px 5px 5px}.long-title{display:flex;align-items:baseline;gap:7px;margin-top:12px}.long-title small{font-size:8.5px;letter-spacing:0;color:#9a9088}.model-note{font-size:9px;color:#9b9189;line-height:1.45;padding:6px 5px 1px}.model-popover::after{content:"";position:absolute;left:34px;bottom:-5px;width:10px;height:10px;background:color-mix(in srgb,var(--paper-2) 93%,transparent);border-right:1px solid rgba(100,82,72,.06);border-bottom:1px solid rgba(100,82,72,.06);transform:rotate(45deg);border-radius:2px}
 .toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 64px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(45,39,35,.84);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:370px){.model-popover{left:46px;width:calc(100vw - 58px)}}
 @media(min-width:700px){.app{box-shadow:0 20px 70px rgba(48,39,34,.08)}}
@@ -99,14 +99,14 @@ const MAIN_MODELS=[
 {id:'claude-opus-4-6',name:'Opus 4.6',desc:''},
 {id:'claude-sonnet-4-6',name:'Sonnet 4.6',desc:''}];
 const MORE_MODELS=[
-{id:'claude-sonnet-5',name:'Sonnet 5',desc:'Most efficient for everyday tasks'},
-{id:'claude-haiku-4-5-20251001',name:'Haiku 4.5',desc:'Fastest for quick answers'},
+{id:'claude-sonnet-5',name:'Sonnet 5',desc:''},
+{id:'claude-haiku-4-5-20251001',name:'Haiku 4.5',desc:''},
 {id:'claude-opus-4-8',name:'Opus 4.8',desc:''},
 {id:'claude-opus-4-7',name:'Opus 4.7',desc:''}];
 const LONG_MODELS=[
-{id:'claude-opus-4-6[1m]',name:'Opus 4.6 · 1M',desc:'一百万上下文，少压缩'},
-{id:'claude-opus-4-8[1m]',name:'Opus 4.8 · 1M',desc:'一百万上下文，少压缩'},
-{id:'claude-sonnet-5[1m]',name:'Sonnet 5 · 1M',desc:'一百万上下文，少压缩'}];
+{id:'claude-opus-4-6[1m]',name:'Opus 4.6 · 1M',desc:''},
+{id:'claude-opus-4-8[1m]',name:'Opus 4.8 · 1M',desc:''},
+{id:'claude-sonnet-5[1m]',name:'Sonnet 5 · 1M',desc:''}];
 const EFFORTS=[
 {id:'low',name:'Low',desc:'Quick replies to simple questions'},
 {id:'medium',name:'Medium',desc:'Light, casual tasks'},
@@ -123,15 +123,16 @@ function setModelOpen(open){modelPopover.classList.toggle('open',open);modelPopo
 function closeAll(){setMoreOpen(false);setModelOpen(false)}
 function send(){const text=input.value.trim();if(!text){hint();return}const article=document.createElement('article');article.className='msg me';const avatar=document.createElement('div');avatar.className='user-avatar';avatar.setAttribute('aria-hidden','true');avatar.textContent='漾';const bubble=document.createElement('div');bubble.className='user-bubble';bubble.textContent=text;article.append(avatar,bubble);list.append(article);input.value='';resizeInput();window.__playSendMorph?.();requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}))}
 function rowHTML(item,selected){return `<button class="model-row${selected?' selected':''}" data-pick="${item.id}"><div><div class="model-name">${item.name}</div>${item.desc?`<div class="model-desc">${item.desc}</div>`:''}</div>${selected?'<span class="model-check">✓</span>':''}</button>`}
+function gridHTML(items){return `<div class="more-model-grid">${items.map(m=>`<button class="more-model-chip${currentModel===m.id?' selected':''}" data-pick="${m.id}"><span>${m.name}</span>${currentModel===m.id?'<span class="chip-check">✓</span>':''}</button>`).join('')}</div>`}
 function renderModel(){
  modelBack.style.visibility=modelView==='main'?'hidden':'visible';
  if(modelView==='main'){
   const effort=EFFORTS.find(e=>e.id===currentEffort)||EFFORTS[2];
-  modelBody.innerHTML=MAIN_MODELS.map(m=>rowHTML(m,currentModel===m.id)).join('')+`<div class="model-navs"><button class="model-nav" data-view="effort"><strong>${effort.name}</strong><small>回复深度与速度</small></button><button class="model-nav more-nav" data-view="more"><strong>更多模型 / 1M</strong><small>Sonnet · Haiku · 长上下文</small></button></div>`;
+  modelBody.innerHTML=MAIN_MODELS.map(m=>rowHTML(m,currentModel===m.id)).join('')+`<div class="model-navs"><button class="model-nav" data-view="effort"><strong>${effort.name}</strong><small>回复深度与速度</small></button><button class="model-nav more-nav" data-view="more"><strong>更多模型 / 1M</strong><small>Sonnet · Haiku ·<br>长上下文</small></button></div>`;
  }else if(modelView==='effort'){
   modelBody.innerHTML=EFFORTS.map(e=>rowHTML(e,currentEffort===e.id)).join('')+'<div class="model-note">更高档位会更深入，但通常也会更慢。</div>';
  }else{
-  modelBody.innerHTML='<div class="more-view-title">更多模型</div>'+MORE_MODELS.map(m=>rowHTML(m,currentModel===m.id)).join('')+'<div class="more-view-title" style="margin-top:10px">1M</div>'+LONG_MODELS.map(m=>rowHTML(m,currentModel===m.id)).join('');
+  modelBody.innerHTML=gridHTML(MORE_MODELS)+'<div class="more-view-title long-title"><span>1M</span><small>一百万上下文，少压缩</small></div>'+LONG_MODELS.map(m=>rowHTML(m,currentModel===m.id)).join('');
  }
  modelBody.querySelectorAll('[data-view]').forEach(b=>b.onclick=e=>{e.stopPropagation();modelView=b.dataset.view;renderModel()});
  modelBody.querySelectorAll('[data-pick]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.pick;if(modelView==='effort'){const effort=EFFORTS.find(x=>x.id===id);if(!effort)return;currentEffort=effort.id;hint(`${effort.name} · 前端预览`);renderModel();return}const all=[...MAIN_MODELS,...MORE_MODELS,...LONG_MODELS],m=all.find(x=>x.id===id);if(!m)return;currentModel=m.id;currentModelName=m.name;modelBtnText.textContent=m.name.replace(' · 1M',' 1M');hint(`已切换到 ${m.name} · 前端预览`);renderModel()});
