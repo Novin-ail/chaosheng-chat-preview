@@ -10,259 +10,78 @@
 <title>潮生 · Chat Preview</title>
 <style>
 :root{
-  --paper:#f5f0e6;
-  --paper-2:#f8f3ea;
-  --ink:#38322f;
-  --ink-soft:#716861;
-  --muted:#aaa097;
-  --skin-pink:#efdeda;
-  --milk-pink:#f6e9e6;
-  --bean:#dce3d2;
-  --bean-deep:#8fa07a;
-  --line:rgba(91,76,67,.075);
-  --bubble-border:rgba(111,113,86,.10);
-  --bubble-shadow:rgba(78,67,58,.045);
+  --paper:#f5f0e6;--paper-2:#f8f3ea;--ink:#38322f;--ink-soft:#716861;--muted:#aaa097;
+  --skin-pink:#efdeda;--milk-pink:#f6e9e6;--bean:#dce3d2;--bean-deep:#8fa07a;
+  --line:rgba(91,76,67,.075);--bubble-border:rgba(111,113,86,.10);--bubble-shadow:rgba(78,67,58,.045)
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
 body{overflow:hidden;background:#ebe5dc;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei",sans-serif}
-button,textarea{font:inherit}
-button{color:inherit}
-.app{
-  height:100dvh;width:100%;max-width:520px;margin:auto;
-  display:grid;grid-template-rows:auto 1fr auto;
-  background:
-    radial-gradient(circle at 87% 7%,rgba(239,222,218,.34),transparent 27%),
-    radial-gradient(circle at 8% 72%,rgba(220,227,210,.24),transparent 24%),
-    var(--paper);
-}
-.topbar{
-  padding:calc(env(safe-area-inset-top) + 8px) 18px 9px;
-  display:grid;grid-template-columns:42px 1fr 42px;align-items:center;
-  background:color-mix(in srgb,var(--paper) 93%,transparent);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(83,70,62,.035);z-index:5
-}
-.back,.top-more{width:40px;height:40px;border:0;background:transparent;color:#665e58}
-.back{font-size:26px}.top-more{font-size:22px}
-.person{text-align:center;cursor:pointer;user-select:none}
-.title{font-size:16px;font-weight:650;letter-spacing:.035em}
-.subtitle{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;color:#8f867e;font-size:10px}
-.online{width:7px;height:7px;border-radius:50%;background:var(--bean-deep);box-shadow:0 0 0 3px rgba(143,160,122,.10)}
-.messages{overflow:auto;padding:27px 20px 30px;scrollbar-width:none}
-.messages::-webkit-scrollbar{display:none}
-.msg{position:relative;margin-bottom:30px}
-.msg.sheng{padding-right:42px}
-.msg.me{display:flex;flex-direction:column;align-items:flex-end;padding-left:58px;margin-bottom:28px}
-.assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 8px 1px;color:#4c4540;font-size:11px;letter-spacing:.025em}
-.assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#403a36;flex:none}
-.time{
-  font-family:"Nunito","Avenir Next Rounded","Avenir Next",system-ui,sans-serif;
-  font-size:11.5px;
-  font-weight:500;
-  letter-spacing:.018em;
-  color:#5d5550;
-}
-.sheep{width:22px;height:22px;border:0;padding:2px;background:transparent;border-radius:8px;display:grid;place-items:center;margin-left:1px}
-.sheep[aria-expanded="true"]{background:var(--milk-pink)}
-.sheep img{width:17px;height:17px;display:block;object-fit:contain}
-.avatar{display:none;position:absolute;width:31px;height:31px;border-radius:50%;object-fit:cover;border:1px solid rgba(91,76,67,.06);background:var(--paper-2)}
-.avatar-sheng{left:-1px;top:29px}
-.user-avatar{display:none;position:absolute;right:-1px;top:0;width:31px;height:31px;border-radius:50%;place-items:center;background:var(--skin-pink);border:1px solid rgba(121,93,89,.08);color:#846c68;font:600 12px/1 "Nunito","SF Pro Rounded",system-ui,sans-serif;box-shadow:0 3px 10px rgba(86,69,62,.035)}
-.app.show-avatar .sheng{padding-left:43px}
-.app.show-avatar .avatar-sheng{display:block}
-.app.show-avatar .me{padding-right:43px}
-.app.show-avatar .user-avatar{display:grid}
-.assistant-text{font-size:15px;line-height:1.76;letter-spacing:.008em;word-break:break-word;color:#37312e}
-.assistant-text.short{width:max-content;max-width:100%}
-.user-bubble{
-  position:relative;width:fit-content;max-width:100%;min-width:0;
-  padding:8px 12px 9px;
-  border:1px solid var(--bubble-border);
-  border-radius:16px 5px 16px 16px;
-  background:color-mix(in srgb,var(--bean) 88%,var(--paper-2));
-  box-shadow:0 4px 14px var(--bubble-shadow);
-  font-size:15px;line-height:1.58;letter-spacing:.006em;
-  word-break:break-word;
-}
-.details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin:0;opacity:0;transition:.18s ease}
-.details.open{grid-template-rows:1fr;opacity:1;margin:0 0 11px}
-.details-inner{overflow:hidden}
-.card{margin:0;padding:9px 11px 10px;background:color-mix(in srgb,var(--milk-pink) 72%,transparent);border:1px solid rgba(139,109,105,.07);border-radius:11px;color:#796d68}
-.line+.line{margin-top:8px}
-.label{margin-bottom:3px;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:#a2928d;font-weight:650}
-.detail{font-size:10.5px;line-height:1.55}
-.composer-wrap{
-  background:color-mix(in srgb,var(--milk-pink) 72%,var(--paper-2));
-  border-top:1px solid rgba(91,76,67,.055);
-  border-radius:24px 24px 0 0;
-  overflow:hidden;
-  padding:8px 16px calc(env(safe-area-inset-bottom) + 7px);
-  z-index:6
-}
-.input-layer{min-height:47px;padding:0 4px 4px}
-textarea{width:100%;min-height:42px;max-height:118px;resize:none;border:0;outline:0;background:transparent;padding:9px 2px 8px;color:var(--ink);font-size:15px;line-height:1.5}
-textarea::placeholder{color:#b1a59e}
-.action-layer{height:46px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;align-items:center;gap:8px;border-top:1px solid rgba(91,76,67,.045);padding-top:5px}
-.action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6761}
-.more{width:38px}
-.model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:15px;background:rgba(239,222,218,.62);font-size:12px;color:#756a65;white-space:nowrap}
-.model:after{content:"⌄";font-size:11px;margin-top:-2px}
-.spacer{min-width:0}
-.icon svg,.morph-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
-.more .morph-svg{width:22px;height:22px;stroke-width:1.75}
-.send{width:40px;height:40px;border-radius:50%;background:var(--bean);color:#58604d;transition:transform .16s ease,background .18s ease}
-.send:active{transform:scale(.94)}
-.send .morph-svg{width:19px;height:19px}
-.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 58px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(45,39,35,.84);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;z-index:20}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+button,textarea{font:inherit}button{color:inherit}
+.app{height:100dvh;width:100%;max-width:520px;margin:auto;display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(circle at 87% 7%,rgba(239,222,218,.34),transparent 27%),radial-gradient(circle at 8% 72%,rgba(220,227,210,.24),transparent 24%),var(--paper)}
+.topbar{padding:calc(env(safe-area-inset-top) + 8px) 18px 9px;display:grid;grid-template-columns:42px 1fr 42px;align-items:center;background:color-mix(in srgb,var(--paper) 93%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(83,70,62,.035);z-index:5}
+.back,.top-more{width:40px;height:40px;border:0;background:transparent;color:#665e58}.back{font-size:26px}.top-more{font-size:22px}
+.person{text-align:center;cursor:pointer;user-select:none}.title{font-size:16px;font-weight:650;letter-spacing:.035em}.subtitle{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;color:#8f867e;font-size:10px}.online{width:7px;height:7px;border-radius:50%;background:var(--bean-deep);box-shadow:0 0 0 3px rgba(143,160,122,.10)}
+.messages{overflow:auto;padding:27px 20px 30px;scrollbar-width:none}.messages::-webkit-scrollbar{display:none}
+.msg{position:relative;margin-bottom:30px}.msg.sheng{padding-right:42px}.msg.me{display:flex;flex-direction:column;align-items:flex-end;padding-left:58px;margin-bottom:28px}
+.assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 8px 1px;color:#4c4540;font-size:11px;letter-spacing:.025em}.assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#403a36;flex:none}
+.time{font-family:"Nunito","Avenir Next Rounded","Avenir Next",system-ui,sans-serif;font-size:11.5px;font-weight:500;letter-spacing:.018em;color:#5d5550}
+.sheep{width:22px;height:22px;border:0;padding:2px;background:transparent;border-radius:8px;display:grid;place-items:center;margin-left:1px}.sheep[aria-expanded="true"]{background:var(--milk-pink)}.sheep img{width:17px;height:17px;display:block;object-fit:contain}
+.avatar{display:none;position:absolute;width:31px;height:31px;border-radius:50%;object-fit:cover;border:1px solid rgba(91,76,67,.06);background:var(--paper-2)}.avatar-sheng{left:-1px;top:29px}.user-avatar{display:none;position:absolute;right:-1px;top:0;width:31px;height:31px;border-radius:50%;place-items:center;background:var(--skin-pink);border:1px solid rgba(121,93,89,.08);color:#846c68;font:600 12px/1 "Nunito","SF Pro Rounded",system-ui,sans-serif;box-shadow:0 3px 10px rgba(86,69,62,.035)}
+.app.show-avatar .sheng{padding-left:43px}.app.show-avatar .avatar-sheng{display:block}.app.show-avatar .me{padding-right:43px}.app.show-avatar .user-avatar{display:grid}
+.assistant-text{font-size:15px;line-height:1.76;letter-spacing:.008em;word-break:break-word;color:#37312e}.assistant-text.short{width:max-content;max-width:100%}
+.user-bubble{position:relative;width:fit-content;max-width:100%;min-width:0;padding:8px 12px 9px;border:1px solid var(--bubble-border);border-radius:16px 5px 16px 16px;background:color-mix(in srgb,var(--bean) 88%,var(--paper-2));box-shadow:0 4px 14px var(--bubble-shadow);font-size:15px;line-height:1.58;letter-spacing:.006em;word-break:break-word}
+.details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin:0;opacity:0;transition:.18s ease}.details.open{grid-template-rows:1fr;opacity:1;margin:0 0 11px}.details-inner{overflow:hidden}.card{margin:0;padding:9px 11px 10px;background:color-mix(in srgb,var(--milk-pink) 72%,transparent);border:1px solid rgba(139,109,105,.07);border-radius:11px;color:#796d68}.line+.line{margin-top:8px}.label{margin-bottom:3px;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:#a2928d;font-weight:650}.detail{font-size:10.5px;line-height:1.55}
+.composer-wrap{position:relative;background:color-mix(in srgb,var(--milk-pink) 72%,var(--paper-2));border-top:1px solid rgba(91,76,67,.055);border-radius:24px 24px 0 0;padding:8px 16px calc(env(safe-area-inset-bottom) + 7px);z-index:6}
+.input-layer{min-height:47px;padding:0 4px 4px}textarea{width:100%;min-height:42px;max-height:118px;resize:none;border:0;outline:0;background:transparent;padding:9px 2px 8px;color:var(--ink);font-size:15px;line-height:1.5}textarea::placeholder{color:#b1a59e}
+.action-layer{height:46px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;align-items:center;gap:8px;border-top:1px solid rgba(91,76,67,.045);padding-top:5px}.action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6761}.more{width:38px}.model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:15px;background:rgba(239,222,218,.62);font-size:12px;color:#756a65;white-space:nowrap}.model:after{content:"⌄";font-size:11px;margin-top:-2px}.spacer{min-width:0}
+.icon svg,.morph-svg,.quick-icon{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;overflow:visible}.more .morph-svg{width:22px;height:22px;stroke-width:1.75}.send{width:40px;height:40px;border-radius:50%;background:var(--bean);color:#58604d;transition:transform .16s ease,background .18s ease}.send:active{transform:scale(.94)}.send .morph-svg{width:19px;height:19px}
+.more-popover{position:absolute;left:12px;bottom:calc(100% + 9px);width:214px;padding:9px;border:1px solid rgba(100,82,72,.075);border-radius:18px;background:color-mix(in srgb,var(--paper-2) 92%,transparent);box-shadow:0 14px 38px rgba(69,55,47,.10);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);opacity:0;transform:translateY(8px) scale(.97);transform-origin:18px 100%;pointer-events:none;transition:opacity .17s ease,transform .2s cubic-bezier(.2,.8,.2,1)}
+.more-popover.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.more-item{min-width:0;height:62px;border:0;border-radius:13px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#6d635d;transition:background .15s ease,transform .12s ease}.more-item:active{transform:scale(.95);background:rgba(220,227,210,.38)}.more-item:nth-child(1),.more-item:nth-child(5){background:rgba(246,233,230,.34)}.more-item:nth-child(3){background:rgba(220,227,210,.30)}.more-item span{font-size:10.5px;line-height:1;white-space:nowrap}.more-item .quick-icon{width:19px;height:19px;stroke-width:1.65}.more-item.regen .quick-icon{width:18px;height:18px}.more-item.sticker .quick-icon{width:18px;height:18px}
+.more-popover::after{content:"";position:absolute;left:22px;bottom:-5px;width:10px;height:10px;background:color-mix(in srgb,var(--paper-2) 92%,transparent);border-right:1px solid rgba(100,82,72,.06);border-bottom:1px solid rgba(100,82,72,.06);transform:rotate(45deg);border-radius:2px}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 58px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(45,39,35,.84);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:700px){.app{box-shadow:0 20px 70px rgba(48,39,34,.08)}}
 </style>
 </head>
 <body>
 <main class="app show-avatar" id="app">
-  <header class="topbar">
-    <button class="back" aria-label="返回">‹</button>
-    <div class="person" id="avatarToggle" title="点这里切换双方头像">
-      <div class="title">声声</div>
-      <div class="subtitle"><span class="online"></span><span>此刻 · 在这里</span></div>
-    </div>
-    <button class="top-more" aria-label="更多">···</button>
-  </header>
-
-  <section class="messages" id="messages">
-    <article class="msg sheng">
-      <img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt="">
-      <div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:12:08</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
-      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">详情现在位于时间下方、正文上方。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
-      <div class="assistant-text">这次我直接沿用你之前认可的 API 版气泡逻辑，不再额外画一个三角尾巴。</div>
-    </article>
-
-    <article class="msg me">
-      <div class="user-avatar" aria-hidden="true">漾</div>
-      <div class="user-bubble">嗯嗯，这个角应该自然一点，不要像贴了一个小三角。</div>
-    </article>
-
-    <article class="msg sheng">
-      <img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt="">
-      <div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:13:24</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
-      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">API 原版靠单角 5px 圆角形成气泡方向。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div>
-      <div class="assistant-text short">对，就是这种。</div>
-    </article>
-
-    <article class="msg me">
-      <div class="user-avatar" aria-hidden="true">漾</div>
-      <div class="user-bubble">然后我的消息这边也不要时间戳，整个聊天页尽量干净。</div>
-    </article>
-
-    <article class="msg sheng">
-      <img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt="">
-      <div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:14:41</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
-      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">用户时间戳已移除，页面降低边框和阴影存在感。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
-      <div class="assistant-text">现在底色是护眼米色，奶粉和皮粉只做很淡的层次，豆绿色主要落在你的气泡和发送按钮上。</div>
-    </article>
-  </section>
-
-  <footer class="composer-wrap">
-    <div class="input-layer"><textarea id="input" rows="1" placeholder="慢慢说…"></textarea></div>
-    <div class="action-layer">
-      <button class="action more" id="moreBtn" aria-label="更多" aria-expanded="false">
-        <svg class="morph-svg" viewBox="0 0 24 24" aria-hidden="true"><path id="moreMorphPath" d="M12 5v14M5 12h14"></path></svg>
-      </button>
-      <button class="action model" aria-label="模型">Opus 4.6</button>
-      <div class="spacer"></div>
-      <button class="action icon mic" aria-label="语音"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"></path></svg></button>
-      <button class="action send" id="send" aria-label="发送">
-        <svg class="morph-svg" viewBox="0 0 24 24" aria-hidden="true"><path id="sendMorphPath" d="M5 12h14M13 6l6 6-6 6"></path></svg>
-      </button>
-    </div>
-  </footer>
+<header class="topbar"><button class="back" aria-label="返回">‹</button><div class="person" id="avatarToggle" title="点这里切换双方头像"><div class="title">声声</div><div class="subtitle"><span class="online"></span><span>此刻 · 在这里</span></div></div><button class="top-more" aria-label="更多">···</button></header>
+<section class="messages" id="messages">
+<article class="msg sheng"><img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt=""><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:12:08</span><button class="sheep" aria-expanded="false"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">详情现在位于时间下方、正文上方。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div><div class="assistant-text">这次我直接沿用你之前认可的 API 版气泡逻辑，不再额外画一个三角尾巴。</div></article>
+<article class="msg me"><div class="user-avatar" aria-hidden="true">漾</div><div class="user-bubble">嗯嗯，这个角应该自然一点，不要像贴了一个小三角。</div></article>
+<article class="msg sheng"><img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt=""><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:13:24</span><button class="sheep" aria-expanded="false"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">API 原版靠单角 5px 圆角形成气泡方向。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div><div class="assistant-text short">对，就是这种。</div></article>
+<article class="msg me"><div class="user-avatar" aria-hidden="true">漾</div><div class="user-bubble">然后我的消息这边也不要时间戳，整个聊天页尽量干净。</div></article>
+<article class="msg sheng"><img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt=""><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:14:41</span><button class="sheep" aria-expanded="false"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">用户时间戳已移除，页面降低边框和阴影存在感。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div><div class="assistant-text">现在底色是护眼米色，奶粉和皮粉只做很淡的层次，豆绿色主要落在你的气泡和发送按钮上。</div></article>
+</section>
+<footer class="composer-wrap" id="composerWrap">
+<div class="more-popover" id="morePopover" aria-hidden="true"><div class="more-grid">
+<button class="more-item" data-action="拍照"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M7 7h2l1.4-2h3.2L15 7h2.5A2.5 2.5 0 0 1 20 9.5v7A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-7A2.5 2.5 0 0 1 6.5 7H7Z"></path><circle cx="12" cy="13" r="3.2"></circle></svg><span>拍照</span></button>
+<button class="more-item" data-action="发送图片"><svg class="quick-icon" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="m6 17 4-4 3 3 2-2 3 3"></path></svg><span>图片</span></button>
+<button class="more-item" data-action="发送定位"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg><span>定位</span></button>
+<button class="more-item regen" data-action="重新生成"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M19 8a7 7 0 1 0 1 7"></path><path d="M19 4v4h-4"></path></svg><span>重新生成</span></button>
+<button class="more-item sticker" data-action="表情包"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M6 4h8a4 4 0 0 1 4 4v5l-5 5H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path><path d="M13 18v-3a2 2 0 0 1 2-2h3"></path><circle cx="9" cy="9" r=".8" fill="currentColor" stroke="none"></circle><circle cx="13" cy="9" r=".8" fill="currentColor" stroke="none"></circle><path d="M8.5 12c.8.7 1.7 1 2.5 1s1.7-.3 2.5-1"></path></svg><span>表情包</span></button>
+</div></div>
+<div class="input-layer"><textarea id="input" rows="1" placeholder="慢慢说…"></textarea></div>
+<div class="action-layer"><button class="action more" id="moreBtn" aria-label="更多" aria-expanded="false"><svg class="morph-svg" viewBox="0 0 24 24" aria-hidden="true"><path id="moreMorphPath" d="M12 5v14M5 12h14"></path></svg></button><button class="action model" aria-label="模型">Opus 4.6</button><div class="spacer"></div><button class="action icon mic" aria-label="语音"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"></path></svg></button><button class="action send" id="send" aria-label="发送"><svg class="morph-svg" viewBox="0 0 24 24"><path id="sendMorphPath" d="M5 12h14M13 6l6 6-6 6"></path></svg></button></div>
+</footer>
 </main>
 <div class="toast" id="toast">这里只是前端预览</div>
 <script>
-const app=document.getElementById('app');
-const list=document.getElementById('messages');
-const input=document.getElementById('input');
-const toast=document.getElementById('toast');
-
-document.querySelectorAll('.sheep').forEach(btn=>{
-  btn.onclick=()=>{
-    const details=btn.closest('.msg').querySelector('.details');
-    const open=details.classList.toggle('open');
-    btn.setAttribute('aria-expanded',open);
-  };
-});
-
-function hint(text='这里只是前端预览'){
-  toast.textContent=text;
-  toast.classList.add('show');
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer=setTimeout(()=>toast.classList.remove('show'),1400);
-}
-function resizeInput(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,118)+'px'}
-input.oninput=resizeInput;
-function send(){
-  const text=input.value.trim();
-  if(!text){hint();return;}
-  const article=document.createElement('article');
-  article.className='msg me';
-  const avatar=document.createElement('div');
-  avatar.className='user-avatar';
-  avatar.setAttribute('aria-hidden','true');
-  avatar.textContent='漾';
-  const bubble=document.createElement('div');
-  bubble.className='user-bubble';
-  bubble.textContent=text;
-  article.append(avatar,bubble);
-  list.append(article);
-  input.value='';resizeInput();
-  window.__playSendMorph?.();
-  requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}));
-}
-document.getElementById('send').onclick=send;
-input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
-document.querySelector('.back').onclick=()=>hint('返回按钮暂未接功能');
-document.querySelector('.top-more').onclick=()=>hint('更多功能暂未接入');
-document.getElementById('moreBtn').onclick=()=>{
-  const open=window.__toggleMoreMorph?.();
-  document.getElementById('moreBtn').setAttribute('aria-expanded',open?'true':'false');
-  hint(open?'更多菜单展开动画':'更多菜单收起动画');
-};
-document.querySelector('.model').onclick=()=>hint('模型选择暂未接入');
-document.querySelector('.mic').onclick=()=>hint('语音暂未接入');
-document.getElementById('avatarToggle').onclick=()=>{
-  const on=app.classList.toggle('show-avatar');
-  hint(on?'已显示双方头像':'已隐藏双方头像');
-};
-requestAnimationFrame(()=>list.scrollTop=list.scrollHeight);
+const app=document.getElementById('app'),list=document.getElementById('messages'),input=document.getElementById('input'),toast=document.getElementById('toast'),moreBtn=document.getElementById('moreBtn'),morePopover=document.getElementById('morePopover');
+document.querySelectorAll('.sheep').forEach(btn=>{btn.onclick=()=>{const details=btn.closest('.msg').querySelector('.details'),open=details.classList.toggle('open');btn.setAttribute('aria-expanded',open)}});
+function hint(text='这里只是前端预览'){toast.textContent=text;toast.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>toast.classList.remove('show'),1400)}
+function resizeInput(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,118)+'px'}input.oninput=resizeInput;
+function setMoreOpen(open){morePopover.classList.toggle('open',open);morePopover.setAttribute('aria-hidden',open?'false':'true');moreBtn.setAttribute('aria-expanded',open?'true':'false');window.__setMoreMorph?.(open);return open}
+function send(){const text=input.value.trim();if(!text){hint();return}const article=document.createElement('article');article.className='msg me';const avatar=document.createElement('div');avatar.className='user-avatar';avatar.setAttribute('aria-hidden','true');avatar.textContent='漾';const bubble=document.createElement('div');bubble.className='user-bubble';bubble.textContent=text;article.append(avatar,bubble);list.append(article);input.value='';resizeInput();window.__playSendMorph?.();requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}))}
+document.getElementById('send').onclick=send;input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
+document.querySelector('.back').onclick=()=>hint('返回按钮暂未接功能');document.querySelector('.top-more').onclick=()=>hint('更多功能暂未接入');
+moreBtn.onclick=e=>{e.stopPropagation();setMoreOpen(!morePopover.classList.contains('open'))};morePopover.onclick=e=>e.stopPropagation();document.addEventListener('click',()=>setMoreOpen(false));
+document.querySelectorAll('.more-item').forEach(btn=>btn.onclick=()=>{hint(`${btn.dataset.action} · 预览`);setMoreOpen(false)});
+document.querySelector('.model').onclick=()=>hint('模型选择暂未接入');document.querySelector('.mic').onclick=()=>hint('语音暂未接入');document.getElementById('avatarToggle').onclick=()=>{const on=app.classList.toggle('show-avatar');hint(on?'已显示双方头像':'已隐藏双方头像')};requestAnimationFrame(()=>list.scrollTop=list.scrollHeight);
 </script>
 <script type="module">
-(async()=>{
-  try{
-    const [{createMorph},{Plus,X,ArrowRight,Check}]=await Promise.all([
-      import('https://esm.sh/morphicons@1.5.0/dom'),
-      import('https://esm.sh/lucide@1.28.0')
-    ]);
-    const morePath=document.getElementById('moreMorphPath');
-    const sendPath=document.getElementById('sendMorphPath');
-    const moreMorph=createMorph(morePath,Plus,{reducedMotion:'user'});
-    const sendMorph=createMorph(sendPath,ArrowRight,{reducedMotion:'user'});
-    let moreOpen=false;
-    let sendTimer;
-    window.__toggleMoreMorph=()=>{
-      moreOpen=!moreOpen;
-      moreMorph.morphTo(moreOpen?X:Plus,'smooth');
-      return moreOpen;
-    };
-    window.__playSendMorph=()=>{
-      clearTimeout(sendTimer);
-      sendMorph.morphTo(Check,'snappy');
-      sendTimer=setTimeout(()=>sendMorph.morphTo(ArrowRight,'smooth'),650);
-    };
-  }catch(err){
-    console.warn('Morphicons preview fallback:',err);
-  }
-})();
+(async()=>{try{const [{createMorph},{Plus,X,ArrowRight,Check}]=await Promise.all([import('https://esm.sh/morphicons@1.5.0/dom'),import('https://esm.sh/lucide@1.28.0')]);const moreMorph=createMorph(document.getElementById('moreMorphPath'),Plus,{reducedMotion:'user'});const sendMorph=createMorph(document.getElementById('sendMorphPath'),ArrowRight,{reducedMotion:'user'});let sendTimer;window.__setMoreMorph=open=>moreMorph.morphTo(open?X:Plus,'smooth');window.__playSendMorph=()=>{clearTimeout(sendTimer);sendMorph.morphTo(Check,'snappy');sendTimer=setTimeout(()=>sendMorph.morphTo(ArrowRight,'smooth'),650)}}catch(err){console.warn('Morphicons preview fallback:',err)}})();
 </script>
 </body>
 </html>
