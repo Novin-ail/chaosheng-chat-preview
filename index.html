@@ -3,27 +3,190 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#f7f5f2">
+<meta name="theme-color" content="#f8f4ed">
 <title>潮生 · Chat Preview</title>
 <style>
-:root{--bg:#f7f5f2;--text:#282521;--muted:#98918a;--sheng:#fffdf9;--me:#e9e1f4;--r:17px}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei",sans-serif}.app{height:100dvh;width:100%;max-width:520px;margin:auto;display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(circle at 12% -8%,rgba(255,255,255,.95),transparent 34%),var(--bg)}.topbar{padding:calc(env(safe-area-inset-top) + 10px) 18px 11px;display:grid;grid-template-columns:38px 1fr 38px;align-items:center;background:rgba(247,245,242,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(45,38,33,.035);z-index:5}.back{width:36px;height:36px;border:0;background:transparent;font-size:25px;color:#3e3935}.title{text-align:center;font-size:15px;font-weight:620}.subtitle{text-align:center;margin-top:3px;color:#aaa39c;font-size:10px;letter-spacing:.12em}.messages{overflow:auto;padding:18px 14px 28px;scrollbar-width:none}.messages::-webkit-scrollbar{display:none}.day{width:max-content;margin:2px auto 22px;color:#aaa39c;font-size:10px}.msg{display:flex;flex-direction:column;margin-bottom:18px}.msg.sheng{align-items:flex-start;padding-right:54px}.msg.me{align-items:flex-end;padding-left:54px}.meta{display:flex;align-items:center;gap:4px;margin:0 8px 5px;color:var(--muted);font-size:10px;min-height:19px}.me .meta{justify-content:flex-end}.sheep{width:18px;height:18px;border:0;padding:0;background:transparent;border-radius:50%;display:grid;place-items:center}.sheep[aria-expanded="true"]{background:rgba(98,85,74,.07)}.sheep img{width:14px;height:14px;display:block;object-fit:contain}.bubble{position:relative;width:max-content;max-width:100%;padding:11px 13px 12px;font-size:14.5px;line-height:1.58;word-break:break-word}.sheng .bubble{background:var(--sheng);border:1px solid rgba(62,51,43,.055);border-radius:7px var(--r) var(--r) var(--r);box-shadow:0 8px 28px rgba(44,35,27,.05)}.sheng .bubble:before{content:"";position:absolute;left:-6px;top:-1px;width:12px;height:15px;background:var(--sheng);clip-path:polygon(100% 0,100% 100%,0 0)}.me .bubble{background:var(--me);border:1px solid rgba(91,71,112,.05);border-radius:var(--r) 7px var(--r) var(--r);box-shadow:0 8px 24px rgba(90,65,113,.055)}.me .bubble:before{content:"";position:absolute;right:-6px;top:-1px;width:12px;height:15px;background:var(--me);clip-path:polygon(0 0,100% 0,0 100%)}.details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin-top:6px;opacity:0;transition:.2s}.details.open{grid-template-rows:1fr;opacity:1}.details-inner{overflow:hidden}.card{margin:2px 3px 0;padding:10px 11px;background:rgba(255,255,255,.72);border:1px solid rgba(54,46,40,.055);border-radius:12px;color:#716a64;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.line+.line{margin-top:9px}.label{margin-bottom:4px;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:#b1aaa3;font-weight:650}.detail{font-size:11px;line-height:1.55}.composer-wrap{padding:8px 12px calc(env(safe-area-inset-bottom) + 10px);background:linear-gradient(to top,rgba(247,245,242,.98) 65%,rgba(247,245,242,.72))}.composer{min-height:48px;display:grid;grid-template-columns:36px 1fr 38px;align-items:end;gap:7px;padding:5px 6px 5px 7px;background:rgba(255,255,255,.8);border:1px solid rgba(58,48,42,.07);border-radius:18px;box-shadow:0 8px 30px rgba(42,35,31,.055);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.composer button{border:0}.plus{width:36px;height:36px;background:transparent;color:#817a74;font-size:25px}textarea{width:100%;min-height:36px;max-height:110px;resize:none;border:0;outline:0;background:transparent;padding:8px 2px 7px;color:var(--text);font:inherit;font-size:14px;line-height:1.4}textarea::placeholder{color:#b8b1aa}.send{width:36px;height:36px;border-radius:13px;background:#2f2b28;color:#fff;font-size:17px;box-shadow:0 5px 14px rgba(40,33,29,.16)}.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 58px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(37,33,30,.82);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}@media(min-width:700px){body{background:#ece8e4}.app{box-shadow:0 22px 70px rgba(46,38,33,.08)}}
+:root{
+  --bg:#f8f4ed;
+  --text:#302c29;
+  --muted:#a59d94;
+  --me:#e9ebdd;
+  --panel:#fffdfa;
+  --line:rgba(76,65,55,.08);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{overflow:hidden;background:#eee9e2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei",sans-serif}
+button,textarea{font:inherit}
+button{color:inherit}
+.app{height:100dvh;width:100%;max-width:520px;margin:auto;display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(circle at 82% 4%,rgba(255,255,255,.9),transparent 28%),var(--bg)}
+.topbar{padding:calc(env(safe-area-inset-top) + 8px) 18px 10px;display:grid;grid-template-columns:42px 1fr 42px;align-items:center;background:rgba(248,244,237,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(63,54,47,.035);z-index:5}
+.back,.top-more{width:40px;height:40px;border:0;background:transparent;font-size:26px;color:#5f5954}
+.top-more{font-size:22px}
+.person{text-align:center;cursor:pointer;user-select:none}
+.title{font-size:16px;font-weight:650;letter-spacing:.03em}
+.subtitle{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;color:#8f877f;font-size:10px}
+.online{width:7px;height:7px;border-radius:50%;background:#8baa54;box-shadow:0 0 0 3px rgba(139,170,84,.09)}
+.messages{overflow:auto;padding:18px 18px 28px;scrollbar-width:none}
+.messages::-webkit-scrollbar{display:none}
+.day{width:max-content;margin:0 auto 25px;color:#aaa29a;font-size:10px;letter-spacing:.05em}
+.msg{position:relative;margin-bottom:24px}
+.msg.sheng{padding-right:48px}
+.msg.me{display:flex;flex-direction:column;align-items:flex-end;padding-left:56px}
+.assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 9px 2px;color:#342f2b;font-size:11px;letter-spacing:.035em}
+.assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#2f2b28;flex:none}
+.sheep{width:22px;height:22px;border:0;padding:2px;background:transparent;border-radius:8px;display:grid;place-items:center;margin-left:1px}
+.sheep[aria-expanded="true"]{background:rgba(73,64,57,.065)}
+.sheep img{width:17px;height:17px;display:block;object-fit:contain}
+.avatar{display:none;position:absolute;left:-1px;top:31px;width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(80,67,57,.06);background:#fff}
+.app.show-avatar .sheng{padding-left:42px}
+.app.show-avatar .avatar{display:block}
+.assistant-text{font-size:15px;line-height:1.72;letter-spacing:.01em;word-break:break-word;color:#37312d}
+.assistant-text.short{width:max-content;max-width:100%}
+.user-bubble{position:relative;width:max-content;max-width:100%;padding:11px 15px 12px;background:var(--me);border:1px solid rgba(91,95,72,.08);border-radius:22px;box-shadow:0 8px 22px rgba(70,66,51,.035);font-size:14.5px;line-height:1.56;word-break:break-word}
+.user-bubble:after{content:"";position:absolute;right:-6px;top:0;width:14px;height:14px;background:var(--me);border-top-right-radius:8px;clip-path:polygon(0 0,100% 0,0 100%)}
+.user-time{margin:5px 7px 0 0;color:#b2aaa2;font-size:9.5px;letter-spacing:.06em}
+.details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin-top:9px;opacity:0;transition:.2s ease}
+.details.open{grid-template-rows:1fr;opacity:1}
+.details-inner{overflow:hidden}
+.card{margin:2px 0 0;padding:10px 12px;background:rgba(255,255,255,.62);border:1px solid rgba(62,52,45,.055);border-radius:14px;color:#746c65;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.line+.line{margin-top:9px}
+.label{margin-bottom:4px;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:#aaa29b;font-weight:650}
+.detail{font-size:11px;line-height:1.58}
+.composer-wrap{background:var(--panel);border-top:1px solid var(--line);border-radius:26px 26px 0 0;box-shadow:0 -8px 24px rgba(65,55,48,.035);padding:10px 16px calc(env(safe-area-inset-bottom) + 8px);z-index:6}
+.input-layer{min-height:48px;padding:0 4px 5px}
+textarea{width:100%;min-height:42px;max-height:118px;resize:none;border:0;outline:0;background:transparent;padding:10px 2px 8px;color:var(--text);font-size:15px;line-height:1.5}
+textarea::placeholder{color:#b4ada6}
+.action-layer{height:47px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;align-items:center;gap:8px;border-top:1px solid rgba(68,57,49,.045);padding-top:6px}
+.action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6861}
+.more{width:38px;font-size:25px;line-height:1}
+.model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:16px;background:#f5f1eb;font-size:12px;color:#766e67;white-space:nowrap}
+.model:after{content:"⌄";font-size:11px;margin-top:-2px}
+.spacer{min-width:0}
+.icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.send{width:40px;height:40px;border-radius:50%;background:#e9eadc;color:#55594b}
+.send svg{width:19px;height:19px}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 58px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(45,39,35,.84);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;z-index:20}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:700px){.app{box-shadow:0 20px 70px rgba(48,39,34,.08)}}
 </style>
 </head>
 <body>
-<main class="app">
-<header class="topbar"><button class="back" aria-label="返回">‹</button><div><div class="title">声声</div><div class="subtitle">潮 生</div></div><div></div></header>
-<section class="messages" id="messages">
-<div class="day">今天</div>
-<article class="msg me"><div class="meta">20:31</div><div class="bubble">宝宝，我还是觉得气泡太圆了。</div></article>
-<article class="msg sheng"><div class="meta"><span>20:31</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div><div class="bubble">那就不要做成软乎乎的药丸形。改成偏圆角方形，尖角也收一点，整体会更像真正的聊天气泡。</div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">这里用于预览 thinking 的展开样式。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div></article>
-<article class="msg me"><div class="meta">20:33</div><div class="bubble">嗯嗯，我的角在右上，声声的角在左上。不要头像。</div></article>
-<article class="msg sheng"><div class="meta"><span>20:34</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div><div class="bubble">现在就是这个结构。时间放在气泡上方，小羊只跟在我的时间后面。点小羊展开 thinking 和工具调用，不占聊天正文的位置。</div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">用户消息右对齐；声声消息左对齐；详情默认收起。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div></article>
-<article class="msg sheng"><div class="meta"><span>20:35</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div><div class="bubble">这条放长一点看看换行。圆角没有完全取消，所以不会太硬，但比之前更利落；尖角贴着气泡上沿，不会像漫画对话框那么夸张。</div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">长文本用于检查最大宽度、换行和尖角位置。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div></article>
-</section>
-<footer class="composer-wrap"><div class="composer"><button class="plus" aria-label="添加">＋</button><textarea id="input" rows="1" placeholder="和声声说点什么…"></textarea><button class="send" id="send" aria-label="发送">↑</button></div></footer>
-</main><div class="toast" id="toast">这里只是前端预览，不会发送到后端</div>
+<main class="app" id="app">
+  <header class="topbar">
+    <button class="back" aria-label="返回">‹</button>
+    <div class="person" id="avatarToggle" title="点这里切换头像">
+      <div class="title">声声</div>
+      <div class="subtitle"><span class="online"></span><span>此刻 · 在这里</span></div>
+    </div>
+    <button class="top-more" aria-label="更多">···</button>
+  </header>
+
+  <section class="messages" id="messages">
+    <div class="day">今天</div>
+
+    <article class="msg sheng">
+      <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
+      <div class="assistant-meta"><span class="dot"></span><span>9/3 21:12:08</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
+      <div class="assistant-text">我觉得这样会更接近你图一的感觉。时间单独落在正文上方，小羊跟在时间后面，不再和气泡绑在一起。</div>
+      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">这里预览 thinking 展开后的样式。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
+    </article>
+
+    <article class="msg me">
+      <div class="user-bubble">嗯嗯，然后你的消息不要气泡底。</div>
+      <div class="user-time">21:13</div>
+    </article>
+
+    <article class="msg sheng">
+      <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
+      <div class="assistant-meta"><span class="dot"></span><span>9/3 21:13:24</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
+      <div class="assistant-text short">好。我的正文现在直接落在页面上。</div>
+      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">声声正文无气泡，头像可选。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div>
+    </article>
+
+    <article class="msg me">
+      <div class="user-bubble">我的气泡还是原来那种软一点的，只把角角挪到右上面。</div>
+      <div class="user-time">21:14</div>
+    </article>
+
+    <article class="msg sheng">
+      <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
+      <div class="assistant-meta"><span class="dot"></span><span>9/3 21:14:41</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
+      <div class="assistant-text">输入区也落到底部了。上面只负责输入，下面一排放更多、模型、语音和发送，不再像一颗悬浮的大胶囊挡在聊天内容上。</div>
+      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">底部为两层固定输入区。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
+    </article>
+  </section>
+
+  <footer class="composer-wrap">
+    <div class="input-layer"><textarea id="input" rows="1" placeholder="慢慢说…"></textarea></div>
+    <div class="action-layer">
+      <button class="action more" aria-label="更多">＋</button>
+      <button class="action model" aria-label="模型">Opus 4.6</button>
+      <div class="spacer"></div>
+      <button class="action icon mic" aria-label="语音"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"></path></svg></button>
+      <button class="action icon send" id="send" aria-label="发送"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 7l5 5-5 5"></path></svg></button>
+    </div>
+  </footer>
+</main>
+<div class="toast" id="toast">这里只是前端预览</div>
 <script>
-const list=document.getElementById('messages'),input=document.getElementById('input'),toast=document.getElementById('toast');document.querySelectorAll('.sheep').forEach(b=>b.onclick=()=>{const d=b.closest('.msg').querySelector('.details'),o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)});function hint(){toast.classList.add('show');clearTimeout(window.t);window.t=setTimeout(()=>toast.classList.remove('show'),1400)}function resize(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,110)+'px'}input.oninput=resize;function send(){const text=input.value.trim();if(!text)return hint();const n=new Date(),a=document.createElement('article');a.className='msg me';const m=document.createElement('div');m.className='meta';m.textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');const b=document.createElement('div');b.className='bubble';b.textContent=text;a.append(m,b);list.append(a);input.value='';resize();list.scrollTo({top:list.scrollHeight,behavior:'smooth'})}document.getElementById('send').onclick=send;input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};document.querySelector('.back').onclick=hint;document.querySelector('.plus').onclick=hint;requestAnimationFrame(()=>list.scrollTop=list.scrollHeight);
+const app=document.getElementById('app');
+const list=document.getElementById('messages');
+const input=document.getElementById('input');
+const toast=document.getElementById('toast');
+
+document.querySelectorAll('.sheep').forEach(btn=>{
+  btn.onclick=()=>{
+    const details=btn.closest('.msg').querySelector('.details');
+    const open=details.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  };
+});
+
+function hint(text='这里只是前端预览'){
+  toast.textContent=text;
+  toast.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer=setTimeout(()=>toast.classList.remove('show'),1400);
+}
+
+function resizeInput(){
+  input.style.height='auto';
+  input.style.height=Math.min(input.scrollHeight,118)+'px';
+}
+input.oninput=resizeInput;
+
+function send(){
+  const text=input.value.trim();
+  if(!text){hint();return;}
+  const now=new Date();
+  const article=document.createElement('article');
+  article.className='msg me';
+  const bubble=document.createElement('div');
+  bubble.className='user-bubble';
+  bubble.textContent=text;
+  const time=document.createElement('div');
+  time.className='user-time';
+  time.textContent=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  article.append(bubble,time);
+  list.append(article);
+  input.value='';
+  resizeInput();
+  requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}));
+}
+
+document.getElementById('send').onclick=send;
+input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}};
+document.querySelector('.back').onclick=()=>hint('返回按钮暂未接功能');
+document.querySelector('.top-more').onclick=()=>hint('更多功能暂未接入');
+document.querySelector('.more').onclick=()=>hint('更多功能暂未接入');
+document.querySelector('.model').onclick=()=>hint('模型选择暂未接入');
+document.querySelector('.mic').onclick=()=>hint('语音暂未接入');
+document.getElementById('avatarToggle').onclick=()=>{
+  const on=app.classList.toggle('show-avatar');
+  hint(on?'已显示头像':'已隐藏头像');
+};
+requestAnimationFrame(()=>list.scrollTop=list.scrollHeight);
 </script>
 </body>
 </html>
