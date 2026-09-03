@@ -85,5 +85,39 @@ settingsBtn.onclick=e=>{e.stopPropagation();setMoreOpen(false);setModelOpen(fals
 <script type="module">
 (async()=>{try{const [{createMorph},{Plus,X,ArrowRight,Check,Heart,Sparkles,ChevronDown,ChevronUp,Menu}]=await Promise.all([import('https://esm.sh/morphicons@1.5.0/dom'),import('https://esm.sh/lucide@1.28.0')]);const moreMorph=createMorph(document.getElementById('moreMorphPath'),Plus,{reducedMotion:'user'});const sendMorph=createMorph(document.getElementById('sendMorphPath'),ArrowRight,{reducedMotion:'user'});const settingsMorph=createMorph(document.getElementById('topMorphPath'),Heart,{reducedMotion:'user'});const modelMorph=createMorph(document.getElementById('modelChevronPath'),ChevronDown,{reducedMotion:'user'});const navMorph=createMorph(document.getElementById('navMorphPath'),Menu,{reducedMotion:'user'});let sendTimer;window.__setMoreMorph=open=>moreMorph.morphTo(open?X:Plus,'smooth');window.__setSettingsMorph=open=>settingsMorph.morphTo(open?Sparkles:Heart,'smooth');window.__setModelMorph=open=>modelMorph.morphTo(open?ChevronUp:ChevronDown,'smooth');window.__setNavMorph=open=>navMorph.morphTo(open?X:Menu,'smooth');window.__playSendMorph=()=>{clearTimeout(sendTimer);sendMorph.morphTo(Check,'snappy');sendTimer=setTimeout(()=>sendMorph.morphTo(ArrowRight,'smooth'),650)}}catch(err){console.warn('Morphicons preview fallback:',err)}})();
 </script>
+<style id="anniversary-refine">
+.love-card{height:80px;padding:0;border-radius:17px;background:linear-gradient(115deg,rgba(255,253,249,.38),rgba(246,233,230,.28));border:1px solid rgba(122,91,87,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.20)}
+.love-card::after{content:none}.love-card>.love-art,.love-card>.love-names,.love-card>.love-days{display:none}
+.love-title{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;margin:0 7px 7px;color:#5e514d;font-size:13px;font-weight:650;letter-spacing:.025em;min-height:23px}
+.love-title-heart{color:#c97988;font-size:14px;line-height:1;transform:translateY(-1px)}
+.love-title-art{position:absolute;right:-3px;top:-9px;width:38px;height:30px;object-fit:contain;opacity:.48;transform:rotate(7deg);pointer-events:none}
+.anniv-calendar{height:100%;display:grid;grid-template-columns:.82fr 1.42fr .82fr;align-items:center;overflow:hidden}
+.date-side{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#7f736d;font-family:"Nunito","Avenir Next Rounded","Avenir Next",system-ui,sans-serif;position:relative}
+.date-side small{font-size:7px;letter-spacing:.08em;color:#ad9f98}.date-num{font-size:12px;font-weight:500;letter-spacing:.035em;white-space:nowrap}
+.date-side.prev{opacity:.58;filter:blur(.55px);transform:translateX(-5px);-webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.16) 18%,#000 72%);mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.16) 18%,#000 72%);text-shadow:-5px 0 7px rgba(104,89,84,.20)}
+.date-side.next{transform:translateX(2px);color:#695f5a}.date-side.next small{color:#998d86}
+.anniv-center{height:56px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,253,249,.36);border-radius:13px;color:#81746e}
+.anniv-center::before,.anniv-center::after{content:"";position:absolute;top:9px;bottom:9px;width:1.5px;opacity:.32}.anniv-center::before{left:0;background:repeating-linear-gradient(to bottom,#c98291 0 2px,transparent 2px 6px)}.anniv-center::after{right:0;background:repeating-linear-gradient(to bottom,#8fa07a 0 3px,transparent 3px 7px)}
+.anniv-copy{font-size:8px;letter-spacing:.08em;margin-bottom:1px;color:#968983}.anniv-dayline{display:flex;align-items:flex-end;justify-content:center;gap:2px;line-height:1}.anniv-dayline .tiny{font-size:8px;color:#8b7d77;margin-bottom:4px}.anniv-day{display:inline-block;font-family:"Marker Felt","Bradley Hand","Comic Sans MS",cursive;font-size:27px;font-weight:600;line-height:.86;color:#c45e66;letter-spacing:-1.5px;transform:rotate(-5deg) skewX(-5deg) translateY(1px);text-shadow:1px 1px 0 rgba(255,255,255,.75),-1px 0 0 rgba(166,71,79,.08)}
+.drawer-grid{margin-top:11px}
+.art-star{left:-18px;right:auto;top:auto;bottom:-19px;opacity:.17;transform:rotate(-11deg)}
+.art-stars-vertical{right:-7px;top:-8px;opacity:.14;transform:rotate(5deg)}
+.art-bubbles{left:-35px;right:auto;top:-17px;opacity:.115;transform:rotate(8deg)}
+.art-rabbit{right:-18px;bottom:-16px;opacity:.16;transform:rotate(-8deg)}
+.art-flowers{left:-24px;right:auto;top:auto;bottom:-24px;opacity:.15;transform:rotate(-10deg)}
+.art-paw{right:-16px;top:13px;opacity:.16;transform:rotate(13deg)}
+</style>
+<script>
+(()=>{
+ const card=document.querySelector('.love-card');
+ if(card&&!document.querySelector('.love-title')){
+  card.insertAdjacentHTML('beforebegin','<div class="love-title"><span>小漾</span><span class="love-title-heart">♡</span><span>声声</span><img class="love-title-art" src="https://files.catbox.moe/d5srb5.png" alt=""></div>');
+  card.innerHTML='<div class="anniv-calendar"><div class="date-side prev"><small>昨天</small><span class="date-num" id="prevDate">--.--</span></div><div class="anniv-center"><div class="anniv-copy">在一起</div><div class="anniv-dayline"><span class="tiny">第</span><span class="anniv-day">XX</span><span class="tiny">天</span></div></div><div class="date-side next"><small>明天</small><span class="date-num" id="nextDate">--.--</span></div></div>';
+  const now=new Date(),prev=new Date(now),next=new Date(now);prev.setDate(now.getDate()-1);next.setDate(now.getDate()+1);
+  const fmt=d=>`${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+  document.getElementById('prevDate').textContent=fmt(prev);document.getElementById('nextDate').textContent=fmt(next);
+ }
+})();
+</script>
 </body>
 </html>
