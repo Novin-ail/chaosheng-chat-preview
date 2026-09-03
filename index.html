@@ -3,68 +3,115 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#f8f4ed">
+<meta name="theme-color" content="#f5f0e6">
 <title>潮生 · Chat Preview</title>
 <style>
 :root{
-  --bg:#f8f4ed;
-  --text:#302c29;
-  --muted:#a59d94;
-  --me:#e9ebdd;
-  --panel:#fffdfa;
-  --line:rgba(76,65,55,.08);
+  --paper:#f5f0e6;
+  --paper-2:#f8f3ea;
+  --ink:#38322f;
+  --ink-soft:#716861;
+  --muted:#aaa097;
+  --skin-pink:#efdeda;
+  --milk-pink:#f6e9e6;
+  --bean:#dce3d2;
+  --bean-deep:#8fa07a;
+  --line:rgba(91,76,67,.075);
+  --bubble-border:rgba(111,113,86,.10);
+  --bubble-shadow:rgba(78,67,58,.045);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
-body{overflow:hidden;background:#eee9e2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei",sans-serif}
+body{overflow:hidden;background:#ebe5dc;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Microsoft YaHei",sans-serif}
 button,textarea{font:inherit}
 button{color:inherit}
-.app{height:100dvh;width:100%;max-width:520px;margin:auto;display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(circle at 82% 4%,rgba(255,255,255,.9),transparent 28%),var(--bg)}
-.topbar{padding:calc(env(safe-area-inset-top) + 8px) 18px 10px;display:grid;grid-template-columns:42px 1fr 42px;align-items:center;background:rgba(248,244,237,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(63,54,47,.035);z-index:5}
-.back,.top-more{width:40px;height:40px;border:0;background:transparent;font-size:26px;color:#5f5954}
-.top-more{font-size:22px}
+.app{
+  height:100dvh;width:100%;max-width:520px;margin:auto;
+  display:grid;grid-template-rows:auto 1fr auto;
+  background:
+    radial-gradient(circle at 87% 7%,rgba(239,222,218,.34),transparent 27%),
+    radial-gradient(circle at 8% 72%,rgba(220,227,210,.24),transparent 24%),
+    var(--paper);
+}
+.topbar{
+  padding:calc(env(safe-area-inset-top) + 8px) 18px 9px;
+  display:grid;grid-template-columns:42px 1fr 42px;align-items:center;
+  background:color-mix(in srgb,var(--paper) 93%,transparent);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(83,70,62,.035);z-index:5
+}
+.back,.top-more{width:40px;height:40px;border:0;background:transparent;color:#665e58}
+.back{font-size:26px}.top-more{font-size:22px}
 .person{text-align:center;cursor:pointer;user-select:none}
-.title{font-size:16px;font-weight:650;letter-spacing:.03em}
-.subtitle{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;color:#8f877f;font-size:10px}
-.online{width:7px;height:7px;border-radius:50%;background:#8baa54;box-shadow:0 0 0 3px rgba(139,170,84,.09)}
-.messages{overflow:auto;padding:18px 18px 28px;scrollbar-width:none}
+.title{font-size:16px;font-weight:650;letter-spacing:.035em}
+.subtitle{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px;color:#8f867e;font-size:10px}
+.online{width:7px;height:7px;border-radius:50%;background:var(--bean-deep);box-shadow:0 0 0 3px rgba(143,160,122,.10)}
+.messages{overflow:auto;padding:27px 20px 30px;scrollbar-width:none}
 .messages::-webkit-scrollbar{display:none}
-.day{width:max-content;margin:0 auto 25px;color:#aaa29a;font-size:10px;letter-spacing:.05em}
-.msg{position:relative;margin-bottom:24px}
-.msg.sheng{padding-right:48px}
-.msg.me{display:flex;flex-direction:column;align-items:flex-end;padding-left:56px}
-.assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 9px 2px;color:#342f2b;font-size:11px;letter-spacing:.035em}
-.assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#2f2b28;flex:none}
+.msg{position:relative;margin-bottom:30px}
+.msg.sheng{padding-right:42px}
+.msg.me{display:flex;flex-direction:column;align-items:flex-end;padding-left:58px;margin-bottom:28px}
+.assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 8px 1px;color:#4c4540;font-size:11px;letter-spacing:.025em}
+.assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#403a36;flex:none}
 .sheep{width:22px;height:22px;border:0;padding:2px;background:transparent;border-radius:8px;display:grid;place-items:center;margin-left:1px}
-.sheep[aria-expanded="true"]{background:rgba(73,64,57,.065)}
+.sheep[aria-expanded="true"]{background:var(--milk-pink)}
 .sheep img{width:17px;height:17px;display:block;object-fit:contain}
-.avatar{display:none;position:absolute;left:-1px;top:31px;width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(80,67,57,.06);background:#fff}
-.app.show-avatar .sheng{padding-left:42px}
+.avatar{display:none;position:absolute;left:-1px;top:29px;width:31px;height:31px;border-radius:50%;object-fit:cover;border:1px solid rgba(91,76,67,.06);background:var(--paper-2)}
+.app.show-avatar .sheng{padding-left:43px}
 .app.show-avatar .avatar{display:block}
-.assistant-text{font-size:15px;line-height:1.72;letter-spacing:.01em;word-break:break-word;color:#37312d}
+.assistant-text{font-size:15px;line-height:1.76;letter-spacing:.008em;word-break:break-word;color:#37312e}
 .assistant-text.short{width:max-content;max-width:100%}
-.user-bubble{position:relative;width:max-content;max-width:100%;padding:11px 15px 12px;background:var(--me);border:1px solid rgba(91,95,72,.08);border-radius:22px;box-shadow:0 8px 22px rgba(70,66,51,.035);font-size:14.5px;line-height:1.56;word-break:break-word}
-.user-bubble:after{content:"";position:absolute;right:-6px;top:0;width:14px;height:14px;background:var(--me);border-top-right-radius:8px;clip-path:polygon(0 0,100% 0,0 100%)}
-.user-time{margin:5px 7px 0 0;color:#b2aaa2;font-size:9.5px;letter-spacing:.06em}
-.details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin-top:9px;opacity:0;transition:.2s ease}
-.details.open{grid-template-rows:1fr;opacity:1}
+
+/* API 版原气泡：没有三角尾巴，只靠一个收紧的小圆角形成“角”。
+   原版 self 是右下 5px；这里按要求把小角挪到右上。 */
+.user-bubble{
+  position:relative;width:fit-content;max-width:100%;min-width:0;
+  padding:8px 12px 9px;
+  border:1px solid var(--bubble-border);
+  border-radius:16px 5px 16px 16px;
+  background:color-mix(in srgb,var(--bean) 88%,var(--paper-2));
+  box-shadow:0 4px 14px var(--bubble-shadow);
+  font-size:15px;line-height:1.58;letter-spacing:.006em;
+  word-break:break-word;
+}
+
+.details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin:0;opacity:0;transition:.18s ease}
+.details.open{grid-template-rows:1fr;opacity:1;margin:0 0 11px}
 .details-inner{overflow:hidden}
-.card{margin:2px 0 0;padding:10px 12px;background:rgba(255,255,255,.62);border:1px solid rgba(62,52,45,.055);border-radius:14px;color:#746c65;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.line+.line{margin-top:9px}
-.label{margin-bottom:4px;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:#aaa29b;font-weight:650}
-.detail{font-size:11px;line-height:1.58}
-.composer-wrap{background:var(--panel);border-top:1px solid var(--line);border-radius:26px 26px 0 0;box-shadow:0 -8px 24px rgba(65,55,48,.035);padding:10px 16px calc(env(safe-area-inset-bottom) + 8px);z-index:6}
-.input-layer{min-height:48px;padding:0 4px 5px}
-textarea{width:100%;min-height:42px;max-height:118px;resize:none;border:0;outline:0;background:transparent;padding:10px 2px 8px;color:var(--text);font-size:15px;line-height:1.5}
-textarea::placeholder{color:#b4ada6}
-.action-layer{height:47px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;align-items:center;gap:8px;border-top:1px solid rgba(68,57,49,.045);padding-top:6px}
-.action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6861}
+.card{
+  margin:0;padding:9px 11px 10px;
+  background:color-mix(in srgb,var(--milk-pink) 72%,transparent);
+  border:1px solid rgba(139,109,105,.07);
+  border-radius:11px;color:#796d68;
+}
+.line+.line{margin-top:8px}
+.label{margin-bottom:3px;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:#a2928d;font-weight:650}
+.detail{font-size:10.5px;line-height:1.55}
+
+.composer-wrap{
+  background:color-mix(in srgb,var(--milk-pink) 72%,var(--paper-2));
+  border-top:1px solid rgba(91,76,67,.055);
+  padding:8px 16px calc(env(safe-area-inset-bottom) + 7px);
+  z-index:6
+}
+.input-layer{min-height:47px;padding:0 4px 4px}
+textarea{
+  width:100%;min-height:42px;max-height:118px;resize:none;
+  border:0;outline:0;background:transparent;
+  padding:9px 2px 8px;color:var(--ink);font-size:15px;line-height:1.5
+}
+textarea::placeholder{color:#b1a59e}
+.action-layer{
+  height:46px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;
+  align-items:center;gap:8px;border-top:1px solid rgba(91,76,67,.045);padding-top:5px
+}
+.action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6761}
 .more{width:38px;font-size:25px;line-height:1}
-.model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:16px;background:#f5f1eb;font-size:12px;color:#766e67;white-space:nowrap}
+.model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:15px;background:rgba(239,222,218,.62);font-size:12px;color:#756a65;white-space:nowrap}
 .model:after{content:"⌄";font-size:11px;margin-top:-2px}
 .spacer{min-width:0}
 .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.send{width:40px;height:40px;border-radius:50%;background:#e9eadc;color:#55594b}
+.send{width:40px;height:40px;border-radius:50%;background:var(--bean);color:#58604d}
 .send svg{width:19px;height:19px}
 .toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 58px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(45,39,35,.84);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;z-index:20}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -83,37 +130,33 @@ textarea::placeholder{color:#b4ada6}
   </header>
 
   <section class="messages" id="messages">
-    <div class="day">今天</div>
-
     <article class="msg sheng">
       <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
       <div class="assistant-meta"><span class="dot"></span><span>9/3 21:12:08</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
-      <div class="assistant-text">我觉得这样会更接近你图一的感觉。时间单独落在正文上方，小羊跟在时间后面，不再和气泡绑在一起。</div>
-      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">这里预览 thinking 展开后的样式。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
+      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">详情现在位于时间下方、正文上方。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
+      <div class="assistant-text">这次我直接沿用你之前认可的 API 版气泡逻辑，不再额外画一个三角尾巴。</div>
     </article>
 
     <article class="msg me">
-      <div class="user-bubble">嗯嗯，然后你的消息不要气泡底。</div>
-      <div class="user-time">21:13</div>
+      <div class="user-bubble">嗯嗯，这个角应该自然一点，不要像贴了一个小三角。</div>
     </article>
 
     <article class="msg sheng">
       <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
       <div class="assistant-meta"><span class="dot"></span><span>9/3 21:13:24</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
-      <div class="assistant-text short">好。我的正文现在直接落在页面上。</div>
-      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">声声正文无气泡，头像可选。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div>
+      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">API 原版靠单角 5px 圆角形成气泡方向。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div>
+      <div class="assistant-text short">对，就是这种。</div>
     </article>
 
     <article class="msg me">
-      <div class="user-bubble">我的气泡还是原来那种软一点的，只把角角挪到右上面。</div>
-      <div class="user-time">21:14</div>
+      <div class="user-bubble">然后我的消息这边也不要时间戳，整个聊天页尽量干净。</div>
     </article>
 
     <article class="msg sheng">
       <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
       <div class="assistant-meta"><span class="dot"></span><span>9/3 21:14:41</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
-      <div class="assistant-text">输入区也落到底部了。上面只负责输入，下面一排放更多、模型、语音和发送，不再像一颗悬浮的大胶囊挡在聊天内容上。</div>
-      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">底部为两层固定输入区。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
+      <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">用户时间戳已移除，页面降低边框和阴影存在感。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
+      <div class="assistant-text">现在底色是护眼米色，奶粉和皮粉只做很淡的层次，豆绿色主要落在你的气泡和发送按钮上。</div>
     </article>
   </section>
 
@@ -149,34 +192,23 @@ function hint(text='这里只是前端预览'){
   clearTimeout(window.__toastTimer);
   window.__toastTimer=setTimeout(()=>toast.classList.remove('show'),1400);
 }
-
-function resizeInput(){
-  input.style.height='auto';
-  input.style.height=Math.min(input.scrollHeight,118)+'px';
-}
+function resizeInput(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,118)+'px'}
 input.oninput=resizeInput;
-
 function send(){
   const text=input.value.trim();
   if(!text){hint();return;}
-  const now=new Date();
   const article=document.createElement('article');
   article.className='msg me';
   const bubble=document.createElement('div');
   bubble.className='user-bubble';
   bubble.textContent=text;
-  const time=document.createElement('div');
-  time.className='user-time';
-  time.textContent=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  article.append(bubble,time);
+  article.append(bubble);
   list.append(article);
-  input.value='';
-  resizeInput();
+  input.value='';resizeInput();
   requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}));
 }
-
 document.getElementById('send').onclick=send;
-input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}};
+input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
 document.querySelector('.back').onclick=()=>hint('返回按钮暂未接功能');
 document.querySelector('.top-more').onclick=()=>hint('更多功能暂未接入');
 document.querySelector('.more').onclick=()=>hint('更多功能暂未接入');
