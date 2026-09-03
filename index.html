@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#f5f0e6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
 <title>潮生 · Chat Preview</title>
 <style>
 :root{
@@ -54,18 +57,18 @@ button{color:inherit}
 .assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 8px 1px;color:#4c4540;font-size:11px;letter-spacing:.025em}
 .assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#403a36;flex:none}
 .time{
-  font-family:"Arial Rounded MT Bold","SF Pro Rounded","Trebuchet MS",system-ui,sans-serif;
-  font-size:11.2px;
-  font-weight:700;
-  letter-spacing:.01em;
-  color:#514943;
+  font-family:"Nunito","Avenir Next Rounded","Avenir Next",system-ui,sans-serif;
+  font-size:11.5px;
+  font-weight:500;
+  letter-spacing:.018em;
+  color:#5d5550;
 }
 .sheep{width:22px;height:22px;border:0;padding:2px;background:transparent;border-radius:8px;display:grid;place-items:center;margin-left:1px}
 .sheep[aria-expanded="true"]{background:var(--milk-pink)}
 .sheep img{width:17px;height:17px;display:block;object-fit:contain}
 .avatar{display:none;position:absolute;width:31px;height:31px;border-radius:50%;object-fit:cover;border:1px solid rgba(91,76,67,.06);background:var(--paper-2)}
 .avatar-sheng{left:-1px;top:29px}
-.user-avatar{display:none;position:absolute;right:-1px;top:0;width:31px;height:31px;border-radius:50%;place-items:center;background:var(--skin-pink);border:1px solid rgba(121,93,89,.08);color:#846c68;font:700 12px/1 "SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif;box-shadow:0 3px 10px rgba(86,69,62,.035)}
+.user-avatar{display:none;position:absolute;right:-1px;top:0;width:31px;height:31px;border-radius:50%;place-items:center;background:var(--skin-pink);border:1px solid rgba(121,93,89,.08);color:#846c68;font:600 12px/1 "Nunito","SF Pro Rounded",system-ui,sans-serif;box-shadow:0 3px 10px rgba(86,69,62,.035)}
 .app.show-avatar .sheng{padding-left:43px}
 .app.show-avatar .avatar-sheng{display:block}
 .app.show-avatar .me{padding-right:43px}
@@ -102,13 +105,15 @@ textarea{width:100%;min-height:42px;max-height:118px;resize:none;border:0;outlin
 textarea::placeholder{color:#b1a59e}
 .action-layer{height:46px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;align-items:center;gap:8px;border-top:1px solid rgba(91,76,67,.045);padding-top:5px}
 .action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6761}
-.more{width:38px;font-size:25px;line-height:1}
+.more{width:38px}
 .model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:15px;background:rgba(239,222,218,.62);font-size:12px;color:#756a65;white-space:nowrap}
 .model:after{content:"⌄";font-size:11px;margin-top:-2px}
 .spacer{min-width:0}
-.icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.send{width:40px;height:40px;border-radius:50%;background:var(--bean);color:#58604d}
-.send svg{width:19px;height:19px}
+.icon svg,.morph-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.more .morph-svg{width:22px;height:22px;stroke-width:1.75}
+.send{width:40px;height:40px;border-radius:50%;background:var(--bean);color:#58604d;transition:transform .16s ease,background .18s ease}
+.send:active{transform:scale(.94)}
+.send .morph-svg{width:19px;height:19px}
 .toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 58px);transform:translate(-50%,-8px);padding:7px 11px;border-radius:10px;background:rgba(45,39,35,.84);color:#fff;font-size:10px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;z-index:20}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:700px){.app{box-shadow:0 20px 70px rgba(48,39,34,.08)}}
@@ -161,11 +166,15 @@ textarea::placeholder{color:#b1a59e}
   <footer class="composer-wrap">
     <div class="input-layer"><textarea id="input" rows="1" placeholder="慢慢说…"></textarea></div>
     <div class="action-layer">
-      <button class="action more" aria-label="更多">＋</button>
+      <button class="action more" id="moreBtn" aria-label="更多" aria-expanded="false">
+        <svg class="morph-svg" viewBox="0 0 24 24" aria-hidden="true"><path id="moreMorphPath" d="M12 5v14M5 12h14"></path></svg>
+      </button>
       <button class="action model" aria-label="模型">Opus 4.6</button>
       <div class="spacer"></div>
       <button class="action icon mic" aria-label="语音"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"></path></svg></button>
-      <button class="action icon send" id="send" aria-label="发送"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 7l5 5-5 5"></path></svg></button>
+      <button class="action send" id="send" aria-label="发送">
+        <svg class="morph-svg" viewBox="0 0 24 24" aria-hidden="true"><path id="sendMorphPath" d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </button>
     </div>
   </footer>
 </main>
@@ -207,13 +216,18 @@ function send(){
   article.append(avatar,bubble);
   list.append(article);
   input.value='';resizeInput();
+  window.__playSendMorph?.();
   requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}));
 }
 document.getElementById('send').onclick=send;
 input.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
 document.querySelector('.back').onclick=()=>hint('返回按钮暂未接功能');
 document.querySelector('.top-more').onclick=()=>hint('更多功能暂未接入');
-document.querySelector('.more').onclick=()=>hint('更多功能暂未接入');
+document.getElementById('moreBtn').onclick=()=>{
+  const open=window.__toggleMoreMorph?.();
+  document.getElementById('moreBtn').setAttribute('aria-expanded',open?'true':'false');
+  hint(open?'更多菜单展开动画':'更多菜单收起动画');
+};
 document.querySelector('.model').onclick=()=>hint('模型选择暂未接入');
 document.querySelector('.mic').onclick=()=>hint('语音暂未接入');
 document.getElementById('avatarToggle').onclick=()=>{
@@ -221,6 +235,34 @@ document.getElementById('avatarToggle').onclick=()=>{
   hint(on?'已显示双方头像':'已隐藏双方头像');
 };
 requestAnimationFrame(()=>list.scrollTop=list.scrollHeight);
+</script>
+<script type="module">
+(async()=>{
+  try{
+    const [{createMorph},{Plus,X,ArrowRight,Check}]=await Promise.all([
+      import('https://esm.sh/morphicons@1.5.0/dom'),
+      import('https://esm.sh/lucide@1.28.0')
+    ]);
+    const morePath=document.getElementById('moreMorphPath');
+    const sendPath=document.getElementById('sendMorphPath');
+    const moreMorph=createMorph(morePath,Plus,{reducedMotion:'user'});
+    const sendMorph=createMorph(sendPath,ArrowRight,{reducedMotion:'user'});
+    let moreOpen=false;
+    let sendTimer;
+    window.__toggleMoreMorph=()=>{
+      moreOpen=!moreOpen;
+      moreMorph.morphTo(moreOpen?X:Plus,'smooth');
+      return moreOpen;
+    };
+    window.__playSendMorph=()=>{
+      clearTimeout(sendTimer);
+      sendMorph.morphTo(Check,'snappy');
+      sendTimer=setTimeout(()=>sendMorph.morphTo(ArrowRight,'smooth'),650);
+    };
+  }catch(err){
+    console.warn('Morphicons preview fallback:',err);
+  }
+})();
 </script>
 </body>
 </html>
