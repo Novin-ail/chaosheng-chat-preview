@@ -53,17 +53,25 @@ button{color:inherit}
 .msg.me{display:flex;flex-direction:column;align-items:flex-end;padding-left:58px;margin-bottom:28px}
 .assistant-meta{display:flex;align-items:center;gap:7px;margin:0 0 8px 1px;color:#4c4540;font-size:11px;letter-spacing:.025em}
 .assistant-meta .dot{width:6px;height:6px;border-radius:50%;background:#403a36;flex:none}
+.time{
+  font-family:"Arial Rounded MT Bold","SF Pro Rounded","Trebuchet MS",system-ui,sans-serif;
+  font-size:11.2px;
+  font-weight:700;
+  letter-spacing:.01em;
+  color:#514943;
+}
 .sheep{width:22px;height:22px;border:0;padding:2px;background:transparent;border-radius:8px;display:grid;place-items:center;margin-left:1px}
 .sheep[aria-expanded="true"]{background:var(--milk-pink)}
 .sheep img{width:17px;height:17px;display:block;object-fit:contain}
-.avatar{display:none;position:absolute;left:-1px;top:29px;width:31px;height:31px;border-radius:50%;object-fit:cover;border:1px solid rgba(91,76,67,.06);background:var(--paper-2)}
+.avatar{display:none;position:absolute;width:31px;height:31px;border-radius:50%;object-fit:cover;border:1px solid rgba(91,76,67,.06);background:var(--paper-2)}
+.avatar-sheng{left:-1px;top:29px}
+.user-avatar{display:none;position:absolute;right:-1px;top:0;width:31px;height:31px;border-radius:50%;place-items:center;background:var(--skin-pink);border:1px solid rgba(121,93,89,.08);color:#846c68;font:700 12px/1 "SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif;box-shadow:0 3px 10px rgba(86,69,62,.035)}
 .app.show-avatar .sheng{padding-left:43px}
-.app.show-avatar .avatar{display:block}
+.app.show-avatar .avatar-sheng{display:block}
+.app.show-avatar .me{padding-right:43px}
+.app.show-avatar .user-avatar{display:grid}
 .assistant-text{font-size:15px;line-height:1.76;letter-spacing:.008em;word-break:break-word;color:#37312e}
 .assistant-text.short{width:max-content;max-width:100%}
-
-/* API 版原气泡：没有三角尾巴，只靠一个收紧的小圆角形成“角”。
-   原版 self 是右下 5px；这里按要求把小角挪到右上。 */
 .user-bubble{
   position:relative;width:fit-content;max-width:100%;min-width:0;
   padding:8px 12px 9px;
@@ -74,37 +82,25 @@ button{color:inherit}
   font-size:15px;line-height:1.58;letter-spacing:.006em;
   word-break:break-word;
 }
-
 .details{display:grid;grid-template-rows:0fr;width:min(100%,360px);margin:0;opacity:0;transition:.18s ease}
 .details.open{grid-template-rows:1fr;opacity:1;margin:0 0 11px}
 .details-inner{overflow:hidden}
-.card{
-  margin:0;padding:9px 11px 10px;
-  background:color-mix(in srgb,var(--milk-pink) 72%,transparent);
-  border:1px solid rgba(139,109,105,.07);
-  border-radius:11px;color:#796d68;
-}
+.card{margin:0;padding:9px 11px 10px;background:color-mix(in srgb,var(--milk-pink) 72%,transparent);border:1px solid rgba(139,109,105,.07);border-radius:11px;color:#796d68}
 .line+.line{margin-top:8px}
 .label{margin-bottom:3px;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:#a2928d;font-weight:650}
 .detail{font-size:10.5px;line-height:1.55}
-
 .composer-wrap{
   background:color-mix(in srgb,var(--milk-pink) 72%,var(--paper-2));
   border-top:1px solid rgba(91,76,67,.055);
+  border-radius:24px 24px 0 0;
+  overflow:hidden;
   padding:8px 16px calc(env(safe-area-inset-bottom) + 7px);
   z-index:6
 }
 .input-layer{min-height:47px;padding:0 4px 4px}
-textarea{
-  width:100%;min-height:42px;max-height:118px;resize:none;
-  border:0;outline:0;background:transparent;
-  padding:9px 2px 8px;color:var(--ink);font-size:15px;line-height:1.5
-}
+textarea{width:100%;min-height:42px;max-height:118px;resize:none;border:0;outline:0;background:transparent;padding:9px 2px 8px;color:var(--ink);font-size:15px;line-height:1.5}
 textarea::placeholder{color:#b1a59e}
-.action-layer{
-  height:46px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;
-  align-items:center;gap:8px;border-top:1px solid rgba(91,76,67,.045);padding-top:5px
-}
+.action-layer{height:46px;display:grid;grid-template-columns:42px auto 1fr 42px 42px;align-items:center;gap:8px;border-top:1px solid rgba(91,76,67,.045);padding-top:5px}
 .action{height:38px;border:0;background:transparent;display:grid;place-items:center;color:#6f6761}
 .more{width:38px;font-size:25px;line-height:1}
 .model{justify-self:start;display:flex;align-items:center;gap:5px;padding:0 13px;border-radius:15px;background:rgba(239,222,218,.62);font-size:12px;color:#756a65;white-space:nowrap}
@@ -119,10 +115,10 @@ textarea::placeholder{color:#b1a59e}
 </style>
 </head>
 <body>
-<main class="app" id="app">
+<main class="app show-avatar" id="app">
   <header class="topbar">
     <button class="back" aria-label="返回">‹</button>
-    <div class="person" id="avatarToggle" title="点这里切换头像">
+    <div class="person" id="avatarToggle" title="点这里切换双方头像">
       <div class="title">声声</div>
       <div class="subtitle"><span class="online"></span><span>此刻 · 在这里</span></div>
     </div>
@@ -131,30 +127,32 @@ textarea::placeholder{color:#b1a59e}
 
   <section class="messages" id="messages">
     <article class="msg sheng">
-      <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
-      <div class="assistant-meta"><span class="dot"></span><span>9/3 21:12:08</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
+      <img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt="">
+      <div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:12:08</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
       <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">详情现在位于时间下方、正文上方。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
       <div class="assistant-text">这次我直接沿用你之前认可的 API 版气泡逻辑，不再额外画一个三角尾巴。</div>
     </article>
 
     <article class="msg me">
+      <div class="user-avatar" aria-hidden="true">漾</div>
       <div class="user-bubble">嗯嗯，这个角应该自然一点，不要像贴了一个小三角。</div>
     </article>
 
     <article class="msg sheng">
-      <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
-      <div class="assistant-meta"><span class="dot"></span><span>9/3 21:13:24</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
+      <img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt="">
+      <div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:13:24</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
       <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">API 原版靠单角 5px 圆角形成气泡方向。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div>
       <div class="assistant-text short">对，就是这种。</div>
     </article>
 
     <article class="msg me">
+      <div class="user-avatar" aria-hidden="true">漾</div>
       <div class="user-bubble">然后我的消息这边也不要时间戳，整个聊天页尽量干净。</div>
     </article>
 
     <article class="msg sheng">
-      <img class="avatar" src="https://files.catbox.moe/ge809e.png" alt="">
-      <div class="assistant-meta"><span class="dot"></span><span>9/3 21:14:41</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
+      <img class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png" alt="">
+      <div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:14:41</span><button class="sheep" aria-expanded="false" aria-label="查看思考与工具调用"><img src="https://files.catbox.moe/ge809e.png" alt=""></button></div>
       <div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">用户时间戳已移除，页面降低边框和阴影存在感。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div>
       <div class="assistant-text">现在底色是护眼米色，奶粉和皮粉只做很淡的层次，豆绿色主要落在你的气泡和发送按钮上。</div>
     </article>
@@ -199,10 +197,14 @@ function send(){
   if(!text){hint();return;}
   const article=document.createElement('article');
   article.className='msg me';
+  const avatar=document.createElement('div');
+  avatar.className='user-avatar';
+  avatar.setAttribute('aria-hidden','true');
+  avatar.textContent='漾';
   const bubble=document.createElement('div');
   bubble.className='user-bubble';
   bubble.textContent=text;
-  article.append(bubble);
+  article.append(avatar,bubble);
   list.append(article);
   input.value='';resizeInput();
   requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:'smooth'}));
@@ -216,7 +218,7 @@ document.querySelector('.model').onclick=()=>hint('模型选择暂未接入');
 document.querySelector('.mic').onclick=()=>hint('语音暂未接入');
 document.getElementById('avatarToggle').onclick=()=>{
   const on=app.classList.toggle('show-avatar');
-  hint(on?'已显示头像':'已隐藏头像');
+  hint(on?'已显示双方头像':'已隐藏双方头像');
 };
 requestAnimationFrame(()=>list.scrollTop=list.scrollHeight);
 </script>
