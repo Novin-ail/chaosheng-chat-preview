@@ -16,6 +16,11 @@
 .notes-card{background:rgba(255,253,249,.72)!important}
 .memory-piece{background:rgba(255,253,249,.68)!important}
 .notes-stack{height:120px}
+.core-strip{width:100%;min-height:58px;padding:9px 12px!important;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px;text-align:left;border:1px solid rgba(104,83,75,.06);border-radius:18px 7px 18px 18px;overflow:hidden}
+.core-strip::before{width:72px!important;height:72px!important;right:-34px!important;top:-36px!important}
+.core-strip-names{justify-self:start;display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:650;white-space:nowrap}
+.core-strip-names i{font-style:normal;color:#c77f8d;font-size:13px;font-weight:400}
+.core-strip-arrow{position:relative;z-index:1;font-family:"Nunito",system-ui,sans-serif;font-size:20px;line-height:1;color:#9a737b;transform:translateY(-1px)}
 </style>
 <title>潮生 · Memory</title>
 </head>
@@ -41,38 +46,12 @@
       <span class="intro-copy">still becoming</span>
     </div>
 
-    <section class="core-card expandable" id="coreCard">
-      <button class="section-head" data-toggle="coreCard" aria-expanded="false">
-        <div>
-          <div class="eyebrow">CORE · ABOUT US</div>
-          <div class="section-title">我们是谁</div>
-        </div>
-        <span class="soft-pill">always here</span>
-      </button>
-      <div class="core-preview">
-        <div class="person-chip sheng">声声</div>
-        <span class="heart-mark">♡</span>
-        <div class="person-chip yang">小漾</div>
-        <div class="core-tags"><span>称呼</span><span>习惯</span><span>性格</span><span>偏好</span></div>
-      </div>
-      <div class="expand-body">
-        <div class="expand-inner">
-          <div class="profile-grid">
-            <article class="profile-box pink">
-              <div class="profile-top"><span>SHENG</span><b>声声</b></div>
-              <p>名字、性格、习惯、稳定表达方式。</p>
-              <div class="micro-tags"><i>identity</i><i>habit</i><i>tone</i></div>
-            </article>
-            <article class="profile-box green">
-              <div class="profile-top"><span>YANG</span><b>小漾</b></div>
-              <p>名字、习惯、长期偏好与相处方式。</p>
-              <div class="micro-tags"><i>identity</i><i>preference</i></div>
-            </article>
-          </div>
-          <div class="core-foot"><span>CORE</span><span>不随时间衰减</span></div>
-        </div>
-      </div>
-    </section>
+    <button class="core-card core-strip" id="coreCard" type="button" onclick="hint('Core · 下一步再做')">
+      <span class="eyebrow">CORE · ABOUT US</span>
+      <span class="core-strip-names"><span>声声</span><i>♡</i><span>小漾</span></span>
+      <span class="soft-pill">always here</span>
+      <span class="core-strip-arrow">›</span>
+    </button>
 
     <section class="notes-card">
       <button class="section-head" id="notesToggle" aria-expanded="true">
