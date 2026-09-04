@@ -1,19 +1,6 @@
-/* Memory home visual overrides: flat major cards + more tactile note stack */
+/* Memory home visual overrides: flat major cards only */
 .entry-card,.notes-card{box-shadow:none!important}
 .entry-card:active{box-shadow:none!important}
 .core-entry{background:rgba(255,250,247,.88)!important}
 .notes-card{background:rgba(249,247,240,.90)!important}
 .timeline-entry{background:rgba(244,247,239,.90)!important}
-
-/* Let the lower notes visibly peek through like real paper */
-.notes-stack{height:158px!important;transition:height .68s cubic-bezier(.22,.72,.2,1)!important}
-.note-paper{height:86px!important;transition:top .66s cubic-bezier(.22,.72,.2,1),transform .58s cubic-bezier(.22,.72,.2,1),opacity .50s ease,filter .50s ease,box-shadow .28s ease!important}
-.note-a{top:0!important;transform:rotate(-.45deg)!important}
-.note-b{top:34px!important;transform:translateX(6px) rotate(.75deg)!important;opacity:.72!important;filter:saturate(.88)!important}
-.note-c{top:68px!important;transform:translateX(-3px) rotate(-1deg)!important;opacity:.50!important;filter:saturate(.80)!important}
-.notes-stack.spread{height:278px!important}
-.notes-stack.spread .note-paper{opacity:1!important;filter:none!important;transform:none!important}
-.notes-stack.spread .note-a{top:0!important}
-.notes-stack.spread .note-b{top:94px!important}
-.notes-stack.spread .note-c{top:188px!important}
-.review-btn{margin-top:0!important}
