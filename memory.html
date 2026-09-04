@@ -36,7 +36,18 @@
 .timeline-strip-copy{display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
 .timeline-strip-copy small{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9b9088;font-style:italic;letter-spacing:.025em}
 .timeline-strip-pill{padding:5px 8px;border-radius:999px;background:rgba(220,227,210,.62);color:#758064;font-family:"Nunito",system-ui,sans-serif;font-size:7.5px;white-space:nowrap;position:relative;z-index:1}
-.memory-home-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin:18px 0 0;color:#afa29a;font-family:"Nunito",system-ui,sans-serif}
+.related-jumps{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}
+.related-jump{position:relative;min-height:66px;padding:11px 12px;border:1px solid rgba(104,83,75,.06);border-radius:17px 6px 17px 17px;text-align:left;overflow:hidden;transition:transform .16s ease}
+.related-jump:active{transform:scale(.985)}
+.related-jump.album{background:rgba(246,233,230,.66)}
+.related-jump.diary{background:rgba(220,227,210,.42)}
+.related-jump .jump-title{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:8px;font-weight:600;letter-spacing:.11em;color:#9b8d86}
+.related-jump .jump-name{display:block;margin-top:6px;font-size:12px;font-weight:650;letter-spacing:.02em}
+.related-jump .jump-note{display:block;margin-top:5px;font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;font-style:italic;color:#a39790;letter-spacing:.025em}
+.related-jump::after{position:absolute;right:10px;bottom:7px;font-size:14px;pointer-events:none}
+.related-jump.album::after{content:"✦";color:rgba(201,130,145,.34);transform:rotate(12deg)}
+.related-jump.diary::after{content:"♡";color:rgba(132,148,111,.34);transform:rotate(-8deg)}
+.memory-home-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;color:#afa29a;font-family:"Nunito",system-ui,sans-serif}
 .memory-home-footer::before,.memory-home-footer::after{content:"";width:38px;border-top:1px dotted rgba(201,130,145,.30)}
 .memory-home-footer span{font-size:6.8px;font-style:italic;letter-spacing:.035em}
 .memory-home-footer i{font-style:normal;font-size:8px;color:rgba(201,130,145,.62)}
@@ -110,6 +121,19 @@
       </span>
       <span class="timeline-strip-pill">memory lane</span>
     </button>
+
+    <div class="related-jumps">
+      <button class="related-jump album" type="button" onclick="hint('Album · 相册页面下一步再做')">
+        <span class="jump-title">ALBUM · MEMORY</span>
+        <span class="jump-name">相册</span>
+        <span class="jump-note">little snapshots</span>
+      </button>
+      <button class="related-jump diary" type="button" onclick="hint('Diary · 日记页面下一步再做')">
+        <span class="jump-title">DIARY · DAYS</span>
+        <span class="jump-name">日记</span>
+        <span class="jump-note">written moments</span>
+      </button>
+    </div>
 
     <div class="memory-home-footer"><i>♡</i><span>little things stay</span><i>✦</i></div>
     <div class="bottom-space"></div>
