@@ -53,7 +53,7 @@ button{font:inherit;color:inherit}
 
 /* Memory + Notes palette: blush, warm oat, soft mauve — no green */
 .memory-app .core-card{background:rgba(247,232,231,.66)!important;border-color:rgba(176,135,139,.08)!important}
-.memory-app .notes-card{background:rgba(250,246,237,.74)!important;border-color:rgba(150,132,118,.07)!important}
+.memory-app .notes-card{background:rgba(255,253,249,.72)!important;border-color:rgba(104,83,75,.06)!important}
 .memory-app .note-paper:nth-child(1){background:#fcf2f1!important}
 .memory-app .note-paper:nth-child(2){background:#faf6ed!important}
 .memory-app .note-paper:nth-child(3){background:#f6f0f4!important}
