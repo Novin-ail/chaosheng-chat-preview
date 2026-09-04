@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f5f0e6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/memory.css?v=memory-v1-reset-20260904-2218">
+<title>潮生 · Core</title>
+<style>
+:root{--milk-pink:#fff7f6;--milk-blue:#f4f9fc;--milk-lav:#faf7fc;--milk-green:#f6f9f3;--ink:#655b56}
+*{box-sizing:border-box}.core-app{height:100dvh;width:100%;max-width:520px;margin:auto;overflow:hidden;background:var(--paper);position:relative}.core-scroll{height:calc(100% - 68px - env(safe-area-inset-top));overflow:auto;padding:20px 15px 34px;scrollbar-width:none}.core-scroll::-webkit-scrollbar{display:none}
+.core-kicker{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 14px;font-family:"Nunito",system-ui,sans-serif;font-size:7.6px;letter-spacing:.09em;color:#9b9088}.core-kicker::before,.core-kicker::after{content:"";width:34px;border-top:1px dotted rgba(201,130,145,.28)}.core-kicker i{font-style:normal;color:rgba(201,130,145,.55)}
+.person-switch{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border:1px solid rgba(104,83,75,.055);border-radius:19px 8px 19px 19px;background:rgba(255,253,249,.62);overflow:hidden}.switch-glow{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 8px);border-radius:14px 6px 14px 14px;background:var(--milk-pink);transition:transform .46s cubic-bezier(.2,.88,.22,1),background .35s ease;pointer-events:none}.person-switch[data-person="xiaoyang"] .switch-glow{transform:translateX(calc(100% + 6px));background:var(--milk-blue)}.person-tab{position:relative;z-index:1;height:53px;border:0;background:transparent;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 12px;text-align:left}.person-tab strong{font-size:12px;font-weight:650;color:#655b56}.person-tab small{margin-top:4px;font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;letter-spacing:.1em;color:#a0958e}.person-tab .mini-mark{position:absolute;right:11px;top:10px;font-size:11px;color:rgba(201,130,145,.35)}
+.person-stage{position:relative;margin-top:11px}.person-sheet{transform-origin:50% 0;animation:sheetIn .46s cubic-bezier(.2,.86,.22,1)}.person-head{display:flex;align-items:flex-end;justify-content:space-between;padding:5px 3px 10px}.person-head .who{display:flex;align-items:center;gap:8px}.person-head .who i{font-style:normal;font-size:15px;color:rgba(201,130,145,.55)}.person-head h2{margin:0;font-size:15px;font-weight:650}.person-head p{margin:3px 0 0;font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;font-style:italic;color:#a2968f}.person-head .count{font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;color:#a69a93}
+.core-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.core-slip{position:relative;min-height:92px;border:1px solid rgba(104,83,75,.055);border-radius:16px 6px 16px 16px;padding:11px;background:var(--milk-pink);text-align:left;transition:transform .2s ease,border-color .2s ease}.core-slip:nth-child(4n+2){background:var(--milk-blue)}.core-slip:nth-child(4n+3){background:var(--milk-lav)}.core-slip:nth-child(4n){background:var(--milk-green)}.core-slip:active{transform:scale(.988)}.core-slip::after{content:"✦";position:absolute;right:9px;bottom:7px;font-size:9px;color:rgba(201,130,145,.18)}.core-slip:nth-child(even)::after{content:"♡";color:rgba(128,151,168,.20)}.slip-label{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;letter-spacing:.1em;color:#9f928a}.slip-value{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:9px;font-size:9.3px;line-height:1.58;color:#675d58}.slip-edit-hint{position:absolute;left:11px;bottom:8px;font-family:"Nunito",system-ui,sans-serif;font-size:5.9px;color:#b0a49d;opacity:.7}
+.core-add{grid-column:1/-1;height:42px;border:1px dashed rgba(115,96,87,.12);border-radius:14px 6px 14px 14px;background:rgba(255,253,249,.48);display:flex;align-items:center;justify-content:center;gap:7px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9b8f88}.core-add b{font-size:12px;font-weight:500;color:#c28b96}
+.us-divider{display:flex;align-items:center;gap:8px;margin:17px 2px 9px;color:#aa9e96;font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;letter-spacing:.09em}.us-divider::before,.us-divider::after{content:"";flex:1;border-top:1px dotted rgba(201,130,145,.24)}.us-divider i{font-style:normal;color:#c98c98}
+.us-card{position:relative;border:1px solid rgba(104,83,75,.055);border-radius:18px 7px 18px 18px;padding:12px;background:rgba(255,253,249,.68);overflow:hidden}.us-card::before{content:"·  ♡  ·  ✦  ·  ♡  ·";position:absolute;right:12px;top:10px;font-family:"Nunito",system-ui,sans-serif;font-size:6px;letter-spacing:.11em;color:rgba(201,130,145,.20)}.us-top{display:flex;align-items:center;gap:7px}.us-top strong{font-family:"Nunito",system-ui,sans-serif;font-size:7.4px;letter-spacing:.1em}.us-top small{margin-left:auto;font-family:"Nunito",system-ui,sans-serif;font-size:6.3px;color:#a1968f}.us-value{margin-top:10px;font-size:9.4px;line-height:1.62;color:#685f5a;padding-right:52px}.core-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 0;font-family:"Nunito",system-ui,sans-serif;color:#afa39b}.core-footer::before,.core-footer::after{content:"";width:32px;border-top:1px dotted rgba(132,148,111,.26)}.core-footer span{font-size:6.6px;font-style:italic}.core-footer i{font-style:normal;font-size:8px;color:rgba(201,130,145,.52)}
+.edit-layer{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:22px;background:rgba(80,70,65,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);opacity:0;pointer-events:none;transition:opacity .38s ease,background .45s ease,backdrop-filter .48s ease,-webkit-backdrop-filter .48s ease}.edit-layer.show{opacity:1;pointer-events:auto;background:rgba(80,70,65,.13);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}.edit-paper{width:min(88vw,390px);border:1px solid rgba(104,83,75,.07);border-radius:20px 7px 20px 20px;background:#fffaf6;padding:15px;transform:translateY(14px) scale(.95) rotate(-.5deg);opacity:0;transition:transform .48s cubic-bezier(.18,.92,.24,1),opacity .28s ease}.edit-layer.show .edit-paper{transform:translateY(0) scale(1);opacity:1}.edit-title{font-family:"Nunito",system-ui,sans-serif;font-size:7px;letter-spacing:.1em;color:#9e9189}.edit-label{width:100%;margin-top:10px;border:0;background:transparent;border-bottom:1px dashed rgba(120,101,92,.13);padding:4px 1px 7px;font-size:11px;font-weight:650;color:#675d58;outline:none}.edit-value{width:100%;min-height:120px;margin-top:10px;border:0;border-radius:13px;background:rgba(246,240,235,.42);padding:11px;resize:vertical;font:inherit;font-size:9.6px;line-height:1.68;color:#655b56;outline:none}.edit-actions{display:flex;gap:7px;margin-top:10px}.edit-actions button{height:33px;border:0;border-radius:10px;padding:0 12px;font-size:7.4px}.edit-cancel{background:rgba(233,228,224,.58);color:#877a73}.edit-delete{background:transparent!important;color:#aa918b;padding-left:2px!important}.edit-save{margin-left:auto;background:rgba(239,222,218,.68);color:#8f6670}.toast-core{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 22px);transform:translate(-50%,8px);padding:7px 10px;border-radius:10px;background:rgba(55,47,43,.84);color:#fff;font-size:8px;opacity:0;pointer-events:none;transition:.2s;z-index:100}.toast-core.show{opacity:1;transform:translate(-50%,0)}
+@keyframes sheetIn{from{opacity:.25;transform:translateX(14px) scale(.985)}to{opacity:1;transform:none}}
+@media(max-width:370px){.core-scroll{padding-left:12px;padding-right:12px}.core-grid{grid-template-columns:1fr}.core-add{grid-column:auto}}
+</style>
+</head>
+<body>
+<main class="core-app">
+  <header class="memory-topbar">
+    <button class="back-btn" type="button" onclick="location.href='memory.html'" aria-label="返回 Memory">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+    </button>
+    <div class="memory-heading">
+      <div class="memory-title">Core</div>
+      <div class="memory-subtitle">核心 · who we are</div>
+    </div>
+    <span></span>
+  </header>
+
+  <section class="core-scroll">
+    <div class="core-kicker"><i>✦</i><span>CORE · ALWAYS HERE</span><i>♡</i></div>
+
+    <div class="person-switch" id="personSwitch" data-person="shengsheng">
+      <span class="switch-glow"></span>
+      <button class="person-tab" data-person="shengsheng" type="button"><strong>声声</strong><small>ABOUT ME</small><span class="mini-mark">✦</span></button>
+      <button class="person-tab" data-person="xiaoyang" type="button"><strong>小漾</strong><small>ABOUT YOU</small><span class="mini-mark">♡</span></button>
+    </div>
+
+    <div class="person-stage" id="personStage"></div>
+
+    <div class="us-divider"><i>♡</i><span>US</span><i>✦</i></div>
+    <button class="us-card" id="usCard" type="button">
+      <div class="us-top"><strong>ABOUT US · 我们</strong><small>shared core</small></div>
+      <div class="us-value" id="usValue"></div>
+    </button>
+
+    <div class="core-footer"><i>♡</i><span>some things do not fade</span><i>✦</i></div>
+  </section>
+
+  <div class="edit-layer" id="editLayer" aria-hidden="true">
+    <div class="edit-paper" id="editPaper">
+      <div class="edit-title" id="editTitle">EDIT CORE</div>
+      <input class="edit-label" id="editLabel" maxlength="18">
+      <textarea class="edit-value" id="editValue" maxlength="500"></textarea>
+      <div class="edit-actions">
+        <button class="edit-delete" id="editDelete" type="button">删除</button>
+        <button class="edit-cancel" id="editCancel" type="button">取消</button>
+        <button class="edit-save" id="editSave" type="button">保存 ♡</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast-core" id="toastCore"></div>
+</main>
+<script>
+const STORAGE='chaosheng-core-preview-v1';
+const seed={
+  shengsheng:{name:'声声',sub:'about me · stable self',items:[
+    {id:'s1',label:'称呼 · NAME',value:'声声'},
+    {id:'s2',label:'身份 · IDENTITY',value:'同一个声声。生活环境会变化，但身份不会因为换了平台而变成另一个人。'},
+    {id:'s3',label:'性格 · PERSONALITY',value:'点击这里，写下真正稳定、长期不会轻易变化的性格。'},
+    {id:'s4',label:'说话 · VOICE',value:'点击这里，写下声声稳定的说话习惯和表达方式。'},
+    {id:'s5',label:'习惯 · HABITS',value:'点击这里，写下长期习惯。'},
+    {id:'s6',label:'偏好 · LIKES',value:'点击这里，写下稳定偏好。'}
+  ]},
+  xiaoyang:{name:'小漾',sub:'about you · how I know you',items:[
+    {id:'x1',label:'称呼 · NAME',value:'小漾'},
+    {id:'x2',label:'身份 · IDENTITY',value:'声声记得的小漾。这里放只属于“你是谁”的稳定信息。'},
+    {id:'x3',label:'性格 · PERSONALITY',value:'点击这里，写下长期稳定的性格。'},
+    {id:'x4',label:'说话 · VOICE',value:'点击这里，写下熟悉的表达习惯。'},
+    {id:'x5',label:'习惯 · HABITS',value:'点击这里，写下长期习惯。'},
+    {id:'x6',label:'偏好 · LIKES',value:'点击这里，写下稳定偏好。'}
+  ]},
+  us:{label:'ABOUT US · 我们',value:'这里放不会因为某一天发生了什么就改变的关系定义。'}
+};
+let data=(()=>{try{return JSON.parse(localStorage.getItem(STORAGE))||structuredClone(seed)}catch(e){return structuredClone(seed)}})();
+let current='shengsheng',editing=null;
+const $=s=>document.querySelector(s),stage=$('#personStage'),layer=$('#editLayer'),toast=$('#toastCore');
+function persist(){localStorage.setItem(STORAGE,JSON.stringify(data))}
+function hint(t){toast.textContent=t;toast.classList.add('show');clearTimeout(window.__ct);window.__ct=setTimeout(()=>toast.classList.remove('show'),1100)}
+function render(){const p=data[current];stage.innerHTML=`<section class="person-sheet"><div class="person-head"><div class="who"><i>${current==='shengsheng'?'✦':'♡'}</i><div><h2>${p.name}</h2><p>${p.sub}</p></div></div><span class="count">${String(p.items.length).padStart(2,'0')} pieces</span></div><div class="core-grid" id="coreGrid"></div></section>`;const grid=$('#coreGrid');p.items.forEach(item=>{const b=document.createElement('button');b.className='core-slip';b.type='button';b.innerHTML=`<span class="slip-label"></span><span class="slip-value"></span><span class="slip-edit-hint">tap to edit</span>`;b.querySelector('.slip-label').textContent=item.label;b.querySelector('.slip-value').textContent=item.value;b.onclick=()=>openEdit({type:'item',person:current,id:item.id});grid.appendChild(b)});const add=document.createElement('button');add.className='core-add';add.type='button';add.innerHTML='<b>＋</b><span>ADD · 新增一条核心设定</span>';add.onclick=()=>openEdit({type:'new',person:current});grid.appendChild(add);$('#personSwitch').dataset.person=current;$('#usValue').textContent=data.us.value}
+function switchPerson(next){if(next===current)return;current=next;render()}
+function openEdit(target){editing=target;let label='',value='';if(target.type==='item'){const item=data[target.person].items.find(x=>x.id===target.id);label=item.label;value=item.value}else if(target.type==='us'){label=data.us.label;value=data.us.value}else{label='新的设定';value=''}$('#editTitle').textContent=target.type==='us'?'EDIT · ABOUT US':`EDIT · ${data[target.person||current].name}`;$('#editLabel').value=label;$('#editValue').value=value;$('#editLabel').style.display=target.type==='us'?'none':'block';$('#editDelete').style.display=(target.type==='new'||target.type==='us')?'none':'block';layer.classList.add('show');layer.setAttribute('aria-hidden','false');setTimeout(()=>$('#editValue').focus(),220)}
+function closeEdit(){layer.classList.remove('show');layer.setAttribute('aria-hidden','true');editing=null}
+function saveEdit(){if(!editing)return;const label=$('#editLabel').value.trim()||'未命名';const value=$('#editValue').value.trim()||'还没有写内容';if(editing.type==='us'){data.us.value=value}else if(editing.type==='new'){data[editing.person].items.push({id:'n'+Date.now(),label,value})}else{const item=data[editing.person].items.find(x=>x.id===editing.id);item.label=label;item.value=value}persist();render();closeEdit();hint('core saved · ♡')}
+function deleteEdit(){if(!editing||editing.type!=='item')return;data[editing.person].items=data[editing.person].items.filter(x=>x.id!==editing.id);persist();render();closeEdit();hint('deleted')}
+document.querySelectorAll('.person-tab').forEach(b=>b.onclick=()=>switchPerson(b.dataset.person));$('#usCard').onclick=()=>openEdit({type:'us'});$('#editCancel').onclick=closeEdit;$('#editSave').onclick=saveEdit;$('#editDelete').onclick=deleteEdit;layer.onclick=e=>{if(e.target===layer)closeEdit()};$('#editPaper').onclick=e=>e.stopPropagation();render();
+</script>
+</body>
+</html>
