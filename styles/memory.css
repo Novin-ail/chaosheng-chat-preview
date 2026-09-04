@@ -33,3 +33,12 @@ button{font:inherit;color:inherit}
 @keyframes heartPulse{0%{transform:scale(1)}45%{transform:scale(1.18) rotate(-4deg)}100%{transform:scale(1)}}
 @media(max-width:370px){.memory-scroll{padding-left:12px;padding-right:12px}.scale-tabs button{padding:0 5px}.profile-grid{grid-template-columns:1fr}.notes-stack.spread{height:350px}}
 @media(min-width:700px){.memory-app{box-shadow:0 20px 70px rgba(48,39,34,.08)}}
+
+/* Shared Dear Lamb wallpaper for Memory-related pages */
+.memory-app,.notes-app,.core-app{
+  background-color:#fbf5f4!important;
+  background-image:url("../assets/dear-lamb-bg-v2.svg")!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+}
