@@ -50,3 +50,33 @@ button{font:inherit;color:inherit}
 .core-app .person-switch[data-person="xiaoyang"] .switch-glow{background:#f0f3e2!important;box-shadow:inset 0 0 0 1px rgba(153,163,111,.10)!important}
 .core-app .person-tab[data-person="xiaoyang"] .mini-mark{color:rgba(153,163,111,.58)!important}
 .core-app .person-switch[data-person="xiaoyang"]~.person-stage .person-head .who i{color:#99a36f!important}
+
+/* Memory + Notes palette: soft rose, warm oat, bean green, quiet mauve */
+.memory-app .core-card{background:rgba(247,232,231,.66)!important;border-color:rgba(176,135,139,.08)!important}
+.memory-app .notes-card{background:rgba(250,246,237,.74)!important;border-color:rgba(150,132,118,.07)!important}
+.memory-app .note-paper:nth-child(1){background:#fcf2f1!important}
+.memory-app .note-paper:nth-child(2){background:#faf6ed!important}
+.memory-app .note-paper:nth-child(3){background:#f1f5e9!important}
+.memory-app .review-btn{background:rgba(244,226,227,.64)!important}
+.memory-app .count-badge::before{color:#ead6d7!important}
+.memory-app .soft-pill,.memory-app .timeline-strip-pill{background:rgba(228,234,217,.72)!important;color:#758062!important}
+.memory-app .timeline-strip{background:rgba(232,238,224,.68)!important;border-color:rgba(132,148,111,.07)!important}
+.memory-app .related-jump.album{background:rgba(246,228,230,.60)!important}
+.memory-app .related-jump.diary{background:rgba(229,236,220,.56)!important}
+
+.notes-app .day-dot.active b{background:rgba(245,231,229,.74)!important;border-color:rgba(185,132,141,.11)!important}
+.notes-app .date-pick{background:rgba(245,229,229,.55)!important}
+.notes-app .status-pill{background:rgba(229,235,219,.62)!important;color:#788364!important}
+.notes-app .day-status .left,.notes-app .day-status .status-pill{background:rgba(251,247,240,.76)!important}
+.notes-app .note-card:nth-child(4n+1){background:#fcf2f1!important}
+.notes-app .note-card:nth-child(4n+2){background:#faf6ed!important}
+.notes-app .note-card:nth-child(4n+3){background:#f2f5ea!important}
+.notes-app .note-card:nth-child(4n){background:#f7f3f2!important}
+.notes-app .note-top .tiny-state{background:rgba(244,226,227,.66)!important;color:#927078!important}
+.notes-app .done-tray{background:rgba(234,239,225,.66)!important;border-color:rgba(132,148,111,.07)!important}
+.notes-app .done-item{background:rgba(255,252,247,.58)!important}
+.notes-app .search-pop{background:rgba(255,250,245,.90)!important}
+.notes-app .search-tags button{background:rgba(229,235,219,.60)!important;color:#788364!important}
+.notes-app .save-inline{background:rgba(229,235,219,.72)!important;color:#6f795e!important}
+.notes-app .finish-note{background:rgba(244,226,227,.72)!important;color:#8f6971!important}
+.notes-app .detail-tags span{background:rgba(244,226,227,.54)!important;color:#8f7077!important}
