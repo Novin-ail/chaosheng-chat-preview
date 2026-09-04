@@ -51,32 +51,42 @@ button{font:inherit;color:inherit}
 .core-app .person-tab[data-person="xiaoyang"] .mini-mark{color:rgba(153,163,111,.58)!important}
 .core-app .person-switch[data-person="xiaoyang"]~.person-stage .person-head .who i{color:#99a36f!important}
 
-/* Memory + Notes palette: soft rose, warm oat, bean green, quiet mauve */
+/* Memory + Notes palette: blush, warm oat, soft mauve — no green */
 .memory-app .core-card{background:rgba(247,232,231,.66)!important;border-color:rgba(176,135,139,.08)!important}
 .memory-app .notes-card{background:rgba(250,246,237,.74)!important;border-color:rgba(150,132,118,.07)!important}
 .memory-app .note-paper:nth-child(1){background:#fcf2f1!important}
 .memory-app .note-paper:nth-child(2){background:#faf6ed!important}
-.memory-app .note-paper:nth-child(3){background:#f1f5e9!important}
+.memory-app .note-paper:nth-child(3){background:#f6f0f4!important}
 .memory-app .review-btn{background:rgba(244,226,227,.64)!important}
 .memory-app .count-badge::before{color:#ead6d7!important}
-.memory-app .soft-pill,.memory-app .timeline-strip-pill{background:rgba(228,234,217,.72)!important;color:#758062!important}
-.memory-app .timeline-strip{background:rgba(232,238,224,.68)!important;border-color:rgba(132,148,111,.07)!important}
+.memory-app .soft-pill,.memory-app .timeline-strip-pill{background:rgba(239,228,232,.72)!important;color:#8b7077!important}
+.memory-app .timeline-strip{background:rgba(245,237,240,.68)!important;border-color:rgba(176,140,149,.07)!important}
+.memory-app .timeline-strip-mini::before{background:linear-gradient(to bottom,rgba(201,130,145,.30),rgba(177,150,156,.20),rgba(150,137,132,.10))!important}
+.memory-app .timeline-strip-mini .t3{background:#b9a5aa!important}
 .memory-app .related-jump.album{background:rgba(246,228,230,.60)!important}
-.memory-app .related-jump.diary{background:rgba(229,236,220,.56)!important}
+.memory-app .related-jump.diary{background:rgba(245,235,239,.58)!important}
+.memory-app .related-jump.diary::after{color:rgba(171,136,145,.34)!important}
+.memory-app .note-bottom b{color:#8f767c!important}
 
+.notes-app .day-hero::after{color:rgba(170,136,145,.32)!important}
 .notes-app .day-dot.active b{background:rgba(245,231,229,.74)!important;border-color:rgba(185,132,141,.11)!important}
 .notes-app .date-pick{background:rgba(245,229,229,.55)!important}
-.notes-app .status-pill{background:rgba(229,235,219,.62)!important;color:#788364!important}
+.notes-app .status-pill{background:rgba(243,231,234,.62)!important;color:#8a6f76!important}
 .notes-app .day-status .left,.notes-app .day-status .status-pill{background:rgba(251,247,240,.76)!important}
 .notes-app .note-card:nth-child(4n+1){background:#fcf2f1!important}
 .notes-app .note-card:nth-child(4n+2){background:#faf6ed!important}
-.notes-app .note-card:nth-child(4n+3){background:#f2f5ea!important}
-.notes-app .note-card:nth-child(4n){background:#f7f3f2!important}
+.notes-app .note-card:nth-child(4n+3){background:#f6f0f4!important}
+.notes-app .note-card:nth-child(4n){background:#fbf6f3!important}
+.notes-app .note-card:nth-child(even)::after{color:#aa8891!important}
 .notes-app .note-top .tiny-state{background:rgba(244,226,227,.66)!important;color:#927078!important}
-.notes-app .done-tray{background:rgba(234,239,225,.66)!important;border-color:rgba(132,148,111,.07)!important}
+.notes-app .weight,.notes-app .weight-value{color:#92777e!important}
+.notes-app .weight-range{background:#eadbdd!important}
+.notes-app .done-tray{background:rgba(246,235,238,.68)!important;border-color:rgba(176,140,149,.07)!important}
+.notes-app .done-tray::after{color:rgba(171,136,145,.20)!important}
+.notes-app .done-head .box-heart{color:#a7838c!important}
 .notes-app .done-item{background:rgba(255,252,247,.58)!important}
 .notes-app .search-pop{background:rgba(255,250,245,.90)!important}
-.notes-app .search-tags button{background:rgba(229,235,219,.60)!important;color:#788364!important}
-.notes-app .save-inline{background:rgba(229,235,219,.72)!important;color:#6f795e!important}
+.notes-app .search-tags button{background:rgba(243,231,234,.60)!important;color:#8c7077!important}
+.notes-app .save-inline{background:rgba(241,231,228,.74)!important;color:#816d68!important}
 .notes-app .finish-note{background:rgba(244,226,227,.72)!important;color:#8f6971!important}
 .notes-app .detail-tags span{background:rgba(244,226,227,.54)!important;color:#8f7077!important}
