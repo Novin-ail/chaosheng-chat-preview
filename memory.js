@@ -10,17 +10,41 @@ $$('[data-toggle]').forEach(btn=>btn.onclick=()=>{
   btn.setAttribute('aria-expanded',open?'true':'false');
 });
 
-$('#notesToggle').onclick=()=>{
-  const stack=$('#notesStack'),open=stack.classList.toggle('spread');
-  $('#notesToggle').setAttribute('aria-expanded',open?'true':'false');
+const notesToggle=$('#notesToggle');
+const notesStack=$('#notesStack');
+const reviewBtn=$('#reviewBtn');
+let noteSwitching=false;
+
+notesToggle.onclick=()=>{
+  const open=notesStack.classList.toggle('spread');
+  notesToggle.setAttribute('aria-expanded',open?'true':'false');
 };
-$('#reviewBtn').onclick=()=>{
-  const stack=$('#notesStack');
-  stack.classList.add('spread');
-  $('#notesToggle').setAttribute('aria-expanded','true');
-  stack.scrollIntoView({behavior:'smooth',block:'center'});
+
+notesStack.onclick=e=>{
+  const note=e.target.closest('.note-paper');
+  if(!note||notesStack.classList.contains('spread')||noteSwitching)return;
+  noteSwitching=true;
+  const a=notesStack.querySelector('.note-a');
+  const b=notesStack.querySelector('.note-b');
+  const c=notesStack.querySelector('.note-c');
+  if(!a||!b||!c){noteSwitching=false;return}
+
+  a.classList.add('note-swap-out');
+  window.setTimeout(()=>{
+    a.classList.remove('note-a');a.classList.add('note-c');
+    b.classList.remove('note-b');b.classList.add('note-a');
+    c.classList.remove('note-c');c.classList.add('note-b');
+    requestAnimationFrame(()=>{
+      a.classList.remove('note-swap-out');
+      window.setTimeout(()=>{noteSwitching=false},360);
+    });
+  },320);
 };
-$$('.note-paper').forEach(note=>note.onclick=()=>hint('小记编辑 · 下一步再接 ouo'));
+
+reviewBtn.onclick=e=>{
+  e.stopPropagation();
+  location.href='notes.html';
+};
 
 $$('[data-memory] .memory-piece').forEach(btn=>btn.onclick=()=>{
   const entry=btn.closest('[data-memory]'),open=entry.classList.toggle('open');
