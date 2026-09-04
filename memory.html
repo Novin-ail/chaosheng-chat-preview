@@ -10,16 +10,21 @@
 <link rel="stylesheet" href="styles/memory.css?v=memory-v1-reset-20260904-2218">
 <style>
 .intro-row{position:relative;top:-12px}
+.intro-row::before{content:"✦";font-size:7px;color:rgba(201,130,145,.42);transform:translateY(-1px)}
+.intro-row::after{content:"♡";font-size:9px;color:rgba(132,148,111,.36);transform:translateY(-1px)}
 .review-btn{position:relative;top:0}
 .core-card,.notes-card,.memory-piece{box-shadow:none!important}
 .core-card{background:rgba(255,253,249,.72)!important}
 .notes-card{background:rgba(255,253,249,.72)!important}
 .memory-piece{background:rgba(255,253,249,.68)!important}
 .notes-stack{height:120px}
-.core-strip{width:100%;min-height:54px;padding:9px 12px!important;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:1px solid rgba(104,83,75,.06);border-radius:18px 7px 18px 18px;overflow:hidden}
+.core-strip{width:100%;min-height:54px;padding:9px 12px!important;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:1px solid rgba(104,83,75,.06);border-radius:18px 7px 18px 18px;overflow:hidden;position:relative}
 .core-strip::before{width:72px!important;height:72px!important;right:-34px!important;top:-36px!important}
-.timeline-strip{width:100%;min-height:82px;margin-top:19px;padding:11px 13px;border:1px solid rgba(104,83,75,.06);border-radius:18px 7px 18px 18px;background:rgba(244,247,239,.72);display:grid;grid-template-columns:66px 1fr auto;align-items:center;gap:10px;text-align:left}
+.core-strip::after{content:"·  ♡  ·  ✦  ·";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:"Nunito",system-ui,sans-serif;font-size:7px;letter-spacing:.14em;color:rgba(201,130,145,.20);white-space:nowrap;pointer-events:none}
+.core-strip .eyebrow,.core-strip .soft-pill{position:relative;z-index:1}
+.timeline-strip{width:100%;min-height:80px;margin-top:19px;padding:11px 13px;border:1px solid rgba(104,83,75,.06);border-radius:18px 7px 18px 18px;background:rgba(244,247,239,.72);display:grid;grid-template-columns:66px 1fr auto;align-items:center;gap:10px;text-align:left;position:relative;overflow:hidden}
 .timeline-strip:active{transform:scale(.992)}
+.timeline-strip::after{content:"♡";position:absolute;right:19px;bottom:8px;font-size:9px;color:rgba(201,130,145,.23);transform:rotate(-8deg);pointer-events:none}
 .timeline-strip-mini{height:58px;position:relative}
 .timeline-strip-mini::before{content:"";position:absolute;left:15px;top:4px;bottom:4px;width:1px;background:linear-gradient(to bottom,rgba(201,130,145,.34),rgba(143,160,122,.22),rgba(142,132,125,.10))}
 .timeline-strip-mini i{position:absolute;left:11px;width:9px;height:9px;border:2px solid var(--paper);border-radius:50%}
@@ -28,9 +33,13 @@
 .timeline-strip-mini .t3{top:47px;background:#9faa90}
 .timeline-strip-mini span{position:absolute;left:25px;font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;color:#9a8e87;letter-spacing:.04em;white-space:nowrap}
 .timeline-strip-mini .d1{top:2px}.timeline-strip-mini .d2{top:24px}.timeline-strip-mini .d3{top:46px}
-.timeline-strip-copy .section-title{margin-top:4px}
-.timeline-strip-copy small{display:block;margin-top:6px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9b9088;font-style:italic;letter-spacing:.025em}
-.timeline-strip-pill{padding:5px 8px;border-radius:999px;background:rgba(220,227,210,.62);color:#758064;font-family:"Nunito",system-ui,sans-serif;font-size:7.5px;white-space:nowrap}
+.timeline-strip-copy{display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
+.timeline-strip-copy small{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9b9088;font-style:italic;letter-spacing:.025em}
+.timeline-strip-pill{padding:5px 8px;border-radius:999px;background:rgba(220,227,210,.62);color:#758064;font-family:"Nunito",system-ui,sans-serif;font-size:7.5px;white-space:nowrap;position:relative;z-index:1}
+.memory-home-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin:18px 0 0;color:#afa29a;font-family:"Nunito",system-ui,sans-serif}
+.memory-home-footer::before,.memory-home-footer::after{content:"";width:38px;border-top:1px dotted rgba(201,130,145,.30)}
+.memory-home-footer span{font-size:6.8px;font-style:italic;letter-spacing:.035em}
+.memory-home-footer i{font-style:normal;font-size:8px;color:rgba(201,130,145,.62)}
 </style>
 <title>潮生 · Memory</title>
 </head>
@@ -97,12 +106,12 @@
       </span>
       <span class="timeline-strip-copy">
         <span class="eyebrow">TIMELINE · 回忆</span>
-        <span class="section-title">沿着时间，慢慢往回走</span>
         <small>day · week · month · year</small>
       </span>
       <span class="timeline-strip-pill">memory lane</span>
     </button>
 
+    <div class="memory-home-footer"><i>♡</i><span>little things stay</span><i>✦</i></div>
     <div class="bottom-space"></div>
   </section>
 
