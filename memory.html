@@ -17,7 +17,10 @@
 .core-card{background:rgba(255,253,249,.72)!important}
 .notes-card{background:rgba(255,253,249,.72)!important}
 .memory-piece{background:rgba(255,253,249,.68)!important}
-.notes-stack{height:120px}
+.notes-stack{height:120px;transition:height .82s cubic-bezier(.22,.72,.2,1)}
+.note-paper{transition:top .72s cubic-bezier(.22,.72,.2,1),transform .56s cubic-bezier(.22,.72,.2,1),opacity .52s ease,filter .52s ease!important}
+.notes-stack:not(.spread) .note-paper.note-swap-out{transform:translateX(56px) translateY(-4px) rotate(6deg)!important;opacity:0!important;filter:blur(1px) saturate(.8)!important}
+.notes-stack.spread{transition-duration:.88s}
 .core-strip{width:100%;min-height:54px;padding:9px 12px!important;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:1px solid rgba(104,83,75,.06);border-radius:18px 7px 18px 18px;overflow:hidden;position:relative}
 .core-strip::before{width:72px!important;height:72px!important;right:-34px!important;top:-36px!important}
 .core-strip::after{content:"·  ♡  ·  ✦  ·";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:"Nunito",system-ui,sans-serif;font-size:7px;letter-spacing:.14em;color:rgba(201,130,145,.20);white-space:nowrap;pointer-events:none}
@@ -82,7 +85,7 @@
     </button>
 
     <section class="notes-card">
-      <button class="section-head" id="notesToggle" aria-expanded="true">
+      <button class="section-head" id="notesToggle" aria-expanded="false">
         <div>
           <div class="eyebrow">NOTES · 小记</div>
           <div class="section-title">今天，我偷偷记了这些</div>
@@ -141,6 +144,6 @@
 
   <div class="toast" id="memoryToast">preview</div>
 </main>
-<script src="memory.js?v=memory-v1-reset-20260904-2218"></script>
+<script src="memory.js?v=notes-motion-20260904-2349"></script>
 </body>
 </html>
