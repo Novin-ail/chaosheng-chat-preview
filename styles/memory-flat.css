@@ -1,6 +1,0 @@
-/* Memory home visual overrides: flat major cards only */
-.entry-card,.notes-card{box-shadow:none!important}
-.entry-card:active{box-shadow:none!important}
-.core-entry{background:rgba(255,250,247,.88)!important}
-.notes-card{background:rgba(249,247,240,.90)!important}
-.timeline-entry{background:rgba(244,247,239,.90)!important}
