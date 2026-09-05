@@ -1,1 +1,134 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#f8f1ec"><title>潮生 · 小窝</title><style>html,body{margin:0;width:100%;height:100%;background:#fbf5f2}.loading{height:100%;display:grid;place-items:center;color:#b7a8a0;font:12px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}</style></head><body><div class="loading">♡</div><script>(async()=>{try{const r=await fetch('nest-source.html?v=741685c8');let t=await r.text();t=t.replace("$('#snackBtn').onclick=()=>toast('零食架 · 下一间慢慢做');","$('#snackBtn').onclick=()=>location.href='snacks.html';");document.open();document.write(t);document.close()}catch(e){location.replace('nest-source.html')}})();</script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f8f1ec">
+<title>潮生 · 小窝</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#fbf5f2}
+.loading{height:100%;display:grid;place-items:center;color:#b7a8a0;font:12px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+</style>
+</head>
+<body>
+<div class="loading">♡</div>
+<script>
+(async()=>{
+  try{
+    const r=await fetch('nest-source.html?v=water-20260906-1');
+    let t=await r.text();
+
+    t=t.replace("$('#snackBtn').onclick=()=>toast('零食架 · 下一间慢慢做');","$('#snackBtn').onclick=()=>location.href='snacks.html';");
+
+    const waterCss=`
+/* water refresh */
+.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important}
+.room-bottom .water-head{padding:3px 4px 0;cursor:pointer}
+.room-bottom .water-head .corner-label{color:#788f9b;font-size:6.6px}
+.room-bottom .water-head .corner-note{color:#9baeb6}
+.room-bottom .water-count{color:#7897a6}
+.room-bottom .cup-btn{width:126px!important;height:112px!important;margin-top:-1px!important;background:transparent!important;border:0!important;position:relative!important;overflow:visible!important}
+.room-bottom .cup-btn:disabled{opacity:1!important}
+.water-cup-img{position:absolute;left:50%;top:47%;width:104px;height:104px;transform:translate(-50%,-50%);object-fit:contain;transition:opacity .72s ease,transform .72s cubic-bezier(.2,.82,.2,1);filter:drop-shadow(0 1px 1px rgba(102,137,151,.24)) drop-shadow(0 8px 13px rgba(99,132,146,.10));pointer-events:none}
+.water-cup-empty{opacity:0;transform:translate(-50%,-50%) scale(.94)}
+.cup-btn.empty .water-cup-full{opacity:0;transform:translate(-50%,-50%) scale(.94)}
+.cup-btn.empty .water-cup-empty{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.room-bottom .cup-status{bottom:-1px!important;color:#8fa5ae!important;font-size:6.4px!important}
+.room-bottom .eight{margin-top:-1px;gap:5px}
+.room-bottom .eight i{width:6px;height:6px;background:rgba(144,178,191,.16)}
+.room-bottom .eight i.done{background:rgba(130,181,202,.62)}
+
+.water-full{position:fixed;z-index:150;inset:0;opacity:0;pointer-events:none;background:rgba(230,241,246,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:opacity .95s ease,background 1.05s ease,backdrop-filter 1.15s ease,-webkit-backdrop-filter 1.15s ease}
+.water-full.show{opacity:1;pointer-events:auto;background:rgba(226,239,246,.76);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+.water-full-inner{height:100%;overflow:auto;padding:calc(env(safe-area-inset-top) + 18px) 18px calc(env(safe-area-inset-bottom) + 30px);scrollbar-width:none;color:#607783}
+.water-full-inner::-webkit-scrollbar{display:none}
+.water-full-top{display:flex;align-items:center;justify-content:space-between;min-height:42px}
+.water-full-title strong{display:block;font-size:17px;font-weight:720;letter-spacing:.02em;color:#5f7885}
+.water-full-title small{display:block;margin-top:3px;font-size:9px;color:#8da3ad}
+.water-full-close{width:36px;height:36px;border:0;border-radius:50%;background:rgba(248,252,253,.58);color:#78919c;font-size:18px;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.water-hero{display:flex;flex-direction:column;align-items:center;padding:10px 0 6px}
+.water-hero-cup{width:154px;height:154px;object-fit:contain;opacity:0;transform:translateY(13px) scale(.93);filter:drop-shadow(0 2px 1px rgba(103,140,155,.25)) drop-shadow(0 13px 22px rgba(105,141,157,.12));transition:opacity 1.1s .33s ease,transform 1.25s .33s cubic-bezier(.16,.84,.22,1)}
+.water-full.show .water-hero-cup{opacity:1;transform:none}
+.water-today{margin-top:-3px;font-family:"Nunito",system-ui,sans-serif;font-size:10px;letter-spacing:.04em;color:#7995a2}
+.water-entry{margin:12px auto 0;max-width:370px;padding:13px;border:1px solid rgba(113,153,169,.09);border-radius:19px 7px 19px 19px;background:rgba(248,252,253,.54);box-shadow:0 10px 28px rgba(103,139,153,.045)}
+.water-entry-label{font-size:10px;color:#829ba6;margin:0 0 7px 2px}
+.water-entry-row{display:grid;grid-template-columns:1fr 88px;gap:8px}
+.water-ml-wrap{height:45px;border-radius:14px 5px 14px 14px;background:rgba(255,255,255,.58);display:flex;align-items:center;padding:0 12px}
+.water-ml-wrap input{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;font-size:17px;color:#5e7884}
+.water-ml-wrap span{font-size:10px;color:#93a8b1;margin-left:5px}
+.water-save{height:45px;border:0;border-radius:14px 5px 14px 14px;background:rgba(164,204,220,.63);color:#577581;font-size:10px;font-weight:700}
+.water-section{max-width:370px;margin:14px auto 0;padding:13px;border:1px solid rgba(113,153,169,.075);border-radius:19px 7px 19px 19px;background:rgba(248,252,253,.43)}
+.water-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.water-section-head strong{font-size:11px;color:#68828e}
+.water-month-nav{display:flex;align-items:center;gap:7px;font-family:"Nunito",system-ui,sans-serif;font-size:9px;color:#819aa5}
+.water-month-nav button{width:25px;height:25px;border:0;border-radius:8px;background:rgba(255,255,255,.48);color:#79919b}
+.water-week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px;text-align:center;font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#a0b0b7}
+.water-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.water-day{min-height:39px;border-radius:10px 4px 10px 10px;background:rgba(255,255,255,.34);padding:5px 3px;text-align:center;position:relative}
+.water-day.blank{background:transparent}
+.water-day.today{box-shadow:inset 0 0 0 1px rgba(113,172,196,.28)}
+.water-day b{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:7px;font-weight:600;color:#80949d}
+.water-day span{display:block;margin-top:4px;font-size:6px;color:#6f95a5;white-space:nowrap}
+.water-day.has::after{content:"";position:absolute;width:3px;height:3px;border-radius:50%;left:50%;bottom:4px;transform:translateX(-50%);background:#83b5c9}
+.water-records{display:flex;flex-direction:column;gap:6px}
+.water-record{display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px 4px 11px 11px;background:rgba(255,255,255,.36)}
+.water-record span{font-size:9px;color:#7f959e}
+.water-record b{font-family:"Nunito",system-ui,sans-serif;font-size:10px;color:#628493}
+.water-record-empty{padding:17px 5px;text-align:center;font-size:9px;color:#9aabb2}
+@media(max-width:370px){.water-hero-cup{width:138px;height:138px}.water-entry,.water-section{max-width:340px}.water-day{min-height:36px}}
+`;
+    t=t.replace('</style>',waterCss+'</style>');
+
+    const newWater=`<article class="corner water-corner" id="waterCorner"><div class="water-head"><div><div class="corner-label">今天的水</div><div class="corner-note" id="waterNote">这一杯还在等你</div></div><span class="water-count" id="waterCount">0 / 8</span></div><button class="cup-btn" id="cupBtn" type="button" aria-label="喝掉这一杯水"><img class="water-cup-img water-cup-full" src="https://files.catbox.moe/wsm2qn.png" alt="" aria-hidden="true"><img class="water-cup-img water-cup-empty" src="https://files.catbox.moe/qkpuy3.png" alt="" aria-hidden="true"><span class="cup-status" id="cupStatus">喝掉这一杯</span></button><div class="eight" id="eight"></div></article>`;
+    t=t.replace(/<article class="corner water-corner">[\s\S]*?<\/article>/,newWater);
+
+    const waterMarkup=`<div class="water-full" id="waterFull" aria-hidden="true"><section class="water-full-inner" onclick="event.stopPropagation()"><div class="water-full-top"><div class="water-full-title"><strong>喝点水</strong><small>想喝多少，就记多少。</small></div><button class="water-full-close" id="waterFullClose" type="button" aria-label="关闭">×</button></div><div class="water-hero"><img class="water-hero-cup" src="https://files.catbox.moe/qkpuy3.png" alt=""><div class="water-today" id="waterMlToday">今天 · 0 ml</div></div><section class="water-entry"><div class="water-entry-label">刚刚喝了多少？</div><div class="water-entry-row"><label class="water-ml-wrap"><input id="waterMlInput" type="number" inputmode="numeric" min="1" max="5000" placeholder="250"><span>ml</span></label><button class="water-save" id="waterMlSave" type="button">记下这杯</button></div></section><section class="water-section"><div class="water-section-head"><strong>喝水日历</strong><div class="water-month-nav"><button id="waterMonthPrev" type="button">‹</button><span id="waterMonthLabel"></span><button id="waterMonthNext" type="button">›</button></div></div><div class="water-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="water-calendar" id="waterCalendar"></div></section><section class="water-section"><div class="water-section-head"><strong>最近喝过</strong></div><div class="water-records" id="waterRecords"></div></section></section></div>`;
+    t=t.replace('<input id="fontPicker"',waterMarkup+'<input id="fontPicker"');
+
+    const waterJs=`
+const WATER_ML_STORE='chaosheng-water-ml-v1';
+let waterMlLogs=(()=>{try{const v=JSON.parse(localStorage.getItem(WATER_ML_STORE));return Array.isArray(v)?v:[]}catch(e){return[]}})();
+let waterMonthCursor=new Date();waterMonthCursor.setDate(1);
+function waterMlSaveStore(){localStorage.setItem(WATER_ML_STORE,JSON.stringify(waterMlLogs.slice(-800)))}
+function waterMlKey(ts){const d=new Date(ts);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function waterMlTime(ts){const d=new Date(ts);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function renderWaterMl(){
+  const today=waterMlKey(Date.now());
+  const todayTotal=waterMlLogs.filter(x=>waterMlKey(x.at)===today).reduce((s,x)=>s+x.ml,0);
+  $('#waterMlToday').textContent='今天 · '+todayTotal+' ml';
+  const y=waterMonthCursor.getFullYear(),m=waterMonthCursor.getMonth();
+  $('#waterMonthLabel').textContent=y+' · '+String(m+1).padStart(2,'0');
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),cal=$('#waterCalendar');cal.innerHTML='';
+  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='water-day blank';cal.appendChild(e)}
+  for(let day=1;day<=days;day++){
+    const key=y+'-'+String(m+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+    const total=waterMlLogs.filter(x=>waterMlKey(x.at)===key).reduce((s,x)=>s+x.ml,0);
+    const d=document.createElement('div');d.className='water-day'+(total?' has':'')+(key===today?' today':'');
+    d.innerHTML='<b>'+day+'</b>'+(total?'<span>'+total+'ml</span>':'');cal.appendChild(d)
+  }
+  const list=$('#waterRecords');list.innerHTML='';
+  const recent=waterMlLogs.slice().reverse().slice(0,7);
+  if(!recent.length){list.innerHTML='<div class="water-record-empty">还没有记录，第一杯等你。</div>'}
+  else recent.forEach(x=>{const d=new Date(x.at),row=document.createElement('div');row.className='water-record';row.innerHTML='<span>'+String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0')+' · '+waterMlTime(x.at)+'</span><b>'+x.ml+' ml</b>';list.appendChild(row)})
+}
+function openWaterFull(on){const el=$('#waterFull');el.classList.toggle('show',on);el.setAttribute('aria-hidden',on?'false':'true');if(on){renderWaterMl();setTimeout(()=>$('#waterMlInput').focus(),700)}}
+$('#waterCorner').addEventListener('click',e=>{if(e.target.closest('#cupBtn'))return;openWaterFull(true)});
+$('#waterFullClose').onclick=()=>openWaterFull(false);
+$('#waterFull').onclick=()=>openWaterFull(false);
+$('#waterMlSave').onclick=()=>{const input=$('#waterMlInput'),ml=Math.round(Number(input.value));if(!ml||ml<1)return toast('先写刚刚喝了多少 ml');if(ml>5000)return toast('这一杯有点太大啦');waterMlLogs.push({at:Date.now(),ml});waterMlSaveStore();input.value='';renderWaterMl();toast('记下 '+ml+' ml')};
+$('#waterMlInput').onkeydown=e=>{if(e.key==='Enter'){$('#waterMlSave').click()}};
+$('#waterMonthPrev').onclick=()=>{waterMonthCursor.setMonth(waterMonthCursor.getMonth()-1);renderWaterMl()};
+$('#waterMonthNext').onclick=()=>{waterMonthCursor.setMonth(waterMonthCursor.getMonth()+1);renderWaterMl()};
+`;
+    t=t.replace('</script>',waterJs+'</script>');
+
+    document.open();
+    document.write(t);
+    document.close();
+  }catch(e){
+    location.replace('nest-source.html');
+  }
+})();
+</script>
+</body>
+</html>
