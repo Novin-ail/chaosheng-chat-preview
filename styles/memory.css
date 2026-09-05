@@ -90,3 +90,12 @@ button{font:inherit;color:inherit}
 .notes-app .save-inline{background:rgba(241,231,228,.74)!important;color:#816d68!important}
 .notes-app .finish-note{background:rgba(244,226,227,.72)!important;color:#8f6971!important}
 .notes-app .detail-tags span{background:rgba(244,226,227,.54)!important;color:#8f7077!important}
+
+/* Album date picker: keep the week header at two lines and make week choices compact */
+.album-app .week-copy em{display:none!important}
+.album-app .week-copy{padding:3px 2px!important}
+.album-app .week-choice{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important}
+.album-app .week-choice button{min-height:38px!important;padding:6px 4px!important;text-align:center!important;border-radius:10px 4px 10px 10px!important}
+.album-app .week-choice b{font-size:6.1px!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.album-app .week-choice small{margin-top:3px!important;font-size:5px!important;line-height:1.25!important;white-space:normal!important}
+@media(max-width:370px){.album-app .week-choice{grid-template-columns:repeat(4,minmax(0,1fr))!important}.album-app .week-choice button{padding:5px 3px!important}}
