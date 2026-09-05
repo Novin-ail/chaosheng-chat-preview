@@ -12,10 +12,10 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-localcup');
+    const r=await fetch('nest-runtime-water.html?v=20260906-localcup-fix2');
     let t=await r.text();
-    t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','assets/water-cup-full.png');
-    t=t.replaceAll('https://files.catbox.moe/qkpuy3.png','assets/water-cup-empty.png');
+    t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','assets/water-cup-full.png?v=2');
+    t=t.replaceAll('https://files.catbox.moe/qkpuy3.png','assets/water-cup-empty.png?v=2');
     document.open();
     document.write(t);
     document.close();
