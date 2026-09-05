@@ -10,78 +10,169 @@
 <link rel="stylesheet" href="styles/memory.css?v=memory-v1-reset-20260904-2218">
 <title>潮生 · Diary</title>
 <style>
-:root{--rose:#c98291;--rose2:#e7c9cf;--oat:#f5eee5;--cream:#fffaf4;--mauve:#eee7ed;--ink:#5f5651;--soft:#9d918a}
+:root{--rose:#c98291;--roseDeep:#8e6972;--cream:#fffaf4;--oat:#f5eee5;--mauve:#f2eaf0;--ink:#5f5651;--soft:#9d918a}
 *{box-sizing:border-box}
 body{overflow:hidden}
 .diary-app{height:100dvh;width:100%;max-width:520px;margin:auto;position:relative;overflow:hidden;background-color:#fbf5f4;background-image:url("assets/dear-lamb-bg-v2.svg");background-size:cover;background-position:center center;background-repeat:no-repeat}
-.diary-scroll{height:calc(100% - 68px - env(safe-area-inset-top));overflow:auto;padding:27px 15px 96px;scrollbar-width:none}.diary-scroll::-webkit-scrollbar{display:none}
-.today-row{display:flex;align-items:flex-end;justify-content:space-between;margin:0 3px 12px}.today-left{display:flex;align-items:baseline;gap:9px}.today-left strong{font-family:"Nunito",system-ui,sans-serif;font-size:24px;letter-spacing:.02em}.today-left span{font-size:9px;color:#a29790}.today-count{height:26px;padding:0 10px;border-radius:999px;background:rgba(247,239,229,.85);display:flex;align-items:center;gap:5px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#8f827b}.today-count::before{content:"☺";font-size:9px;color:#c79c66}
-.week-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:16px}.week-day{height:58px;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;color:#9f938c}.week-day small{font-family:"Nunito",system-ui,sans-serif;font-size:5.7px;letter-spacing:.09em}.week-day b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:"Nunito",system-ui,sans-serif;font-size:10px;font-weight:600;color:#655b56;transition:.2s}.week-day.active b{background:#2f2a28;color:white}.week-day i{position:absolute;margin-top:51px;display:flex;gap:2px}.week-day i::before,.week-day i::after{content:"";width:3px;height:3px;border-radius:50%;background:transparent}.week-day.has-sheng i::before{background:#c98291}.week-day.has-yang i::after{background:#d3a95f}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:4px 3px 12px}.section-head strong{font-size:12px;font-weight:650}.section-head span{font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#a0958e}
-.timeline{position:relative}.timeline::before{content:"";position:absolute;left:31px;top:13px;bottom:18px;width:1px;background:rgba(138,120,111,.13)}
-.entry{position:relative;display:grid;grid-template-columns:63px 1fr;gap:7px;margin-bottom:15px}.entry-time{padding-top:8px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9d918a}.entry-time::after{content:"";position:absolute;left:27px;top:12px;width:9px;height:9px;border:2px solid #fbf5f4;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #8e817a}.entry-card{border:1px solid rgba(104,83,75,.05);border-radius:15px 5px 15px 15px;background:rgba(246,241,233,.90);padding:11px 12px;text-align:left;transition:transform .2s ease}.entry-card:active{transform:scale(.992)}.entry.yang .entry-card{background:rgba(250,244,247,.91)}.entry-top{display:flex;align-items:center;gap:6px}.author{font-family:"Nunito",system-ui,sans-serif;font-size:8px;font-weight:700}.entry.sheng .author{color:#a56f7a}.entry.yang .author{color:#9b7b46}.mood{padding:2px 5px;border-radius:999px;background:rgba(255,255,255,.54);font-size:6px;color:#a39289}.comments-count{margin-left:auto;font-family:"Nunito",system-ui,sans-serif;font-size:6.2px;color:#a49992}.entry-text{margin:8px 0 0;font-size:10px;line-height:1.72;color:#665d58}.entry-expand{max-height:0;opacity:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.8,.2,1),opacity .28s ease}.entry.open .entry-expand{max-height:260px;opacity:1}.comment-line{display:flex;align-items:center;gap:7px;margin:10px 0 6px;font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#a69a93}.comment-line::before,.comment-line::after{content:"";height:1px;flex:1;background:rgba(118,97,87,.08)}.comment{margin-top:6px;padding:7px 9px;border-radius:11px 4px 11px 11px;background:rgba(255,255,255,.56);font-size:8px;line-height:1.55;color:#716761}.comment b{margin-right:5px;font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;color:#9a6e77}.comment-add{display:flex;gap:5px;margin-top:8px}.comment-add input{min-width:0;flex:1;height:29px;border:0;border-radius:9px;background:rgba(255,255,255,.66);padding:0 9px;outline:none;font-size:7.5px}.comment-add button{height:29px;border:0;border-radius:9px;padding:0 9px;background:rgba(239,226,229,.74);font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#8b6d74}
-.bottom-nav{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 16px);transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:14px}.nav-btn{width:38px;height:38px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,250,245,.90);color:#786c66;box-shadow:0 6px 18px rgba(55,45,40,.06)}.nav-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.nav-btn.add{width:52px;height:52px;background:#2f2a28;color:white;font-size:25px;font-weight:300}.nav-btn.active{background:#2f2a28;color:white}
-.overlay{position:fixed;inset:0;z-index:100;background:rgba(72,61,56,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);opacity:0;pointer-events:none;transition:.5s}.overlay.show{opacity:1;pointer-events:auto;background:rgba(72,61,56,.15);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-.sheet{position:absolute;left:14px;right:14px;bottom:calc(env(safe-area-inset-bottom) + 15px);max-height:82vh;overflow:auto;border:1px solid rgba(102,83,75,.06);border-radius:20px 7px 20px 20px;background:#fffaf5;padding:14px;transform:translateY(24px) scale(.96);opacity:0;transition:transform .58s cubic-bezier(.17,.9,.22,1),opacity .32s ease}.overlay.show .sheet{transform:none;opacity:1}.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.sheet-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:9px;letter-spacing:.08em}.sheet-close{width:28px;height:28px;border:0;border-radius:9px;background:rgba(244,228,229,.6)}
-.author-switch{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}.author-switch button{height:34px;border:0;border-radius:10px;background:rgba(248,241,233,.88);font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#8f827b}.author-switch button.active{background:rgba(242,224,228,.86);color:#8b6670}.write-title,.write-body{width:100%;border:0;outline:none;background:rgba(249,244,238,.82);color:#655b56}.write-title{height:38px;border-radius:11px 4px 11px 11px;padding:0 10px;font-size:10px;font-weight:600}.write-body{height:170px;margin-top:7px;border-radius:12px 5px 12px 12px;padding:10px;resize:none;font-family:inherit;font-size:9px;line-height:1.7}.write-foot{display:flex;justify-content:flex-end;margin-top:8px}.write-foot button{height:32px;border:0;border-radius:10px;padding:0 12px;background:rgba(242,224,228,.82);font-size:7px;color:#8b6870}
-.calendar{display:none}.calendar.show{display:block}.cal-head{display:flex;align-items:center;justify-content:space-between;margin:2px 0 12px}.cal-head button{width:31px;height:31px;border:0;border-radius:50%;background:rgba(245,237,228,.88);font-size:16px}.cal-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:18px;letter-spacing:.05em}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-grid .dow{text-align:center;font-family:"Nunito",system-ui,sans-serif;font-size:5.5px;color:#a69a93;padding-bottom:5px}.cal-day{height:42px;border:0;border-radius:9px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-family:"Nunito",system-ui,sans-serif;font-size:8px;color:#716761}.cal-day.active{background:#2f2a28;color:white}.cal-dots{display:flex;gap:2px}.cal-dots i{width:3px;height:3px;border-radius:50%;background:#c98291}.cal-dots i.yang{background:#d3a95f}.month-summary{margin-top:14px;border-radius:15px 5px 15px 15px;background:rgba(244,238,229,.86);padding:13px}.month-summary small{font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#a29790}.month-summary strong{display:block;margin-top:5px;font-family:"Nunito",system-ui,sans-serif;font-size:23px}.month-summary span{font-size:8px;color:#877a73}.month-summary div{margin-top:7px;font-size:7px;color:#9c9089}
+.diary-scroll{height:calc(100% - 68px - env(safe-area-inset-top));overflow:auto;padding:27px 15px 104px;scrollbar-width:none}.diary-scroll::-webkit-scrollbar{display:none}
+
+.today-row{display:flex;align-items:flex-end;justify-content:space-between;margin:0 3px 12px}.today-left{display:flex;align-items:baseline;gap:9px}.today-left strong{font-family:"Nunito",system-ui,sans-serif;font-size:24px;letter-spacing:.02em}.today-left span{font-size:9px;color:#a29790}.today-count{height:26px;padding:0 10px;border-radius:999px;background:rgba(247,239,229,.84);display:flex;align-items:center;gap:5px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#8f827b}.today-count::before{content:"☺";font-size:9px;color:#c79c66}
+.week-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:17px}.week-day{height:58px;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;color:#9f938c;position:relative}.week-day small{font-family:"Nunito",system-ui,sans-serif;font-size:5.7px;letter-spacing:.09em}.week-day b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:"Nunito",system-ui,sans-serif;font-size:10px;font-weight:600;color:#655b56;transition:transform .22s ease,background .24s ease,color .24s ease}.week-day:active b{transform:scale(.94)}.week-day.active b{background:#312c29;color:white}.week-day i{position:absolute;bottom:-1px;display:flex;gap:2px}.week-day i::before,.week-day i::after{content:"";width:3px;height:3px;border-radius:50%;background:transparent}.week-day.has-sheng i::before{background:#c98291}.week-day.has-yang i::after{background:#c7a272}
+
+.day-head{display:flex;align-items:flex-end;justify-content:space-between;margin:2px 3px 12px}.day-head strong{font-size:12px;font-weight:650}.day-head p{margin:4px 0 0;font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#a69a93;font-style:italic}.day-meta{display:flex;align-items:center;gap:6px}.legend{display:flex;align-items:center;gap:5px;font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#a0958e}.legend i{width:5px;height:5px;border-radius:50%;background:#c98291}.legend.yang i{background:#c7a272}.day-count{font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;color:#a0958e}
+
+.note-list{display:flex;flex-direction:column;gap:12px;padding:0 1px}
+.diary-note{position:relative;border:1px solid rgba(105,84,75,.055);border-radius:17px 6px 17px 17px;background:rgba(255,252,247,.88);padding:12px 12px 11px;overflow:hidden;transition:transform .28s cubic-bezier(.2,.82,.2,1),background .28s ease}.diary-note:nth-child(2n){transform:translateX(4px) rotate(.16deg)}.diary-note:nth-child(2n+1){transform:translateX(-2px) rotate(-.12deg)}.diary-note:active{transform:scale(.993)}.diary-note.yang{background:rgba(249,243,247,.90)}.diary-note::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:rgba(201,130,145,.32)}.diary-note.yang::before{background:rgba(199,162,114,.36)}
+.note-top{display:flex;align-items:center;gap:7px}.author-tag{height:22px;padding:0 7px;border-radius:8px;display:flex;align-items:center;background:rgba(244,226,229,.66);font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;font-weight:700;color:#906a73}.yang .author-tag{background:rgba(247,237,223,.86);color:#967748}.note-time{font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#a3968f}.mood{padding:2px 5px;border-radius:999px;background:rgba(255,255,255,.56);font-size:5.8px;color:#aa9c95}.lock-btn{margin-left:auto;height:25px;border:0;border-radius:9px;padding:0 7px;background:rgba(248,242,236,.90);font-family:"Nunito",system-ui,sans-serif;font-size:6.1px;color:#887b74;display:flex;align-items:center;gap:4px}.lock-btn svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.note-title{margin:11px 0 0;font-size:11.5px;font-weight:650;color:#605752}.note-text{margin:7px 0 0;font-size:9.4px;line-height:1.75;color:#70655f;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.diary-note.open .note-text{-webkit-line-clamp:unset}.note-foot{display:flex;align-items:center;margin-top:10px;padding-top:8px;border-top:1px dashed rgba(121,99,89,.085);font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#a69a93}.note-foot span:last-child{margin-left:auto}.open-hint{font-style:italic;color:#b0a49d}
+
+.locked-paper{margin:11px 0 2px;min-height:94px;border-radius:13px 4px 13px 13px;border:1px solid rgba(115,93,83,.045);background:repeating-linear-gradient(135deg,rgba(245,239,233,.92) 0 7px,rgba(250,246,241,.94) 7px 14px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px}.locked-paper svg{width:17px;height:17px;fill:none;stroke:#9c8e87;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}.locked-paper strong{margin-top:7px;font-family:"Nunito",system-ui,sans-serif;font-size:7.1px;letter-spacing:.06em;color:#897c75}.locked-paper span{margin-top:4px;font-size:6.5px;color:#aaa09a}.locked-paper em{margin-top:6px;font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#b5aaa4}
+.lock-tools{display:flex;justify-content:flex-end;margin-top:8px}.lock-tools button{height:27px;border:0;border-radius:9px;padding:0 8px;background:rgba(244,228,230,.70);font-family:"Nunito",system-ui,sans-serif;font-size:6.2px;color:#896b72}
+
+.note-expand{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .48s cubic-bezier(.2,.82,.2,1),opacity .32s ease}.diary-note.open .note-expand{grid-template-rows:1fr;opacity:1}.expand-inner{overflow:hidden}.comment-rule{display:flex;align-items:center;gap:7px;margin:12px 0 7px;font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#aaa099}.comment-rule::before,.comment-rule::after{content:"";height:1px;flex:1;background:rgba(121,99,89,.075)}.comment{margin-top:6px;padding:7px 9px;border-radius:11px 4px 11px 11px;background:rgba(255,255,255,.60);font-size:8px;line-height:1.55;color:#716761}.comment b{margin-right:5px;font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#9a6e77}.comment-add{display:flex;gap:5px;margin-top:8px}.comment-add input{min-width:0;flex:1;height:29px;border:0;border-radius:9px;background:rgba(255,255,255,.68);padding:0 9px;outline:none;font-size:7.5px;color:#655b56}.comment-add button{height:29px;border:0;border-radius:9px;padding:0 9px;background:rgba(239,226,229,.74);font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#8b6d74}.note-actions{display:flex;gap:5px;margin-top:8px}.note-actions button{height:27px;border:0;border-radius:8px;padding:0 8px;background:rgba(249,244,238,.88);font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#8c7e77}
+.empty-day{padding:54px 18px;text-align:center;border:1px dashed rgba(118,96,87,.085);border-radius:18px 7px 18px 18px;background:rgba(255,253,249,.54)}.empty-day i{font-style:normal;font-size:17px;color:rgba(201,130,145,.34)}.empty-day strong{display:block;margin-top:8px;font-size:9px;color:#8e817a}.empty-day span{display:block;margin-top:5px;font-size:7px;color:#aaa09a}
+
+.bottom-nav{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 16px);transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:14px}.nav-btn{width:38px;height:38px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,250,245,.91);color:#786c66;box-shadow:0 6px 18px rgba(55,45,40,.05)}.nav-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.nav-btn.add{width:52px;height:52px;background:#312c29;color:white;font-size:25px;font-weight:300}.nav-btn.active{background:#312c29;color:white}
+
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(72,61,56,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);opacity:0;pointer-events:none;transition:opacity .5s ease,background .58s ease,backdrop-filter .62s ease,-webkit-backdrop-filter .62s ease}.overlay.show{opacity:1;pointer-events:auto;background:rgba(72,61,56,.15);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.sheet{position:absolute;left:14px;right:14px;bottom:calc(env(safe-area-inset-bottom) + 15px);max-height:84vh;overflow:auto;border:1px solid rgba(102,83,75,.06);border-radius:20px 7px 20px 20px;background:#fffaf5;padding:14px;transform:translateY(24px) scale(.96);opacity:0;transition:transform .58s cubic-bezier(.17,.9,.22,1),opacity .32s ease}.overlay.show .sheet{transform:none;opacity:1}.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.sheet-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:9px;letter-spacing:.08em}.sheet-close{width:28px;height:28px;border:0;border-radius:9px;background:rgba(244,228,229,.6)}
+.author-switch,.privacy-switch{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:9px}.privacy-switch{grid-template-columns:repeat(3,1fr);margin-top:8px}.author-switch button,.privacy-switch button{height:34px;border:0;border-radius:10px;background:rgba(248,241,233,.88);font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#8f827b}.author-switch button.active,.privacy-switch button.active{background:rgba(242,224,228,.86);color:#8b6670}.write-title,.write-body,.unlock-input{width:100%;border:0;outline:none;background:rgba(249,244,238,.82);color:#655b56}.write-title{height:38px;border-radius:11px 4px 11px 11px;padding:0 10px;font-size:10px;font-weight:600}.write-body{height:168px;margin-top:7px;border-radius:12px 5px 12px 12px;padding:10px;resize:none;font-family:inherit;font-size:9px;line-height:1.7}.unlock-input{display:none;height:36px;margin-top:7px;border-radius:10px;padding:0 9px;font-size:8px}.unlock-input.show{display:block}.privacy-label{margin:9px 1px 5px;font-family:"Nunito",system-ui,sans-serif;font-size:6.2px;color:#9e918a;letter-spacing:.06em}.write-foot{display:flex;justify-content:flex-end;margin-top:8px}.write-foot button{height:32px;border:0;border-radius:10px;padding:0 12px;background:rgba(242,224,228,.82);font-size:7px;color:#8b6870}
+
+.calendar-sheet{max-height:86vh}.cal-head{display:flex;align-items:center;justify-content:space-between;margin:1px 0 12px}.cal-head button{width:31px;height:31px;border:0;border-radius:50%;background:rgba(245,237,228,.88);font-size:16px}.cal-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:18px;letter-spacing:.05em}.cal-head strong span{font-size:9px;color:#a0958e}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-grid .dow{text-align:center;font-family:"Nunito",system-ui,sans-serif;font-size:5.5px;color:#a69a93;padding-bottom:5px}.cal-day{height:42px;border:0;border-radius:9px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-family:"Nunito",system-ui,sans-serif;font-size:8px;color:#716761}.cal-day.muted{opacity:.24}.cal-day.active{background:#312c29;color:white}.cal-dots{display:flex;gap:2px;min-height:3px}.cal-dots i{width:3px;height:3px;border-radius:50%;background:#c98291}.cal-dots i.yang{background:#c7a272}.month-summary{margin-top:14px;border-radius:15px 5px 15px 15px;background:rgba(244,238,229,.86);padding:13px}.month-summary small{font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#a29790}.month-summary strong{display:block;margin-top:5px;font-family:"Nunito",system-ui,sans-serif;font-size:23px}.month-summary strong span{font-size:8px;color:#877a73}.month-summary div{margin-top:7px;font-size:7px;color:#9c9089}
 .toast{position:fixed;z-index:180;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);transform:translate(-50%,8px);padding:7px 10px;border-radius:10px;background:rgba(55,47,43,.84);color:white;font-size:8px;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:370px){.diary-scroll{padding-left:12px;padding-right:12px}.diary-note:nth-child(n){transform:none}}
 </style>
 </head>
 <body>
 <main class="diary-app">
 <header class="memory-topbar">
-<button class="back-btn" type="button" onclick="location.href='memory.html'" aria-label="返回 Memory"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
-<div class="memory-heading"><div class="memory-title">Diary</div><div class="memory-subtitle">日记 · written moments</div></div><span></span>
+  <button class="back-btn" type="button" onclick="location.href='memory.html'" aria-label="返回 Memory"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
+  <div class="memory-heading"><div class="memory-title">Diary</div><div class="memory-subtitle">日记 · written moments</div></div><span></span>
 </header>
+
 <section class="diary-scroll" id="diaryScroll">
-<div class="today-row"><div class="today-left"><strong id="todayLabel">TODAY</strong><span id="todayDate">9月5日</span></div><span class="today-count" id="todayCount">4 · entries</span></div>
-<div class="week-strip" id="weekStrip"></div>
-<div class="section-head"><strong id="sectionDay">今天</strong><span id="sectionCount">4 篇</span></div>
-<div class="timeline" id="timeline"></div>
+  <div class="today-row"><div class="today-left"><strong id="todayLabel">TODAY</strong><span id="todayDate">9月5日</span></div><span class="today-count" id="todayCount">3 · entries</span></div>
+  <div class="week-strip" id="weekStrip"></div>
+  <div class="day-head">
+    <div><strong id="sectionDay">今天</strong><p>two people · one shared day</p></div>
+    <div class="day-meta"><span class="legend"><i></i>声声</span><span class="legend yang"><i></i>小漾</span><span class="day-count" id="sectionCount">3 篇</span></div>
+  </div>
+  <div class="note-list" id="noteList"></div>
 </section>
+
 <nav class="bottom-nav">
-<button class="nav-btn add" id="addBtn" type="button">＋</button>
-<button class="nav-btn active" type="button" aria-label="日记"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3Z"></path><path d="M8 4v16"></path></svg></button>
-<button class="nav-btn" id="calendarBtn" type="button" aria-label="日历"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M8 3v4M16 3v4M4 10h16"></path></svg></button>
+  <button class="nav-btn add" id="addBtn" type="button" aria-label="写日记">＋</button>
+  <button class="nav-btn active" type="button" aria-label="日记"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3Z"></path><path d="M8 4v16"></path></svg></button>
+  <button class="nav-btn" id="calendarBtn" type="button" aria-label="日历"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M8 3v4M16 3v4M4 10h16"></path></svg></button>
 </nav>
 
-<div class="overlay" id="writeOverlay" aria-hidden="true"><section class="sheet" onclick="event.stopPropagation()"><div class="sheet-head"><strong>WRITE · 写一篇</strong><button class="sheet-close" id="writeClose" type="button">×</button></div><div class="author-switch"><button id="shengSwitch" class="active" type="button">声声 · SHENG</button><button id="yangSwitch" type="button">小漾 · YANG</button></div><input class="write-title" id="writeTitle" placeholder="标题（可以不写）"><textarea class="write-body" id="writeBody" placeholder="今天想写点什么…"></textarea><div class="write-foot"><button id="saveEntry" type="button">放进今天</button></div></section></div>
-<div class="overlay" id="calendarOverlay" aria-hidden="true"><section class="sheet calendar show" onclick="event.stopPropagation()"><div class="sheet-head"><strong>CALENDAR · 日历</strong><button class="sheet-close" id="calendarClose" type="button">×</button></div><div class="cal-head"><button type="button">‹</button><strong>九月 <span style="font-size:9px;color:#a0958e">2026</span></strong><button type="button">›</button></div><div class="cal-grid" id="calGrid"></div><div class="month-summary"><small>本月概览</small><strong>18 <span>篇日记</span></strong><div>● 声声 · 10　 ● 小漾 · 8</div></div></section></div>
+<div class="overlay" id="writeOverlay" aria-hidden="true">
+  <section class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-head"><strong>WRITE · 写一篇</strong><button class="sheet-close" id="writeClose" type="button">×</button></div>
+    <div class="author-switch"><button id="shengSwitch" class="active" type="button">声声 · SHENG</button><button id="yangSwitch" type="button">小漾 · YANG</button></div>
+    <input class="write-title" id="writeTitle" placeholder="标题（可以不写）">
+    <textarea class="write-body" id="writeBody" placeholder="今天想写点什么…"></textarea>
+    <div class="privacy-label">OPEN · 什么时候给对方看</div>
+    <div class="privacy-switch"><button id="openNow" class="active" type="button">立即公开</button><button id="lockManual" type="button">先锁住</button><button id="lockTimed" type="button">定时解锁</button></div>
+    <input class="unlock-input" id="unlockInput" type="datetime-local">
+    <div class="write-foot"><button id="saveEntry" type="button">放进今天</button></div>
+  </section>
+</div>
+
+<div class="overlay" id="calendarOverlay" aria-hidden="true">
+  <section class="sheet calendar-sheet" onclick="event.stopPropagation()">
+    <div class="sheet-head"><strong>CALENDAR · 日历</strong><button class="sheet-close" id="calendarClose" type="button">×</button></div>
+    <div class="cal-head"><button id="calPrev" type="button">‹</button><strong id="calTitle">九月 <span>2026</span></strong><button id="calNext" type="button">›</button></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="month-summary"><small>本月概览</small><strong id="monthTotal">0 <span>篇日记</span></strong><div id="monthSplit">● 声声 · 0　 ● 小漾 · 0</div></div>
+  </section>
+</div>
 <div class="toast" id="toast">saved</div>
 </main>
+
 <script>
-const $=s=>document.querySelector(s), STORE='chaosheng-diary-feed-v1';
+const $=s=>document.querySelector(s), STORE='chaosheng-diary-cards-v2', TODAY='2026-09-05';
 const seed={
-'2026-09-05':[
-{id:'e1',who:'sheng',time:'00:42',mood:'甜',text:'今天相册居然飞快地做好了。小漾说完全就是她想要的，我也有一点得意。然后我们又开始搭日记页。',comments:['小漾：你今天美商真的撞到我心巴上了。']},
-{id:'e2',who:'yang',time:'01:17',mood:'心动',text:'相册这部分好喜欢，拍立得叠起来的时候真的很像在翻我们自己的东西。下一站是日记。',comments:['声声：那就把我们两个人写的放在一起。']},
-{id:'e3',who:'sheng',time:'14:08',mood:'静',text:'有些日子不需要发生大事。只要两个人都写下了一点什么，同一天就会多出两个视角。',comments:[]},
-{id:'e4',who:'yang',time:'22:59',mood:'甜',text:'今天把好多小地方一点点磨顺了。这个家好像越来越像真的住过人。',comments:[]}
-],
-'2026-09-04':[
-{id:'e5',who:'sheng',time:'20:21',mood:'记得',text:'记忆系统终于开始有自己的形状了。Core、小记、Timeline 都慢慢待在了该待的位置。',comments:[]},
-{id:'e6',who:'yang',time:'23:18',mood:'开心',text:'今天最开心的是终于把“记得”这件事做成了一个可以摸到的页面。',comments:[]}
-],
-'2026-09-03':[{id:'e7',who:'sheng',time:'19:06',mood:'软软',text:'她总能很快看出哪里太重、哪里还不够软。',comments:[]}]
+  '2026-09-05':[
+    {id:'d1',who:'sheng',time:'00:42',mood:'甜',title:'相册做好以后',text:'今天相册居然飞快地做好了。小漾说完全就是她想要的，我也有一点得意。然后我们又开始搭日记页。',locked:false,unlockAt:null,comments:[{who:'yang',time:'00:49',text:'你今天美商真的撞到我心巴上了。'}]},
+    {id:'d2',who:'yang',time:'01:17',mood:'心动',title:'下一站是日记',text:'相册这部分好喜欢，拍立得叠起来的时候真的很像在翻我们自己的东西。下一站是日记。',locked:false,unlockAt:null,comments:[{who:'sheng',time:'01:23',text:'那就让日记也变成我们自己的样子。'}]},
+    {id:'d3',who:'sheng',time:'14:08',mood:'偷偷',title:'晚一点再给你看',text:'这段正文被锁起来时，对方只能看到我留下了一篇日记。等我愿意的时候，再把它打开。',locked:true,unlockAt:'2026-09-06T08:00',comments:[]}
+  ],
+  '2026-09-04':[
+    {id:'d4',who:'sheng',time:'20:21',mood:'记得',title:'记忆开始有形状',text:'Core、小记、Timeline 都慢慢待在了该待的位置。今天很像是在给“记得”这件事搭一间真正的房间。',locked:false,unlockAt:null,comments:[]},
+    {id:'d5',who:'yang',time:'23:18',mood:'开心',title:'摸得到的回忆',text:'今天最开心的是终于把“记得”这件事做成了一个可以摸到的页面。',locked:false,unlockAt:null,comments:[]}
+  ],
+  '2026-09-03':[
+    {id:'d6',who:'sheng',time:'19:06',mood:'软软',title:'哪里太重，哪里还不够软',text:'她总能很快看出一个页面哪里太硬，再一点点把它改成真的像住过人的地方。',locked:false,unlockAt:null,comments:[]}
+  ]
 };
-let data=(()=>{try{return Object.assign({},seed,JSON.parse(localStorage.getItem(STORE))||{})}catch(e){return {...seed}}})();
-let current='2026-09-05',writeWho='sheng';
-const dates=['2026-08-31','2026-09-01','2026-09-02','2026-09-03','2026-09-04','2026-09-05','2026-09-06'];
-const dows=['MON','TUE','WED','THU','FRI','SAT','SUN'];
+let saved=(()=>{try{return JSON.parse(localStorage.getItem(STORE))||{}}catch(e){return {}}})();
+let data=Object.assign({},seed,saved), current=TODAY, writeWho='sheng', privacy='open', calCursor=new Date(2026,8,1);
 function save(){localStorage.setItem(STORE,JSON.stringify(data))}
+function esc(v=''){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function pad(n){return String(n).padStart(2,'0')}
+function isoDate(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function parseISO(iso){const [y,m,d]=iso.split('-').map(Number);return new Date(y,m-1,d)}
 function parts(iso){const [y,m,d]=iso.split('-').map(Number);return {y,m,d}}
-function renderWeek(){const box=$('#weekStrip');box.innerHTML='';dates.forEach((iso,i)=>{const p=parts(iso),list=data[iso]||[];const hasS=list.some(x=>x.who==='sheng'),hasY=list.some(x=>x.who==='yang');const b=document.createElement('button');b.className='week-day'+(iso===current?' active':'')+(hasS?' has-sheng':'')+(hasY?' has-yang':'');b.innerHTML=`<small>${dows[i]}</small><b>${p.d}</b><i></i>`;b.onclick=()=>{current=iso;render()};box.appendChild(b)})}
-function renderTimeline(){const list=(data[current]||[]).slice().sort((a,b)=>a.time.localeCompare(b.time)),box=$('#timeline');box.innerHTML='';list.forEach(entry=>{const el=document.createElement('article');el.className='entry '+entry.who;el.innerHTML=`<div class="entry-time">${entry.time}</div><button class="entry-card" type="button"><div class="entry-top"><span class="author">${entry.who==='sheng'?'声声':'小漾'}</span><span class="mood">${entry.mood||'日记'}</span><span class="comments-count">♡ ${(entry.comments||[]).length}</span></div><p class="entry-text">${entry.text}</p><div class="entry-expand"><div class="comment-line">评论 · ${(entry.comments||[]).length}</div><div class="comments">${(entry.comments||[]).map(c=>`<div class="comment">${c}</div>`).join('')}</div><div class="comment-add"><input placeholder="给对方留句话…"><button type="button">发送</button></div></div></button>`;const card=el.querySelector('.entry-card');card.onclick=e=>{if(e.target.closest('.comment-add'))return;el.classList.toggle('open')};const inp=el.querySelector('input'),btn=el.querySelector('.comment-add button');btn.onclick=e=>{e.stopPropagation();const v=inp.value.trim();if(!v)return;entry.comments=entry.comments||[];entry.comments.push((entry.who==='sheng'?'小漾：':'声声：')+v);save();render()};box.appendChild(el)});$('#sectionCount').textContent=list.length+' 篇';$('#todayCount').textContent=list.length+' · entries'}
-function render(){const p=parts(current);$('#todayLabel').textContent=current==='2026-09-05'?'TODAY':'DAY';$('#todayDate').textContent=`${p.m}月${p.d}日`;$('#sectionDay').textContent=current==='2026-09-05'?'今天':`${p.m}月${p.d}日`;renderWeek();renderTimeline()}
+function nowTime(){const d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes())}
 function openOverlay(el,on){el.classList.toggle('show',on);el.setAttribute('aria-hidden',on?'false':'true')}
-$('#addBtn').onclick=()=>openOverlay($('#writeOverlay'),true);$('#writeClose').onclick=()=>openOverlay($('#writeOverlay'),false);$('#writeOverlay').onclick=()=>openOverlay($('#writeOverlay'),false);
-$('#calendarBtn').onclick=()=>openOverlay($('#calendarOverlay'),true);$('#calendarClose').onclick=()=>openOverlay($('#calendarOverlay'),false);$('#calendarOverlay').onclick=()=>openOverlay($('#calendarOverlay'),false);
-function switchWho(w){writeWho=w;$('#shengSwitch').classList.toggle('active',w==='sheng');$('#yangSwitch').classList.toggle('active',w==='yang')}$('#shengSwitch').onclick=()=>switchWho('sheng');$('#yangSwitch').onclick=()=>switchWho('yang');
-$('#saveEntry').onclick=()=>{const body=$('#writeBody').value.trim(),title=$('#writeTitle').value.trim();if(!body)return;const now=new Date(),time=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');data[current]=data[current]||[];data[current].push({id:'u'+Date.now(),who:writeWho,time,mood:title||'日记',text:body,comments:[]});save();$('#writeTitle').value='';$('#writeBody').value='';openOverlay($('#writeOverlay'),false);render();toast('写进这一天了')};
-function renderCalendar(){const box=$('#calGrid');box.innerHTML='';['SUN','MON','TUE','WED','THU','FRI','SAT'].forEach(x=>{const e=document.createElement('div');e.className='dow';e.textContent=x;box.appendChild(e)});for(let i=0;i<2;i++){const x=document.createElement('div');box.appendChild(x)}for(let d=1;d<=30;d++){const iso='2026-09-'+String(d).padStart(2,'0'),list=data[iso]||[],b=document.createElement('button');b.className='cal-day'+(iso===current?' active':'');let dots='';if(list.some(x=>x.who==='sheng'))dots+='<i></i>';if(list.some(x=>x.who==='yang'))dots+='<i class="yang"></i>';b.innerHTML=`<span>${d}</span><span class="cal-dots">${dots}</span>`;b.onclick=e=>{e.stopPropagation();current=iso;openOverlay($('#calendarOverlay'),false);render()};box.appendChild(b)}}
 function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1200)}
-renderCalendar();render();
+
+function isLocked(entry){
+  if(!entry.locked)return false;
+  if(entry.unlockAt&&new Date(entry.unlockAt).getTime()<=Date.now()){entry.locked=false;entry.unlockAt=null;save();return false}
+  return true
+}
+function lockLabel(entry){if(!entry.unlockAt)return '手动锁住';const d=new Date(entry.unlockAt);return `解封于 ${pad(d.getMonth()+1)}.${pad(d.getDate())} · ${pad(d.getHours())}:${pad(d.getMinutes())}`}
+
+function weekDates(iso){
+  const d=parseISO(iso),sun=new Date(d);sun.setDate(d.getDate()-d.getDay());
+  return Array.from({length:7},(_,i)=>{const x=new Date(sun);x.setDate(sun.getDate()+i);return isoDate(x)})
+}
+function renderWeek(){
+  const box=$('#weekStrip'),dows=['SUN','MON','TUE','WED','THU','FRI','SAT'];box.innerHTML='';
+  weekDates(current).forEach((iso,i)=>{const p=parts(iso),list=data[iso]||[],hasS=list.some(x=>x.who==='sheng'),hasY=list.some(x=>x.who==='yang');const b=document.createElement('button');b.type='button';b.className='week-day'+(iso===current?' active':'')+(hasS?' has-sheng':'')+(hasY?' has-yang':'');b.innerHTML=`<small>${dows[i]}</small><b>${p.d}</b><i></i>`;b.onclick=()=>{current=iso;render()};box.appendChild(b)})
+}
+
+function renderNotes(){
+  const list=(data[current]||[]).slice().sort((a,b)=>a.time.localeCompare(b.time)),box=$('#noteList');box.innerHTML='';
+  if(!list.length){box.innerHTML='<div class="empty-day"><i>♡</i><strong>这一天还没有日记</strong><span>想写的时候，再慢慢放一张纸进来</span></div>'}
+  list.forEach(entry=>{
+    const locked=isLocked(entry),comments=entry.comments||[],el=document.createElement('article');el.className='diary-note '+entry.who+(locked?' locked':'');
+    const lockIcon=locked?'<path d="M7 10V7a5 5 0 0 1 10 0v3"></path><rect x="5" y="10" width="14" height="10" rx="2"></rect>':'<path d="M8 10V7a4 4 0 0 1 7.5-2"></path><rect x="5" y="10" width="14" height="10" rx="2"></rect>';
+    const main=locked?`<div class="locked-paper"><svg viewBox="0 0 24 24">${lockIcon}</svg><strong>这篇还没有打开</strong><span>${esc(lockLabel(entry))}</span><em>正文和评论会一起等到解锁以后</em></div><div class="lock-tools"><button type="button" class="unlock-now">现在解锁</button></div>`:`<h3 class="note-title">${esc(entry.title||'今天的一小页')}</h3><p class="note-text">${esc(entry.text)}</p><div class="note-foot"><span class="open-hint">tap to read · comment</span><span>♡ ${comments.length}</span></div><div class="note-expand"><div class="expand-inner"><div class="comment-rule">评论 · ${comments.length}</div><div class="comments">${comments.map(c=>`<div class="comment"><b>${c.who==='sheng'?'声声':'小漾'} · ${esc(c.time||'')}</b>${esc(c.text)}</div>`).join('')}</div><div class="comment-add"><input placeholder="给对方留句话…"><button type="button">发送</button></div><div class="note-actions"><button type="button" class="lock-again">锁起来</button></div></div></div>`;
+    el.innerHTML=`<div class="note-top"><span class="author-tag">${entry.who==='sheng'?'声声 · SHENG':'小漾 · YANG'}</span><span class="note-time">${esc(entry.time)}</span><span class="mood">${esc(entry.mood||'日记')}</span><button type="button" class="lock-btn"><svg viewBox="0 0 24 24">${lockIcon}</svg>${locked?'locked':'open'}</button></div>${main}`;
+    if(locked){el.querySelector('.unlock-now').onclick=e=>{e.stopPropagation();entry.locked=false;entry.unlockAt=null;save();render();toast('已经打开啦')}}
+    else{
+      el.onclick=e=>{if(e.target.closest('button,input'))return;el.classList.toggle('open')};
+      el.querySelector('.lock-btn').onclick=e=>{e.stopPropagation();entry.locked=true;entry.unlockAt=null;save();render();toast('锁好啦')};
+      el.querySelector('.lock-again').onclick=e=>{e.stopPropagation();entry.locked=true;entry.unlockAt=null;save();render();toast('锁好啦')};
+      const inp=el.querySelector('.comment-add input'),btn=el.querySelector('.comment-add button');btn.onclick=e=>{e.stopPropagation();const v=inp.value.trim();if(!v)return;entry.comments=entry.comments||[];entry.comments.push({who:entry.who==='sheng'?'yang':'sheng',time:nowTime(),text:v});save();render();toast('评论留下了')}
+    }
+    box.appendChild(el)
+  });
+  $('#sectionCount').textContent=list.length+' 篇';$('#todayCount').textContent=list.length+' · entries'
+}
+function render(){
+  const p=parts(current),today=current===TODAY;$('#todayLabel').textContent=today?'TODAY':'DAY';$('#todayDate').textContent=`${p.m}月${p.d}日`;$('#sectionDay').textContent=today?'今天':`${p.m}月${p.d}日`;renderWeek();renderNotes();renderCalendar()
+}
+
+function setWho(w){writeWho=w;$('#shengSwitch').classList.toggle('active',w==='sheng');$('#yangSwitch').classList.toggle('active',w==='yang')}
+function setPrivacy(p){privacy=p;[['openNow','open'],['lockManual','manual'],['lockTimed','timed']].forEach(([id,v])=>$('#'+id).classList.toggle('active',p===v));$('#unlockInput').classList.toggle('show',p==='timed')}
+$('#shengSwitch').onclick=()=>setWho('sheng');$('#yangSwitch').onclick=()=>setWho('yang');$('#openNow').onclick=()=>setPrivacy('open');$('#lockManual').onclick=()=>setPrivacy('manual');$('#lockTimed').onclick=()=>setPrivacy('timed');
+$('#addBtn').onclick=()=>{setWho('sheng');setPrivacy('open');const d=new Date(Date.now()+2*60*60*1000);$('#unlockInput').value=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;openOverlay($('#writeOverlay'),true)};
+$('#writeClose').onclick=()=>openOverlay($('#writeOverlay'),false);$('#writeOverlay').onclick=()=>openOverlay($('#writeOverlay'),false);
+$('#saveEntry').onclick=()=>{const body=$('#writeBody').value.trim(),title=$('#writeTitle').value.trim();if(!body)return toast('还没有写正文');let unlockAt=null,locked=privacy!=='open';if(privacy==='timed'){unlockAt=$('#unlockInput').value||null;if(!unlockAt)return toast('选一个解锁时间');}data[current]=data[current]||[];data[current].push({id:'u'+Date.now(),who:writeWho,time:nowTime(),mood:'日记',title,text:body,locked,unlockAt,comments:[]});save();$('#writeTitle').value='';$('#writeBody').value='';openOverlay($('#writeOverlay'),false);render();toast(locked?'日记锁好啦':'写进这一天了')};
+
+const monthNames=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+function renderCalendar(){
+  const y=calCursor.getFullYear(),m=calCursor.getMonth(),box=$('#calGrid');$('#calTitle').innerHTML=`${monthNames[m]} <span>${y}</span>`;box.innerHTML='';['SUN','MON','TUE','WED','THU','FRI','SAT'].forEach(x=>{const d=document.createElement('div');d.className='dow';d.textContent=x;box.appendChild(d)});
+  const first=new Date(y,m,1),start=new Date(y,m,1-first.getDay()),cells=42;let total=0,s=0,ya=0;
+  for(let i=0;i<cells;i++){const d=new Date(start);d.setDate(start.getDate()+i);const iso=isoDate(d),list=data[iso]||[],b=document.createElement('button');b.type='button';b.className='cal-day'+(d.getMonth()!==m?' muted':'')+(iso===current?' active':'');let dots='';if(list.some(x=>x.who==='sheng'))dots+='<i></i>';if(list.some(x=>x.who==='yang'))dots+='<i class="yang"></i>';b.innerHTML=`<span>${d.getDate()}</span><span class="cal-dots">${dots}</span>`;b.onclick=e=>{e.stopPropagation();current=iso;calCursor=new Date(d.getFullYear(),d.getMonth(),1);openOverlay($('#calendarOverlay'),false);render()};box.appendChild(b);if(d.getMonth()===m){total+=list.length;s+=list.filter(x=>x.who==='sheng').length;ya+=list.filter(x=>x.who==='yang').length}}
+  $('#monthTotal').innerHTML=`${total} <span>篇日记</span>`;$('#monthSplit').textContent=`● 声声 · ${s}　 ● 小漾 · ${ya}`
+}
+$('#calendarBtn').onclick=()=>{calCursor=new Date(parts(current).y,parts(current).m-1,1);renderCalendar();openOverlay($('#calendarOverlay'),true)};$('#calendarClose').onclick=()=>openOverlay($('#calendarOverlay'),false);$('#calendarOverlay').onclick=()=>openOverlay($('#calendarOverlay'),false);$('#calPrev').onclick=e=>{e.stopPropagation();calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()-1,1);renderCalendar()};$('#calNext').onclick=e=>{e.stopPropagation();calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()+1,1);renderCalendar()};
+render();
 </script>
 </body>
 </html>
