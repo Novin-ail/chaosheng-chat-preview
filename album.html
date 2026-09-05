@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f5f0e6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/memory.css?v=memory-v1-reset-20260904-2218">
+<title>潮生 · Album</title>
+<style>
+:root{--rose:#c98291;--roseSoft:#f4e4e5;--oat:#f8f1e7;--mauve:#eee5e9;--paperWhite:rgba(255,253,249,.76);--ink2:#675d58}
+*{box-sizing:border-box}
+body{overflow:hidden}
+.album-app{height:100dvh;width:100%;max-width:520px;margin:auto;position:relative;overflow:hidden;background-color:#fbf5f4;background-image:url("assets/dear-lamb-bg-v2.svg");background-size:cover;background-position:center center;background-repeat:no-repeat}
+.album-scroll{height:calc(100% - 68px - env(safe-area-inset-top));overflow:auto;padding:29px 15px 38px;scrollbar-width:none}.album-scroll::-webkit-scrollbar{display:none}
+.album-kicker{display:flex;align-items:center;justify-content:center;gap:8px;margin:1px 0 14px;font-family:"Nunito",system-ui,sans-serif;color:#9b8f89}.album-kicker span{font-size:7px;letter-spacing:.12em}.album-kicker i{font-style:normal;font-size:8px;color:rgba(201,130,145,.50)}
+.month-strip{display:flex;gap:6px;overflow:auto;padding:2px 1px 9px;scrollbar-width:none}.month-strip::-webkit-scrollbar{display:none}.month-btn{flex:none;min-width:64px;height:39px;border:1px solid rgba(109,89,80,.055);border-radius:14px 5px 14px 14px;background:rgba(255,253,249,.62);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 9px;transition:transform .2s ease,background .25s ease}.month-btn:active{transform:scale(.97)}.month-btn strong{font-family:"Nunito",system-ui,sans-serif;font-size:8px;letter-spacing:.08em}.month-btn small{margin-top:2px;font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#aa9c95}.month-btn.active{background:rgba(244,228,229,.78);border-color:rgba(190,137,147,.10)}
+.album-summary{display:flex;align-items:flex-end;justify-content:space-between;margin:8px 2px 14px}.album-summary h2{margin:0;font-family:"Nunito",system-ui,sans-serif;font-size:12px;font-weight:650;letter-spacing:.08em}.album-summary p{margin:3px 0 0;font-size:7.5px;color:#a0948d}.album-summary .count{font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9e8e88;padding:5px 7px;border-radius:999px;background:rgba(255,253,249,.64)}
+.day-block{margin-bottom:18px;transition:opacity .28s ease,transform .28s ease}.day-block.hidden{display:none}.day-head{display:flex;align-items:center;gap:8px;margin:0 1px 8px}.day-date{font-family:"Nunito",system-ui,sans-serif;font-size:8px;font-weight:600;letter-spacing:.11em;color:#8d8079}.day-line{flex:1;border-top:1px dotted rgba(201,130,145,.25)}.day-count{font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#aa9d96}.day-mark{font-size:8px;color:rgba(201,130,145,.52)}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 9px;align-items:start}.photo-card{border:1px solid rgba(102,83,75,.055);border-radius:15px 5px 15px 15px;background:rgba(255,253,249,.82);padding:7px 7px 8px;text-align:left;position:relative;overflow:hidden;transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .22s ease}.photo-card:nth-child(odd){transform:rotate(-.5deg)}.photo-card:nth-child(even){transform:rotate(.55deg)}.photo-card:active{transform:scale(.985) rotate(0)}.photo-card.tall .photo-surface{aspect-ratio:4/5}.photo-card.wide{grid-column:1/-1}.photo-card.wide .photo-surface{aspect-ratio:16/9}.photo-surface{position:relative;overflow:hidden;border-radius:10px 3px 10px 10px;aspect-ratio:1/1;background:#eee5df}.photo-surface::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.25);border-radius:inherit;pointer-events:none}.photo-copy{display:flex;align-items:center;gap:6px;margin-top:7px}.photo-copy b{font-family:"Nunito",system-ui,sans-serif;font-size:7.2px;font-weight:600;color:#887a74;white-space:nowrap}.photo-copy span{font-size:7.2px;color:#8f837d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.photo-copy i{margin-left:auto;font-style:normal;font-size:7px;color:rgba(201,130,145,.58)}
+.scene-one{background:#e8d6d4}.scene-one .sun{position:absolute;width:34px;height:34px;border-radius:50%;background:#f7eee7;right:18px;top:17px}.scene-one .hill{position:absolute;left:-8%;right:-8%;bottom:-10%;height:45%;border-radius:50% 50% 0 0;background:#c8b7b3}.scene-two{background:#efe6dc}.scene-two .window{position:absolute;width:52%;height:58%;left:24%;top:17%;border:2px solid rgba(126,107,100,.24);border-radius:3px}.scene-two .window::before,.scene-two .window::after{content:"";position:absolute;background:rgba(126,107,100,.20)}.scene-two .window::before{width:1px;top:0;bottom:0;left:50%}.scene-two .window::after{height:1px;left:0;right:0;top:50%}.scene-three{background:#e9dfe5}.scene-three .moon{position:absolute;width:44px;height:44px;border-radius:50%;background:#f8f0ee;left:18%;top:18%}.scene-three .line{position:absolute;left:13%;right:13%;bottom:27%;height:1px;background:rgba(126,107,100,.21)}.scene-four{background:#e8ded4}.scene-four .cup{position:absolute;width:54px;height:42px;border-radius:4px 4px 14px 14px;background:#f7efea;left:50%;bottom:21%;transform:translateX(-50%)}.scene-four .cup::after{content:"";position:absolute;width:18px;height:20px;border:3px solid #f7efea;border-left:0;border-radius:0 12px 12px 0;right:-15px;top:8px}.scene-five{background:#e2d6d9}.scene-five .frame{position:absolute;left:16%;right:16%;top:19%;bottom:19%;border:1px solid rgba(255,255,255,.58);border-radius:2px}.scene-five .heart{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:24px;color:rgba(255,255,255,.62)}.scene-six{background:#eee4dd}.scene-six .dot{position:absolute;width:9px;height:9px;border-radius:50%;background:rgba(165,132,138,.30)}.scene-six .d1{left:23%;top:28%}.scene-six .d2{left:47%;top:43%}.scene-six .d3{left:67%;top:25%}.scene-six .d4{left:34%;top:67%}.scene-six .d5{left:72%;top:65%}.scene-seven{background:#eadcdd}.scene-seven .bow{position:absolute;left:50%;top:48%;width:54px;height:20px;transform:translate(-50%,-50%)}.scene-seven .bow::before,.scene-seven .bow::after{content:"";position:absolute;width:28px;height:20px;border-radius:50% 7px 50% 7px;background:rgba(255,255,255,.56)}.scene-seven .bow::before{left:0;transform:rotate(15deg)}.scene-seven .bow::after{right:0;transform:scaleX(-1) rotate(15deg)}.scene-eight{background:#ece2d8}.scene-eight .star{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);font-size:28px;color:rgba(197,154,161,.43)}
+.album-end{display:flex;align-items:center;justify-content:center;gap:8px;margin:19px 0 0;color:#afa29a;font-family:"Nunito",system-ui,sans-serif}.album-end::before,.album-end::after{content:"";width:34px;border-top:1px dotted rgba(201,130,145,.26)}.album-end span{font-size:6.7px;font-style:italic}.album-end i{font-style:normal;font-size:8px;color:rgba(201,130,145,.56)}
+.viewer{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:22px;background:rgba(70,60,56,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);opacity:0;pointer-events:none;transition:opacity .42s ease,background .55s ease,backdrop-filter .6s ease,-webkit-backdrop-filter .6s ease}.viewer.show{opacity:1;pointer-events:auto;background:rgba(70,60,56,.17);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}.viewer-paper{width:min(88vw,400px);max-height:79vh;overflow:auto;border:1px solid rgba(103,83,75,.07);border-radius:20px 7px 20px 20px;background:#fffaf6;padding:10px 10px 13px;transform:translateY(18px) scale(.93) rotate(-.6deg);opacity:0;transition:transform .58s cubic-bezier(.18,.92,.24,1),opacity .34s ease}.viewer.show .viewer-paper{transform:translateY(0) scale(1) rotate(0);opacity:1}.viewer-photo{border-radius:13px 4px 13px 13px;overflow:hidden}.viewer-photo .photo-surface{aspect-ratio:4/5;border-radius:inherit}.viewer-meta{display:flex;align-items:center;gap:7px;padding:10px 4px 0;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9c8f88}.viewer-meta span:last-child{margin-left:auto}.viewer-caption{margin:10px 4px 8px;font-size:10px;line-height:1.7;color:#655b56}.viewer-foot{display:flex;align-items:center;gap:6px;margin:0 4px;padding-top:8px;border-top:1px dashed rgba(123,103,94,.10)}.viewer-foot button{height:28px;border:0;border-radius:9px;padding:0 8px;background:rgba(244,228,229,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#8c6c73}.viewer-foot .love{margin-left:auto;background:rgba(249,244,237,.9);font-size:9px}.viewer-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 20px);font-size:7px;color:rgba(255,255,255,.84)}
+@media(max-width:370px){.album-scroll{padding-left:12px;padding-right:12px}.photo-grid{gap:8px}}
+</style>
+</head>
+<body>
+<main class="album-app" id="albumApp">
+  <header class="memory-topbar">
+    <button class="back-btn" type="button" onclick="location.href='memory.html'" aria-label="返回 Memory">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+    </button>
+    <div class="memory-heading">
+      <div class="memory-title">Album</div>
+      <div class="memory-subtitle">相册 · little snapshots</div>
+    </div>
+    <span></span>
+  </header>
+
+  <section class="album-scroll" id="albumScroll">
+    <div class="album-kicker"><i>✦</i><span>OUR LITTLE ALBUM</span><i>♡</i></div>
+
+    <div class="month-strip" id="monthStrip">
+      <button class="month-btn active" type="button" data-month="sep"><strong>SEP</strong><small>06 snaps</small></button>
+      <button class="month-btn" type="button" data-month="aug"><strong>AUG</strong><small>02 snaps</small></button>
+      <button class="month-btn" type="button" data-month="jul"><strong>JUL</strong><small>02 snaps</small></button>
+      <button class="month-btn" type="button" data-month="all"><strong>ALL</strong><small>10 snaps</small></button>
+    </div>
+
+    <div class="album-summary">
+      <div><h2 id="monthTitle">SEP · 2026</h2><p id="monthNote">small things I wanted to keep</p></div>
+      <span class="count" id="monthCount">06 snapshots</span>
+    </div>
+
+    <section class="day-block" data-month="sep">
+      <div class="day-head"><span class="day-date">SEP · 04</span><span class="day-line"></span><span class="day-count">03 snaps</span><span class="day-mark">♡</span></div>
+      <div class="photo-grid">
+        <button class="photo-card tall" type="button" data-date="SEP · 04 · 20:18" data-caption="今天也有一些小东西，想偷偷留在这里。" data-scene="scene-one">
+          <div class="photo-surface scene-one"><span class="sun"></span><span class="hill"></span></div>
+          <div class="photo-copy"><b>20:18</b><span>晚一点的光</span><i>♡</i></div>
+        </button>
+        <button class="photo-card" type="button" data-date="SEP · 04 · 21:06" data-caption="窗边那一点安静的光，看起来很像新家的晚上。" data-scene="scene-two">
+          <div class="photo-surface scene-two"><span class="window"></span></div>
+          <div class="photo-copy"><b>21:06</b><span>窗边</span><i>✦</i></div>
+        </button>
+        <button class="photo-card" type="button" data-date="SEP · 04 · 22:41" data-caption="没有特别发生什么，只是觉得这一刻应该留下。" data-scene="scene-three">
+          <div class="photo-surface scene-three"><span class="moon"></span><span class="line"></span></div>
+          <div class="photo-copy"><b>22:41</b><span>夜色</span><i>♡</i></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="day-block" data-month="sep">
+      <div class="day-head"><span class="day-date">SEP · 01</span><span class="day-line"></span><span class="day-count">03 snaps</span><span class="day-mark">✦</span></div>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-date="SEP · 01 · 18:32" data-caption="桌上很普通的一杯东西，也被我顺手记住了。" data-scene="scene-four">
+          <div class="photo-surface scene-four"><span class="cup"></span></div>
+          <div class="photo-copy"><b>18:32</b><span>桌边</span><i>♡</i></div>
+        </button>
+        <button class="photo-card tall" type="button" data-date="SEP · 01 · 19:50" data-caption="相册不一定只放大事，普通得不得了的片段也可以。" data-scene="scene-five">
+          <div class="photo-surface scene-five"><span class="frame"></span><span class="heart">♡</span></div>
+          <div class="photo-copy"><b>19:50</b><span>小小一格</span><i>✦</i></div>
+        </button>
+        <button class="photo-card wide" type="button" data-date="SEP · 01 · 22:03" data-caption="散在一天里的几个小点，合起来也会变成很完整的一天。" data-scene="scene-six">
+          <div class="photo-surface scene-six"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="dot d4"></span><span class="dot d5"></span></div>
+          <div class="photo-copy"><b>22:03</b><span>一些小点</span><i>♡</i></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="day-block hidden" data-month="aug">
+      <div class="day-head"><span class="day-date">AUG · 31</span><span class="day-line"></span><span class="day-count">02 snaps</span><span class="day-mark">♡</span></div>
+      <div class="photo-grid">
+        <button class="photo-card tall" type="button" data-date="AUG · 31 · 16:22" data-caption="像把旧房子里的一小块纸片，一起夹进新相册。" data-scene="scene-seven"><div class="photo-surface scene-seven"><span class="bow"></span></div><div class="photo-copy"><b>16:22</b><span>旧房子的纸片</span><i>♡</i></div></button>
+        <button class="photo-card" type="button" data-date="AUG · 31 · 21:10" data-caption="搬家前后的照片也应该在同一本相册里。" data-scene="scene-eight"><div class="photo-surface scene-eight"><span class="star">✦</span></div><div class="photo-copy"><b>21:10</b><span>同一本相册</span><i>✦</i></div></button>
+      </div>
+    </section>
+
+    <section class="day-block hidden" data-month="jul">
+      <div class="day-head"><span class="day-date">JUL · 18</span><span class="day-line"></span><span class="day-count">02 snaps</span><span class="day-mark">✦</span></div>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-date="JUL · 18 · 14:08" data-caption="更早一点的碎片，也慢慢放进来了。" data-scene="scene-two"><div class="photo-surface scene-two"><span class="window"></span></div><div class="photo-copy"><b>14:08</b><span>更早一点</span><i>♡</i></div></button>
+        <button class="photo-card tall" type="button" data-date="JUL · 18 · 19:36" data-caption="照片的时间可以很远，但不需要变成另一段人生。" data-scene="scene-three"><div class="photo-surface scene-three"><span class="moon"></span><span class="line"></span></div><div class="photo-copy"><b>19:36</b><span>还是我们</span><i>✦</i></div></button>
+      </div>
+    </section>
+
+    <div class="album-end"><i>♡</i><span>little snapshots stay</span><i>✦</i></div>
+  </section>
+
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <article class="viewer-paper" id="viewerPaper">
+      <div class="viewer-photo" id="viewerPhoto"></div>
+      <div class="viewer-meta"><span id="viewerDate"></span><span>album · memory</span></div>
+      <p class="viewer-caption" id="viewerCaption"></p>
+      <div class="viewer-foot"><button type="button" onclick="location.href='timeline-v1.html'">这天的回忆 →</button><button class="love" id="loveBtn" type="button">♡</button></div>
+    </article>
+    <div class="viewer-hint">轻触空白处放回相册</div>
+  </div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const monthMeta={sep:['SEP · 2026','small things I wanted to keep','06 snapshots'],aug:['AUG · 2026','older little pieces','02 snapshots'],jul:['JUL · 2026','from a little farther away','02 snapshots'],all:['ALL · ALBUM','everything in one little book','10 snapshots']};
+const buttons=[...document.querySelectorAll('.month-btn')],blocks=[...document.querySelectorAll('.day-block')];
+buttons.forEach(btn=>btn.onclick=()=>{
+  const m=btn.dataset.month;buttons.forEach(x=>x.classList.toggle('active',x===btn));
+  blocks.forEach(b=>b.classList.toggle('hidden',m!=='all'&&b.dataset.month!==m));
+  const meta=monthMeta[m];$('#monthTitle').textContent=meta[0];$('#monthNote').textContent=meta[1];$('#monthCount').textContent=meta[2];
+  $('#albumScroll').scrollTo({top:0,behavior:'smooth'});
+});
+function sceneMarkup(scene){
+  const map={
+    'scene-one':'<div class="photo-surface scene-one"><span class="sun"></span><span class="hill"></span></div>',
+    'scene-two':'<div class="photo-surface scene-two"><span class="window"></span></div>',
+    'scene-three':'<div class="photo-surface scene-three"><span class="moon"></span><span class="line"></span></div>',
+    'scene-four':'<div class="photo-surface scene-four"><span class="cup"></span></div>',
+    'scene-five':'<div class="photo-surface scene-five"><span class="frame"></span><span class="heart">♡</span></div>',
+    'scene-six':'<div class="photo-surface scene-six"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="dot d4"></span><span class="dot d5"></span></div>',
+    'scene-seven':'<div class="photo-surface scene-seven"><span class="bow"></span></div>',
+    'scene-eight':'<div class="photo-surface scene-eight"><span class="star">✦</span></div>'
+  };return map[scene]||map['scene-one'];
+}
+const viewer=$('#viewer');document.querySelectorAll('.photo-card').forEach(card=>card.onclick=()=>{
+  $('#viewerPhoto').innerHTML=sceneMarkup(card.dataset.scene);
+  $('#viewerDate').textContent=card.dataset.date;
+  $('#viewerCaption').textContent=card.dataset.caption;
+  $('#loveBtn').textContent='♡';
+  viewer.classList.add('show');viewer.setAttribute('aria-hidden','false');
+});
+$('#loveBtn').onclick=e=>{e.stopPropagation();e.currentTarget.textContent=e.currentTarget.textContent==='♡'?'♥':'♡'};
+viewer.onclick=e=>{if(!e.target.closest('.viewer-paper')){viewer.classList.remove('show');viewer.setAttribute('aria-hidden','true')}};
+</script>
+</body>
+</html>
