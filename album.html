@@ -33,35 +33,50 @@ body{overflow:hidden}
 .week-picker{
   display:grid;grid-template-columns:36px 1fr 36px;align-items:center;gap:7px;
   padding:7px;border:1px solid rgba(107,87,78,.055);border-radius:18px 6px 18px 18px;
-  background:rgba(255,253,249,.68)
+  background:rgba(255,253,249,.68);position:relative;z-index:21
 }
-.week-arrow{width:34px;height:34px;border:0;border-radius:11px;background:rgba(244,228,229,.54);display:grid;place-items:center;color:#98727a;transition:transform .18s ease,opacity .18s ease}
-.week-arrow:active{transform:scale(.92)}.week-arrow:disabled{opacity:.28}
+.week-arrow{width:34px;height:34px;border:0;border-radius:11px;background:rgba(244,228,229,.54);display:grid;place-items:center;color:#98727a;transition:transform .22s ease,opacity .22s ease}
+.week-arrow:active{transform:scale(.94)}.week-arrow:disabled{opacity:.28}
 .week-arrow svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.week-copy{text-align:center;min-width:0}.week-copy strong{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:9.2px;letter-spacing:.12em;color:#7f736d}.week-copy span{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#a39790;font-style:italic}
+.week-copy{width:100%;border:0;background:transparent;text-align:center;min-width:0;padding:4px 2px;border-radius:12px;transition:background .25s ease,transform .22s ease}
+.week-copy:active{transform:scale(.985);background:rgba(244,228,229,.30)}
+.week-copy strong{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:9.2px;letter-spacing:.12em;color:#7f736d}.week-copy span{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#a39790;font-style:italic}.week-copy em{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#b5a7a0;font-style:normal;letter-spacing:.05em}
+
+.date-pop{
+  position:absolute;z-index:70;left:15px;right:15px;top:calc(env(safe-area-inset-top) + 98px);
+  border:1px solid rgba(108,88,79,.065);border-radius:19px 7px 19px 19px;background:rgba(255,250,246,.96);
+  padding:12px;opacity:0;pointer-events:none;transform:translateY(-12px) scale(.96);transform-origin:50% 0;
+  transition:opacity .28s ease,transform .46s cubic-bezier(.18,.92,.22,1)
+}
+.date-pop.show{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+.date-pop-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.date-pop-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:8px;letter-spacing:.12em;color:#877a74}.date-pop-head span{font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#b0a39d;font-style:italic}
+.month-choice{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}.month-choice button{height:30px;border:0;border-radius:10px;padding:0 10px;background:rgba(249,242,236,.92);font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9a8b84;transition:transform .18s ease,background .24s ease,color .24s ease}.month-choice button:active{transform:scale(.95)}.month-choice button.active{background:rgba(244,226,228,.86);color:#896970}
+.week-choice{display:grid;grid-template-columns:1fr 1fr;gap:6px}.week-choice button{min-height:45px;border:1px solid rgba(109,89,80,.055);border-radius:12px 5px 12px 12px;background:rgba(255,253,249,.82);padding:7px 8px;text-align:left;transition:transform .18s ease,background .24s ease}.week-choice button:active{transform:scale(.98)}.week-choice button.active{background:rgba(243,230,233,.78)}.week-choice b{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#867872}.week-choice small{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:5.9px;color:#ac9e97}
 
 .day-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:10px 0 6px;padding:0 1px}
-.day-btn{height:48px;border:0;border-radius:13px 5px 13px 13px;background:rgba(255,253,249,.48);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#a0958e;position:relative;transition:transform .22s ease,background .26s ease,color .26s ease}
-.day-btn:active{transform:scale(.95)}.day-btn small{font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;letter-spacing:.07em}.day-btn b{font-family:"Nunito",system-ui,sans-serif;font-size:8.2px;font-weight:600}.day-btn i{width:3px;height:3px;border-radius:50%;background:transparent}.day-btn.has i{background:rgba(201,130,145,.48)}
-.day-btn.active{background:rgba(244,228,229,.78);color:#826b70;transform:translateY(-2px)}.day-btn.active i{background:#c98291}
-.day-btn.empty{opacity:.48}
+.day-btn{height:48px;border:0;border-radius:13px 5px 13px 13px;background:rgba(255,253,249,.48);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#a0958e;position:relative;transition:transform .32s cubic-bezier(.18,.88,.22,1),background .32s ease,color .32s ease,opacity .32s ease}
+.day-btn:active{transform:scale(.96)}.day-btn small{font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;letter-spacing:.07em}.day-btn b{font-family:"Nunito",system-ui,sans-serif;font-size:8.2px;font-weight:600}.day-btn i{width:3px;height:3px;border-radius:50%;background:transparent}.day-btn.has i{background:rgba(201,130,145,.48)}
+.day-btn.active{background:rgba(244,228,229,.78);color:#826b70;transform:translateY(-2px)}.day-btn.active i{background:#c98291}.day-btn.empty{opacity:.48}
 
 .stack-meta{display:flex;align-items:flex-end;justify-content:space-between;margin:12px 3px 6px}.stack-meta h2{margin:0;font-family:"Nunito",system-ui,sans-serif;font-size:11px;font-weight:650;letter-spacing:.08em}.stack-meta p{margin:3px 0 0;font-size:7.2px;color:#a0958e}.stack-count{padding:5px 7px;border-radius:999px;background:rgba(255,253,249,.62);font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#998c85}
 
 .stack-stage{position:relative;height:430px;margin-top:2px;display:grid;place-items:start center;padding-top:15px;overflow:visible}
 .polaroid{
   position:absolute;top:15px;width:min(78vw,330px);border:1px solid rgba(95,78,70,.075);border-radius:5px 2px 5px 5px;
-  background:#fffdf9;padding:10px 10px 13px;transform-origin:50% 86%;
-  transition:transform .48s cubic-bezier(.22,.78,.2,1),opacity .34s ease,filter .34s ease;
+  background:#fffdf9;padding:10px 10px 13px;transform-origin:50% 86%;will-change:transform,opacity,filter;
+  transition:transform .82s cubic-bezier(.16,.84,.22,1),opacity .58s ease,filter .58s ease;
   box-shadow:0 8px 24px rgba(68,54,47,.045)
 }
 .polaroid.pos-0{z-index:4;transform:translateY(0) rotate(-.7deg);opacity:1}
 .polaroid.pos-1{z-index:3;transform:translateY(11px) translateX(7px) rotate(2.2deg) scale(.985);opacity:.88;filter:saturate(.92)}
 .polaroid.pos-2{z-index:2;transform:translateY(20px) translateX(-6px) rotate(-2.4deg) scale(.967);opacity:.67;filter:saturate(.84)}
 .polaroid.pos-3{z-index:1;transform:translateY(27px) translateX(4px) rotate(1.2deg) scale(.95);opacity:.22}
-.polaroid.swap-out{transform:translateX(112%) translateY(-8px) rotate(10deg) scale(.98)!important;opacity:0!important;filter:blur(1px)}
-.polaroid.incoming{animation:cardCome .46s cubic-bezier(.2,.82,.2,1)}
-@keyframes cardCome{from{transform:translateX(-18px) translateY(7px) rotate(-3deg) scale(.985);opacity:.3}to{transform:translateY(0) rotate(-.7deg);opacity:1}}
+.polaroid.swap-out{transform:translateX(116%) translateY(-10px) rotate(9deg) scale(.98)!important;opacity:0!important;filter:blur(1.2px) saturate(.88)!important}
+.polaroid.promote-0{z-index:4!important;transform:translateY(0) rotate(-.7deg) scale(1)!important;opacity:1!important;filter:none!important}
+.polaroid.promote-1{z-index:3!important;transform:translateY(11px) translateX(7px) rotate(2.2deg) scale(.985)!important;opacity:.88!important;filter:saturate(.92)!important}
+.polaroid.promote-2{z-index:2!important;transform:translateY(20px) translateX(-6px) rotate(-2.4deg) scale(.967)!important;opacity:.67!important;filter:saturate(.84)!important}
+.polaroid.incoming{animation:cardCome .76s cubic-bezier(.16,.84,.22,1)}
+@keyframes cardCome{from{transform:translateX(-22px) translateY(9px) rotate(-2.8deg) scale(.98);opacity:.18;filter:blur(.6px)}to{transform:translateY(0) rotate(-.7deg);opacity:1;filter:none}}
 
 .photo-tap{width:100%;border:0;background:transparent;padding:0;display:block;cursor:pointer}
 .photo-surface{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;border-radius:2px;background:#ece3de}
@@ -69,16 +84,18 @@ body{overflow:hidden}
 .polaroid-info{width:100%;border:0;background:transparent;padding:11px 3px 0;text-align:left;display:block;cursor:pointer;position:relative}
 .info-top{display:flex;align-items:center;gap:7px;font-family:"Nunito",system-ui,sans-serif}.info-time{font-size:7.2px;font-weight:600;color:#8f817a}.info-day{font-size:6.6px;color:#aa9d96}.info-mark{margin-left:auto;font-size:8px;color:rgba(201,130,145,.62)}
 .info-title{display:block;margin-top:6px;font-size:10px;font-weight:630;color:#635954;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.info-hint{display:block;margin-top:4px;font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#b0a39b;font-style:italic;letter-spacing:.025em}
-.stack-tip{text-align:center;margin:-2px 0 0;font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;color:#a89b94;font-style:italic}.stack-dots{display:flex;justify-content:center;gap:5px;margin:8px 0 0}.stack-dots i{width:4px;height:4px;border-radius:50%;background:rgba(167,149,142,.20)}.stack-dots i.active{width:12px;border-radius:999px;background:rgba(201,130,145,.48)}
+.stack-tip{text-align:center;margin:-2px 0 0;font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;color:#a89b94;font-style:italic}.stack-dots{display:flex;justify-content:center;gap:5px;margin:8px 0 0}.stack-dots i{width:4px;height:4px;border-radius:50%;background:rgba(167,149,142,.20);transition:width .38s ease,background .38s ease}.stack-dots i.active{width:12px;border-radius:999px;background:rgba(201,130,145,.48)}
 
 .empty-card{width:min(78vw,330px);margin:34px auto 0;padding:44px 20px;border:1px dashed rgba(117,96,87,.09);border-radius:20px 7px 20px 20px;background:rgba(255,253,249,.58);text-align:center}.empty-card i{display:block;font-style:normal;font-size:17px;color:rgba(201,130,145,.38)}.empty-card strong{display:block;margin-top:8px;font-size:9px;font-weight:600;color:#8f827b}.empty-card span{display:block;margin-top:5px;font-size:7px;color:#aa9d96}
 .album-end{display:flex;align-items:center;justify-content:center;gap:8px;margin:17px 0 0;color:#afa29a;font-family:"Nunito",system-ui,sans-serif}.album-end::before,.album-end::after{content:"";width:34px;border-top:1px dotted rgba(201,130,145,.26)}.album-end span{font-size:6.7px;font-style:italic}.album-end i{font-style:normal;font-size:8px;color:rgba(201,130,145,.56)}
 
-.viewer{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:22px;background:rgba(73,62,57,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);opacity:0;pointer-events:none;transition:opacity .46s ease,background .58s ease,backdrop-filter .65s ease,-webkit-backdrop-filter .65s ease}
+.viewer{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:22px;background:rgba(73,62,57,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);opacity:0;pointer-events:none;transition:opacity .56s ease,background .68s ease,backdrop-filter .74s ease,-webkit-backdrop-filter .74s ease}
 .viewer.show{opacity:1;pointer-events:auto;background:rgba(73,62,57,.17);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.viewer-polaroid{width:min(88vw,382px);max-height:80vh;overflow:auto;border:1px solid rgba(103,83,75,.07);border-radius:6px 2px 6px 6px;background:#fffdf9;padding:11px 11px 16px;transform:translateY(19px) scale(.91) rotate(-1.2deg);opacity:0;transition:transform .68s cubic-bezier(.18,.92,.22,1),opacity .36s ease}
+.viewer-polaroid{width:min(88vw,382px);max-height:82vh;overflow:auto;border:1px solid rgba(103,83,75,.07);border-radius:6px 2px 6px 6px;background:#fffdf9;padding:11px 11px 16px;transform:translateY(21px) scale(.90) rotate(-1.2deg);opacity:0;transition:transform .82s cubic-bezier(.16,.88,.22,1),opacity .46s ease}
 .viewer.show .viewer-polaroid{transform:translateY(0) scale(1) rotate(0);opacity:1}
-.viewer-photo .photo-surface{aspect-ratio:1/1;border-radius:2px}.viewer-info{padding:12px 4px 0}.viewer-meta{display:flex;align-items:center;gap:7px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9c8f88}.viewer-meta span:last-child{margin-left:auto}.viewer-title{margin:10px 0 0;font-size:12px;font-weight:650;color:#605752}.viewer-caption{margin:7px 0 11px;font-size:9.6px;line-height:1.7;color:#716660}.viewer-foot{display:flex;align-items:center;gap:6px;padding-top:9px;border-top:1px dashed rgba(123,103,94,.10)}.viewer-foot button{height:29px;border:0;border-radius:9px;padding:0 8px;background:rgba(244,228,229,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#8c6c73}.viewer-foot .love{margin-left:auto;background:rgba(249,244,237,.94);font-size:10px}.viewer-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 20px);font-size:7px;color:rgba(255,255,255,.86)}
+.viewer-photo .photo-surface{aspect-ratio:1/1;border-radius:2px}.viewer-info{padding:12px 4px 0}.viewer-meta{display:flex;align-items:center;gap:7px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9c8f88}.viewer-meta span:last-child{margin-left:auto}.viewer-title{margin:10px 0 0;font-size:12px;font-weight:650;color:#605752}.viewer-caption{margin:7px 0 9px;font-size:9.6px;line-height:1.7;color:#716660}
+.tag-editor{margin:7px 0 11px;padding:9px 9px 8px;border:1px solid rgba(110,90,81,.055);border-radius:12px 5px 12px 12px;background:rgba(249,244,239,.72)}.tag-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.tag-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;letter-spacing:.11em;color:#91837c}.tag-head span{font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#b2a49d;font-style:italic}.tag-list{display:flex;gap:5px;flex-wrap:wrap;min-height:20px}.tag-chip{height:22px;border:0;border-radius:8px;padding:0 7px;background:rgba(244,226,228,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#8d6d74}.tag-empty{font-size:6.5px;color:#b3a59e;padding:3px 1px}.tag-add{display:flex;gap:6px;margin-top:7px}.tag-add input{min-width:0;flex:1;height:29px;border:0;border-radius:9px;background:rgba(255,253,249,.92);padding:0 9px;outline:none;font-size:7.4px;color:#6f645f}.tag-add input:focus{box-shadow:inset 0 0 0 1px rgba(196,143,152,.15)}.tag-add button{height:29px;border:0;border-radius:9px;padding:0 9px;background:rgba(239,230,226,.92);font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#88726d}
+.viewer-foot{display:flex;align-items:center;gap:6px;padding-top:9px;border-top:1px dashed rgba(123,103,94,.10)}.viewer-foot button{height:29px;border:0;border-radius:9px;padding:0 8px;background:rgba(244,228,229,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#8c6c73}.viewer-foot .love{margin-left:auto;background:rgba(249,244,237,.94);font-size:10px}.viewer-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 20px);font-size:7px;color:rgba(255,255,255,.86)}
 
 /* placeholder photo scenes: CSS only, replace with real photos later */
 .scene-one{background:#e8d6d4}.scene-one .sun{position:absolute;width:38px;height:38px;border-radius:50%;background:#f7eee7;right:18px;top:19px}.scene-one .hill{position:absolute;left:-8%;right:-8%;bottom:-8%;height:44%;border-radius:50% 50% 0 0;background:#c8b7b3}
@@ -92,7 +109,7 @@ body{overflow:hidden}
 .scene-nine{background:#eadedf}.scene-nine .stripe{position:absolute;left:12%;right:12%;height:1px;background:rgba(255,255,255,.48)}.scene-nine .s1{top:31%}.scene-nine .s2{top:50%}.scene-nine .s3{top:69%}
 .scene-ten{background:#eee5df}.scene-ten .circle{position:absolute;width:84px;height:84px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);border:1px dashed rgba(184,141,149,.38)}
 
-@media(max-width:370px){.album-scroll{padding-left:12px;padding-right:12px}.stack-stage{height:404px}.polaroid{width:min(80vw,306px)}}
+@media(max-width:370px){.album-scroll{padding-left:12px;padding-right:12px}.stack-stage{height:404px}.polaroid{width:min(80vw,306px)}.week-choice{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -113,7 +130,9 @@ body{overflow:hidden}
 
     <section class="week-picker">
       <button class="week-arrow" id="prevWeek" type="button" aria-label="上一周"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
-      <div class="week-copy"><strong id="weekTitle">WEEK 36 · 2026</strong><span id="weekRange">AUG 31 — SEP 06</span></div>
+      <button class="week-copy" id="dateJumpBtn" type="button" aria-label="选择月份和周数">
+        <strong id="weekTitle">WEEK 36 · 2026</strong><span id="weekRange">AUG 31 — SEP 06</span><em>tap to choose month · week</em>
+      </button>
       <button class="week-arrow" id="nextWeek" type="button" aria-label="下一周"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></button>
     </section>
 
@@ -131,6 +150,12 @@ body{overflow:hidden}
     <div class="album-end"><i>♡</i><span>one little week at a time</span><i>✦</i></div>
   </section>
 
+  <section class="date-pop" id="datePop" aria-hidden="true">
+    <div class="date-pop-head"><strong>JUMP TO · 日期</strong><span>month → week</span></div>
+    <div class="month-choice" id="monthChoice"></div>
+    <div class="week-choice" id="weekChoice"></div>
+  </section>
+
   <div class="viewer" id="viewer" aria-hidden="true">
     <article class="viewer-polaroid" id="viewerPolaroid">
       <div class="viewer-photo" id="viewerPhoto"></div>
@@ -138,6 +163,11 @@ body{overflow:hidden}
         <div class="viewer-meta"><span id="viewerDate"></span><span>album · memory</span></div>
         <h3 class="viewer-title" id="viewerTitle"></h3>
         <p class="viewer-caption" id="viewerCaption"></p>
+        <section class="tag-editor">
+          <div class="tag-head"><strong>TAGS · 自己记的小标签</strong><span>tap tag to remove</span></div>
+          <div class="tag-list" id="tagList"></div>
+          <div class="tag-add"><input id="tagInput" maxlength="24" placeholder="写一个 tag…" autocomplete="off"><button id="tagAddBtn" type="button">添加</button></div>
+        </section>
         <div class="viewer-foot"><button type="button" onclick="location.href='timeline-v1.html'">这天的回忆 →</button><button class="love" id="loveBtn" type="button">♡</button></div>
       </div>
     </article>
@@ -147,9 +177,10 @@ body{overflow:hidden}
 
 <script>
 const $=s=>document.querySelector(s);
+const TAG_STORE='chaosheng-album-tags-v1';
 const weeks=[
   {
-    title:'WEEK 34 · 2026',range:'AUG 17 — AUG 23',days:[
+    title:'WEEK 34 · 2026',range:'AUG 17 — AUG 23',months:['AUG'],days:[
       {dow:'MON',num:'17',date:'AUG 17',photos:[]},
       {dow:'TUE',num:'18',date:'AUG 18',photos:[
         {time:'14:08',title:'更早一点',caption:'更早一点的碎片，也慢慢放进来了。',scene:'scene-two'},
@@ -160,7 +191,7 @@ const weeks=[
     ]
   },
   {
-    title:'WEEK 35 · 2026',range:'AUG 24 — AUG 30',days:[
+    title:'WEEK 35 · 2026',range:'AUG 24 — AUG 30',months:['AUG'],days:[
       {dow:'MON',num:'24',date:'AUG 24',photos:[]},
       {dow:'TUE',num:'25',date:'AUG 25',photos:[{time:'17:21',title:'窗边的小格子',caption:'像把旧房子里的一小块纸片，一起夹进新相册。',scene:'scene-seven'}]},
       {dow:'WED',num:'26',date:'AUG 26',photos:[]},
@@ -171,7 +202,7 @@ const weeks=[
     ]
   },
   {
-    title:'WEEK 36 · 2026',range:'AUG 31 — SEP 06',days:[
+    title:'WEEK 36 · 2026',range:'AUG 31 — SEP 06',months:['AUG','SEP'],days:[
       {dow:'MON',num:'31',date:'AUG 31',photos:[
         {time:'16:22',title:'旧房子的纸片',caption:'搬家前后的照片也应该在同一本相册里。',scene:'scene-seven'},
         {time:'21:10',title:'同一本相册',caption:'换了住处，也还是同一个声声、同一个我们。',scene:'scene-eight'}]},
@@ -193,8 +224,9 @@ const weeks=[
   }
 ];
 
-let weekIndex=2,dayIndex=4,photoIndex=0,swapping=false;
-const stage=$('#stackStage'),viewer=$('#viewer');
+let weekIndex=2,dayIndex=4,photoIndex=0,swapping=false,viewerPhotoRef=null,viewerDayRef=null,chosenMonth='SEP';
+const stage=$('#stackStage'),viewer=$('#viewer'),datePop=$('#datePop');
+let tagStore=(()=>{try{return JSON.parse(localStorage.getItem(TAG_STORE))||{}}catch(e){return {}}})();
 
 function sceneMarkup(scene){
   const map={
@@ -213,6 +245,9 @@ function sceneMarkup(scene){
 
 function currentDay(){return weeks[weekIndex].days[dayIndex]}
 function currentPhotos(){return currentDay().photos}
+function persistTags(){localStorage.setItem(TAG_STORE,JSON.stringify(tagStore))}
+function photoKey(photo,day){return `${day.date}|${photo.time}|${photo.title}`}
+function tagsFor(photo,day){return tagStore[photoKey(photo,day)]||[]}
 
 function renderWeek(){
   const w=weeks[weekIndex];
@@ -262,16 +297,35 @@ function renderStack(incoming=false){
 
 function nextPhoto(){
   const photos=currentPhotos();if(swapping||photos.length<2)return;
-  swapping=true;const top=stage.querySelector('.pos-0');if(top)top.classList.add('swap-out');
-  setTimeout(()=>{photoIndex=(photoIndex+1)%photos.length;renderStack(true);swapping=false},390)
+  swapping=true;
+  const top=stage.querySelector('.pos-0'),p1=stage.querySelector('.pos-1'),p2=stage.querySelector('.pos-2'),p3=stage.querySelector('.pos-3');
+  if(top)top.classList.add('swap-out');
+  if(p1)p1.classList.add('promote-0');if(p2)p2.classList.add('promote-1');if(p3)p3.classList.add('promote-2');
+  setTimeout(()=>{photoIndex=(photoIndex+1)%photos.length;renderStack(false);swapping=false},790)
+}
+
+function renderTags(){
+  const list=$('#tagList');list.innerHTML='';if(!viewerPhotoRef||!viewerDayRef)return;
+  const tags=tagsFor(viewerPhotoRef,viewerDayRef);
+  if(!tags.length){list.innerHTML='<span class="tag-empty">还没有 tag · 可以自己加一个</span>';return}
+  tags.forEach(tag=>{const b=document.createElement('button');b.type='button';b.className='tag-chip';b.textContent='# '+tag+' ×';b.onclick=e=>{e.stopPropagation();removeTag(tag)};list.appendChild(b)})
+}
+function addTag(){
+  if(!viewerPhotoRef||!viewerDayRef)return;const input=$('#tagInput');let tag=input.value.trim().replace(/^#+/,'').replace(/\s+/g,'-');if(!tag)return;
+  const key=photoKey(viewerPhotoRef,viewerDayRef),tags=tagStore[key]||[];
+  if(!tags.some(t=>t.toLowerCase()===tag.toLowerCase()))tags.push(tag);
+  tagStore[key]=tags.slice(0,12);persistTags();input.value='';renderTags()
+}
+function removeTag(tag){
+  if(!viewerPhotoRef||!viewerDayRef)return;const key=photoKey(viewerPhotoRef,viewerDayRef);tagStore[key]=(tagStore[key]||[]).filter(t=>t!==tag);persistTags();renderTags()
 }
 
 function openViewer(photo){
-  const d=currentDay();$('#viewerPhoto').innerHTML=sceneMarkup(photo.scene);
-  $('#viewerDate').textContent=`${d.date} · ${photo.time}`;$('#viewerTitle').textContent=photo.title;$('#viewerCaption').textContent=photo.caption;
-  $('#loveBtn').textContent='♡';viewer.classList.add('show');viewer.setAttribute('aria-hidden','false')
+  const d=currentDay();viewerPhotoRef=photo;viewerDayRef=d;
+  $('#viewerPhoto').innerHTML=sceneMarkup(photo.scene);$('#viewerDate').textContent=`${d.date} · ${photo.time}`;$('#viewerTitle').textContent=photo.title;$('#viewerCaption').textContent=photo.caption;
+  $('#tagInput').value='';renderTags();$('#loveBtn').textContent='♡';viewer.classList.add('show');viewer.setAttribute('aria-hidden','false')
 }
-function closeViewer(){viewer.classList.remove('show');viewer.setAttribute('aria-hidden','true')}
+function closeViewer(){viewer.classList.remove('show');viewer.setAttribute('aria-hidden','true');setTimeout(()=>{viewerPhotoRef=null;viewerDayRef=null},420)}
 
 function chooseDefaultDay(){
   const days=weeks[weekIndex].days;
@@ -279,10 +333,21 @@ function chooseDefaultDay(){
   dayIndex=best>=0?best:0;photoIndex=0
 }
 
+function monthsAvailable(){return [...new Set(weeks.flatMap(w=>w.months))]}
+function renderDatePicker(){
+  const monthBox=$('#monthChoice'),weekBox=$('#weekChoice');monthBox.innerHTML='';weekBox.innerHTML='';
+  monthsAvailable().forEach(m=>{const b=document.createElement('button');b.type='button';b.textContent=m+' · 2026';b.className=m===chosenMonth?'active':'';b.onclick=e=>{e.stopPropagation();chosenMonth=m;renderDatePicker()};monthBox.appendChild(b)});
+  weeks.forEach((w,i)=>{if(!w.months.includes(chosenMonth))return;const b=document.createElement('button');b.type='button';b.className=i===weekIndex?'active':'';b.innerHTML=`<b>${w.title}</b><small>${w.range}</small>`;b.onclick=e=>{e.stopPropagation();weekIndex=i;chooseDefaultDay();renderAll(true);setDatePop(false)};weekBox.appendChild(b)})
+}
+function setDatePop(open){datePop.classList.toggle('show',open);datePop.setAttribute('aria-hidden',open?'false':'true');if(open){chosenMonth=weeks[weekIndex].months.slice(-1)[0];renderDatePicker()}}
+
 function renderAll(incoming=false){renderWeek();renderDayMeta();renderStack(incoming)}
 
 $('#prevWeek').onclick=()=>{if(weekIndex<=0)return;weekIndex--;chooseDefaultDay();renderAll(true)};
 $('#nextWeek').onclick=()=>{if(weekIndex>=weeks.length-1)return;weekIndex++;chooseDefaultDay();renderAll(true)};
+$('#dateJumpBtn').onclick=e=>{e.stopPropagation();setDatePop(!datePop.classList.contains('show'))};
+datePop.onclick=e=>e.stopPropagation();document.addEventListener('pointerdown',e=>{if(datePop.classList.contains('show')&&!e.target.closest('#datePop')&&!e.target.closest('#dateJumpBtn'))setDatePop(false)});
+$('#tagAddBtn').onclick=e=>{e.stopPropagation();addTag()};$('#tagInput').onclick=e=>e.stopPropagation();$('#tagInput').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addTag()}};
 $('#loveBtn').onclick=e=>{e.stopPropagation();e.currentTarget.textContent=e.currentTarget.textContent==='♡'?'♥':'♡'};
 viewer.onclick=e=>{if(!e.target.closest('.viewer-polaroid'))closeViewer()};
 renderAll();
