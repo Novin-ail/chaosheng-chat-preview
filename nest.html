@@ -111,7 +111,7 @@ function renderWaterMl(){
   if(!recent.length){list.innerHTML='<div class="water-record-empty">还没有记录，第一杯等你。</div>'}
   else recent.forEach(x=>{const d=new Date(x.at),row=document.createElement('div');row.className='water-record';row.innerHTML='<span>'+String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0')+' · '+waterMlTime(x.at)+'</span><b>'+x.ml+' ml</b>';list.appendChild(row)})
 }
-function openWaterFull(on){const el=$('#waterFull');el.classList.toggle('show',on);el.setAttribute('aria-hidden',on?'false':'true');if(on){renderWaterMl();setTimeout(()=>$('#waterMlInput').focus(),700)}}
+function openWaterFull(on){const el=$('#waterFull');el.classList.toggle('show',on);el.setAttribute('aria-hidden',on?'false':'true');if(on)renderWaterMl()}
 $('#waterCorner').addEventListener('click',e=>{if(e.target.closest('#cupBtn'))return;openWaterFull(true)});
 $('#waterFullClose').onclick=()=>openWaterFull(false);
 $('#waterFull').onclick=()=>openWaterFull(false);
@@ -120,7 +120,8 @@ $('#waterMlInput').onkeydown=e=>{if(e.key==='Enter'){$('#waterMlSave').click()}}
 $('#waterMonthPrev').onclick=()=>{waterMonthCursor.setMonth(waterMonthCursor.getMonth()-1);renderWaterMl()};
 $('#waterMonthNext').onclick=()=>{waterMonthCursor.setMonth(waterMonthCursor.getMonth()+1);renderWaterMl()};
 `;
-    t=t.replace('</script>',waterJs+'</script>');
+    const scriptEnd='</scr'+'ipt>';
+    t=t.replace(scriptEnd,waterJs+scriptEnd);
 
     document.open();
     document.write(t);
