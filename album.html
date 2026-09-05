@@ -40,7 +40,7 @@ body{overflow:hidden}
 .week-arrow svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .week-copy{width:100%;border:0;background:transparent;text-align:center;min-width:0;padding:4px 2px;border-radius:12px;transition:background .25s ease,transform .22s ease}
 .week-copy:active{transform:scale(.985);background:rgba(244,228,229,.30)}
-.week-copy strong{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:9.2px;letter-spacing:.12em;color:#7f736d}.week-copy span{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#a39790;font-style:italic}.week-copy em{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#b5a7a0;font-style:normal;letter-spacing:.05em}
+.week-copy strong{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:9.2px;letter-spacing:.12em;color:#7f736d}.week-copy span{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#a39790;font-style:italic}.week-copy em{display:none!important}
 
 .date-pop{
   position:absolute;z-index:70;left:15px;right:15px;top:calc(env(safe-area-inset-top) + 98px);
@@ -51,7 +51,7 @@ body{overflow:hidden}
 .date-pop.show{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
 .date-pop-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.date-pop-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:8px;letter-spacing:.12em;color:#877a74}.date-pop-head span{font-family:"Nunito",system-ui,sans-serif;font-size:6px;color:#b0a39d;font-style:italic}
 .month-choice{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}.month-choice button{height:30px;border:0;border-radius:10px;padding:0 10px;background:rgba(249,242,236,.92);font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9a8b84;transition:transform .18s ease,background .24s ease,color .24s ease}.month-choice button:active{transform:scale(.95)}.month-choice button.active{background:rgba(244,226,228,.86);color:#896970}
-.week-choice{display:grid;grid-template-columns:1fr 1fr;gap:6px}.week-choice button{min-height:45px;border:1px solid rgba(109,89,80,.055);border-radius:12px 5px 12px 12px;background:rgba(255,253,249,.82);padding:7px 8px;text-align:left;transition:transform .18s ease,background .24s ease}.week-choice button:active{transform:scale(.98)}.week-choice button.active{background:rgba(243,230,233,.78)}.week-choice b{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#867872}.week-choice small{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:5.9px;color:#ac9e97}
+.week-choice{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.week-choice button{min-height:38px;border:1px solid rgba(109,89,80,.055);border-radius:10px 4px 10px 10px;background:rgba(255,253,249,.82);padding:6px 5px;text-align:center;transition:transform .18s ease,background .24s ease}.week-choice button:active{transform:scale(.97)}.week-choice button.active{background:rgba(243,230,233,.78)}.week-choice b{display:block;font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#867872;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.week-choice small{display:block;margin-top:3px;font-family:"Nunito",system-ui,sans-serif;font-size:5.2px;color:#ac9e97;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 .day-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:10px 0 6px;padding:0 1px}
 .day-btn{height:48px;border:0;border-radius:13px 5px 13px 13px;background:rgba(255,253,249,.48);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#a0958e;position:relative;transition:transform .32s cubic-bezier(.18,.88,.22,1),background .32s ease,color .32s ease,opacity .32s ease}
@@ -94,7 +94,7 @@ body{overflow:hidden}
 .viewer-polaroid{width:min(88vw,382px);max-height:82vh;overflow:auto;border:1px solid rgba(103,83,75,.07);border-radius:6px 2px 6px 6px;background:#fffdf9;padding:11px 11px 16px;transform:translateY(21px) scale(.90) rotate(-1.2deg);opacity:0;transition:transform .82s cubic-bezier(.16,.88,.22,1),opacity .46s ease}
 .viewer.show .viewer-polaroid{transform:translateY(0) scale(1) rotate(0);opacity:1}
 .viewer-photo .photo-surface{aspect-ratio:1/1;border-radius:2px}.viewer-info{padding:12px 4px 0}.viewer-meta{display:flex;align-items:center;gap:7px;font-family:"Nunito",system-ui,sans-serif;font-size:7px;color:#9c8f88}.viewer-meta span:last-child{margin-left:auto}.viewer-title{margin:10px 0 0;font-size:12px;font-weight:650;color:#605752}.viewer-caption{margin:7px 0 9px;font-size:9.6px;line-height:1.7;color:#716660}
-.tag-editor{margin:7px 0 11px;padding:9px 9px 8px;border:1px solid rgba(110,90,81,.055);border-radius:12px 5px 12px 12px;background:rgba(249,244,239,.72)}.tag-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.tag-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;letter-spacing:.11em;color:#91837c}.tag-head span{font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#b2a49d;font-style:italic}.tag-list{display:flex;gap:5px;flex-wrap:wrap;min-height:20px}.tag-chip{height:22px;border:0;border-radius:8px;padding:0 7px;background:rgba(244,226,228,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#8d6d74}.tag-empty{font-size:6.5px;color:#b3a59e;padding:3px 1px}.tag-add{display:flex;gap:6px;margin-top:7px}.tag-add input{min-width:0;flex:1;height:29px;border:0;border-radius:9px;background:rgba(255,253,249,.92);padding:0 9px;outline:none;font-size:7.4px;color:#6f645f}.tag-add input:focus{box-shadow:inset 0 0 0 1px rgba(196,143,152,.15)}.tag-add button{height:29px;border:0;border-radius:9px;padding:0 9px;background:rgba(239,230,226,.92);font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#88726d}
+.tag-editor{margin:6px 0 9px;padding:7px 8px 7px;border:1px solid rgba(110,90,81,.055);border-radius:12px 5px 12px 12px;background:rgba(249,244,239,.72)}.tag-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}.tag-head strong{font-family:"Nunito",system-ui,sans-serif;font-size:6.7px;letter-spacing:.11em;color:#91837c}.tag-head span{font-family:"Nunito",system-ui,sans-serif;font-size:5.8px;color:#b2a49d;font-style:italic}.tag-list{display:flex;gap:5px;flex-wrap:wrap;min-height:0}.tag-list:empty{display:none}.tag-chip{height:22px;border:0;border-radius:8px;padding:0 7px;background:rgba(244,226,228,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.4px;color:#8d6d74}.tag-add{display:flex;gap:6px;margin-top:5px}.tag-list:empty + .tag-add{margin-top:0}.tag-add input{min-width:0;flex:1;height:27px;border:0;border-radius:9px;background:rgba(255,253,249,.92);padding:0 9px;outline:none;font-size:7.4px;color:#6f645f}.tag-add input:focus{box-shadow:inset 0 0 0 1px rgba(196,143,152,.15)}.tag-add button{height:27px;border:0;border-radius:9px;padding:0 9px;background:rgba(239,230,226,.92);font-family:"Nunito",system-ui,sans-serif;font-size:6.5px;color:#88726d}
 .viewer-foot{display:flex;align-items:center;gap:6px;padding-top:9px;border-top:1px dashed rgba(123,103,94,.10)}.viewer-foot button{height:29px;border:0;border-radius:9px;padding:0 8px;background:rgba(244,228,229,.68);font-family:"Nunito",system-ui,sans-serif;font-size:6.8px;color:#8c6c73}.viewer-foot .love{margin-left:auto;background:rgba(249,244,237,.94);font-size:10px}.viewer-hint{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 20px);font-size:7px;color:rgba(255,255,255,.86)}
 
 /* placeholder photo scenes: CSS only, replace with real photos later */
@@ -109,7 +109,7 @@ body{overflow:hidden}
 .scene-nine{background:#eadedf}.scene-nine .stripe{position:absolute;left:12%;right:12%;height:1px;background:rgba(255,255,255,.48)}.scene-nine .s1{top:31%}.scene-nine .s2{top:50%}.scene-nine .s3{top:69%}
 .scene-ten{background:#eee5df}.scene-ten .circle{position:absolute;width:84px;height:84px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);border:1px dashed rgba(184,141,149,.38)}
 
-@media(max-width:370px){.album-scroll{padding-left:12px;padding-right:12px}.stack-stage{height:404px}.polaroid{width:min(80vw,306px)}.week-choice{grid-template-columns:1fr}}
+@media(max-width:370px){.album-scroll{padding-left:12px;padding-right:12px}.stack-stage{height:404px}.polaroid{width:min(80vw,306px)}.week-choice{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -131,7 +131,7 @@ body{overflow:hidden}
     <section class="week-picker">
       <button class="week-arrow" id="prevWeek" type="button" aria-label="上一周"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
       <button class="week-copy" id="dateJumpBtn" type="button" aria-label="选择月份和周数">
-        <strong id="weekTitle">WEEK 36 · 2026</strong><span id="weekRange">AUG 31 — SEP 06</span><em>tap to choose month · week</em>
+        <strong id="weekTitle">WEEK 36 · 2026</strong><span id="weekRange">AUG 31 — SEP 06</span>
       </button>
       <button class="week-arrow" id="nextWeek" type="button" aria-label="下一周"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></button>
     </section>
@@ -307,7 +307,7 @@ function nextPhoto(){
 function renderTags(){
   const list=$('#tagList');list.innerHTML='';if(!viewerPhotoRef||!viewerDayRef)return;
   const tags=tagsFor(viewerPhotoRef,viewerDayRef);
-  if(!tags.length){list.innerHTML='<span class="tag-empty">还没有 tag · 可以自己加一个</span>';return}
+  if(!tags.length)return;
   tags.forEach(tag=>{const b=document.createElement('button');b.type='button';b.className='tag-chip';b.textContent='# '+tag+' ×';b.onclick=e=>{e.stopPropagation();removeTag(tag)};list.appendChild(b)})
 }
 function addTag(){
