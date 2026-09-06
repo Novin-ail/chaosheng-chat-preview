@@ -16,34 +16,87 @@ header{display:flex;justify-content:space-between;align-items:center}.back{width
 .songs{background:#fffaf6b8;border:1px solid var(--line);border-radius:22px 7px 22px 22px;padding:17px 16px;box-shadow:0 8px 26px #80584d06}.list-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.list-head h3{font-size:15px;margin:0}.list-head span{font-size:12px;color:var(--soft)}.tabs{display:flex;gap:16px;border-bottom:1px solid var(--line);margin-bottom:3px}.tabs button{padding:9px 0;background:transparent;color:var(--soft);font-size:13px;border-bottom:2px solid transparent}.tabs button[aria-selected=true]{color:#9f6e7b;border-color:#d5b0b9}.song{width:100%;display:flex;text-align:left;align-items:center;gap:13px;padding:14px 1px;background:transparent;border-bottom:1px dashed var(--line)}.song:last-child{border-bottom:0}.num{font:italic 12px Georgia,serif;color:#b6a19a;width:20px}.song-info{flex:1}.song strong{display:block;font-size:14px;font-weight:500}.song small{display:block;margin-top:5px;font-size:12px;color:var(--soft)}.song .duration{font-size:12px;color:var(--soft)}.song[aria-current=true] strong,.song[aria-current=true] .num{color:#b37e8c}.empty{padding:26px 0;text-align:center;font-size:13px;color:var(--soft)}footer{text-align:center;color:#b8a49d;font:italic 12px Georgia,serif;margin-top:22px;letter-spacing:.08em}
 @media(max-width:370px){.page{padding-left:16px;padding-right:16px}.art{width:210px}.heading{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){.record{animation:none}}
+
+/* Music discovery and local preview collections */
+.search-open{width:100%;text-align:left;margin:18px 0 2px;padding:12px 14px;border:1px solid var(--line);border-radius:14px 5px 14px 14px;background:#fffaf6bb;color:var(--soft);font-size:14px}
+.shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}.shortcut{padding:13px;text-align:left;border-radius:17px 6px 17px 17px;background:#f2e2e7b0;color:var(--ink)}.shortcut:nth-child(2){background:#ede8e0bf}.shortcut strong{font-size:14px;font-weight:500;display:block}.shortcut small{display:block;margin-top:6px;font-size:12px;color:var(--soft)}
+.song-row{display:flex;align-items:center;border-bottom:1px dashed var(--line);gap:4px}.song-row .song{border:0;flex:1;min-width:0}.song-info{min-width:0}.song strong,.song small{overflow-wrap:anywhere}.small-btn{min-width:40px;min-height:40px;background:transparent;color:var(--rose);font-size:20px}.pill{padding:8px 11px;border-radius:12px 4px 12px 12px;background:#f1e1e6;color:#916975;font-size:13px}
+dialog{color:var(--ink);border:1px solid var(--line);border-radius:24px 8px 24px 24px;padding:0;background:#fffaf6;width:calc(100% - 28px);max-width:470px;max-height:82dvh;box-shadow:0 20px 65px #654d4920}dialog::backdrop{background:#67555426;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}.dialog-inner{padding:18px;overflow:auto;max-height:80dvh}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.dialog-head h2{font-size:18px;letter-spacing:.03em}.close{width:40px;height:40px;background:#f5eae6;border-radius:50%;font-size:22px}.hint{font-size:12px;line-height:1.7;color:var(--soft);margin:8px 0 14px}.search-form{display:flex;gap:8px;margin-bottom:14px}.text-input{min-width:0;width:100%;border:1px solid var(--line);background:#faf0ee;padding:12px;font-size:16px;border-radius:12px 5px 12px 12px}.search-form .text-input{flex:1}.search-form button{white-space:nowrap}
+.collection{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:16px 12px;margin:9px 0;border:1px solid var(--line);border-radius:15px 5px 15px 15px;background:#f8efec;text-align:left;font-size:14px;overflow-wrap:anywhere}.collection small{color:var(--soft);font-size:12px;white-space:nowrap}.collection:disabled{opacity:.55;cursor:default}.new-list{margin-top:15px;padding-top:14px;border-top:1px dashed var(--line)}.new-list label{font-size:13px;display:block;margin-bottom:8px}.notice{min-height:20px;font-size:12px;line-height:1.6;color:#98717d}.dialog-toolbar{display:flex;gap:9px;justify-content:space-between;align-items:center}.dialog-toolbar span{font-size:12px;color:var(--soft)}.toast{position:fixed;z-index:100;bottom:calc(env(safe-area-inset-bottom) + 22px);left:50%;transform:translateX(-50%);max-width:calc(100% - 32px);padding:10px 16px;border-radius:14px 5px 14px 14px;background:#725e62;color:white;font-size:13px;pointer-events:none}.toast:empty{display:none}
 </style>
 </head>
 <body>
 <main class="page">
 <header><a class="back" href="nest.html?v=music-1" aria-label="返回小窝"><svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></svg></a><span class="eyebrow">a little room for music</span></header>
 <div class="heading"><div><h1>唱片室</h1><p>把喜欢的歌，放在这里。</p></div><span class="badge">小窝 · 音乐</span></div>
+<button class="search-open" id="searchOpen">⌕ &nbsp; 找一首歌，收进小窝</button>
 <section class="player" id="player" aria-label="唱片播放器">
 <div class="art"><img class="frame" src="https://iili.io/ndLuGZQ.png" alt=""><img class="record" src="https://iili.io/ndLTEBI.png" alt="旋转唱片"></div>
 <div class="track-head"><span></span><div><h2 id="title"></h2><p class="artist" id="artist"></p></div><button class="heart" id="heart" aria-label="收藏歌曲" aria-pressed="false">♡</button></div>
 <input class="seek" id="seek" type="range" min="0" max="240" value="0" aria-label="演示播放进度">
 <div class="times"><span id="elapsed">0:00</span><span id="duration">4:00</span></div>
 <div class="controls"><button id="prev" aria-label="上一首"><svg viewBox="0 0 24 24"><path d="M5 5v14m14-14L8 12l11 7z"/></svg></button><button class="play" id="play" aria-label="演示播放" aria-pressed="false"><svg viewBox="0 0 24 24"><path id="playIcon" d="m8 5 11 7-11 7z"/></svg></button><button id="next" aria-label="下一首"><svg viewBox="0 0 24 24"><path d="M19 5v14M5 5l11 7-11 7z"/></svg></button></div>
-<p class="preview-note">试听界面预览 · 暂无音源</p>
+<p class="preview-note">示例曲库 · 暂无音源 / 未连接网易云</p>
 </section>
+<div class="shortcuts"><button class="shortcut" id="dailyOpen"><strong>每日推荐</strong><small>今天，听些什么？</small></button><button class="shortcut" id="listsOpen"><strong>我的歌单</strong><small>给喜欢的歌一个小窝</small></button></div>
 <section class="songs"><div class="list-head"><h3>唱片架</h3><span id="count"></span></div><div class="tabs" role="tablist" aria-label="歌单"><button id="allTab" role="tab" aria-selected="true" aria-controls="list">全部歌曲</button><button id="favTab" role="tab" aria-selected="false" aria-controls="list" tabindex="-1">喜欢的歌</button></div><div id="list" role="tabpanel" aria-labelledby="allTab"></div></section>
 <footer>♡ &nbsp; stay for one more song &nbsp; ♡</footer>
 </main>
+
+<dialog id="searchDialog" aria-labelledby="searchHeading"><div class="dialog-inner"><div class="dialog-head"><h2 id="searchHeading">找一首歌</h2><button class="close" data-close aria-label="关闭搜索">×</button></div><form class="search-form" id="searchForm"><input id="query" class="text-input" type="search" placeholder="歌名、歌手或风格" aria-label="搜索关键词" maxlength="80"><button class="pill" type="submit">搜索</button></form><p class="hint">现在搜索的是示例曲库，接入后可搜索网易云歌曲。</p><div id="searchResults"></div></div></dialog>
+<dialog id="dailyDialog" aria-labelledby="dailyHeading"><div class="dialog-inner"><div class="dialog-head"><h2 id="dailyHeading">今天，听这些</h2><button class="close" data-close aria-label="关闭每日推荐">×</button></div><p class="hint">每日推荐 · 示例预览<br>接入并登录网易云后，这里会换成给你的每日推荐。</p><div id="dailyResults"></div></div></dialog>
+<dialog id="listsDialog" aria-labelledby="listsHeading"><div class="dialog-inner"><div class="dialog-head"><h2 id="listsHeading">我的歌单</h2><button class="close" data-close aria-label="关闭歌单">×</button></div><p class="hint">这一版歌单保存在当前浏览器，尚未同步网易云。</p><div id="collections"></div><form id="newListForm" class="new-list"><label for="listName">给新歌单起个名字</label><div class="search-form"><input class="text-input" id="listName" maxlength="40" required placeholder="比如：窝在一起听"><button class="pill" type="submit">新建</button></div><p class="notice" id="listNotice" role="status"></p></form></div></dialog>
+<dialog id="detailDialog" aria-labelledby="detailHeading"><div class="dialog-inner"><div class="dialog-head"><h2 id="detailHeading"></h2><button class="close" data-close aria-label="关闭歌单详情">×</button></div><div class="dialog-toolbar"><span>本机歌单</span><button class="pill" id="findMore">＋ 找歌添加</button></div><div id="detailResults"></div></div></dialog>
+<dialog id="addDialog" aria-labelledby="addHeading"><div class="dialog-inner"><div class="dialog-head"><h2 id="addHeading">收进歌单</h2><button class="close" data-close aria-label="取消添加">×</button></div><p class="hint" id="addingTitle"></p><div id="addChoices"></div><button class="pill" id="createForSong">＋ 新建歌单并添加</button></div></dialog>
+<div class="toast" role="status" id="toast"></div>
+
 <script>
-const tracks=[{title:'晚风来信',artist:'示例曲目 · 轻柔钢琴',duration:240},{title:'靠近一点',artist:'示例曲目 · 木吉他',duration:216},{title:'月亮还没睡',artist:'示例曲目 · 夜间轻音乐',duration:258},{title:'慢慢的晴天',artist:'示例曲目 · 午后旋律',duration:192}];
-const $=s=>document.querySelector(s);let current=0,playing=false,position=0,filter=false;const favorites=new Set();
+
+const tracks=[
+{title:'晚风来信',artist:'示例曲目 · 轻柔钢琴',duration:240},
+{title:'靠近一点',artist:'示例曲目 · 木吉他',duration:216},
+{title:'月亮还没睡',artist:'示例曲目 · 夜间轻音乐',duration:258},
+{title:'慢慢的晴天',artist:'示例曲目 · 午后旋律',duration:192},
+{title:'窗边的小雨',artist:'示例曲目 · 雨声钢琴',duration:225},
+{title:'棉花糖电台',artist:'示例曲目 · 慵懒爵士',duration:203},
+{title:'海浪睡着了',artist:'示例曲目 · 环境音乐',duration:268},
+{title:'留一盏灯',artist:'示例曲目 · 温柔民谣',duration:231}
+];
+const $=s=>document.querySelector(s),STORE='chaosheng-music-preview-v1';
+const valid=i=>Number.isInteger(i)&&i>=0&&i<tracks.length;
+let current=0,playing=false,position=0,filter=false,pendingSong=null,detailId=null,createWithSong=false,toastTimer;
+let saved={};try{saved=JSON.parse(localStorage.getItem(STORE))||{}}catch{}
+const favorites=new Set((Array.isArray(saved.favorites)?saved.favorites:[]).filter(valid));
+let playlists=(Array.isArray(saved.playlists)?saved.playlists:[]).filter(p=>p&&typeof p.id==='string'&&typeof p.name==='string'&&Array.isArray(p.ids)).map(p=>({id:p.id,name:p.name.slice(0,40),ids:[...new Set(p.ids.filter(valid))]}));
 const time=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function toast(s){$('#toast').textContent=s;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').textContent='',2600)}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({favorites:[...favorites],playlists}));return true}catch{toast('浏览器未能保存，当前操作仅在本次页面保留');return false}}
+function open(id){$(id).showModal()}
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('dialog').close());
+document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}));
 function progress(){$('#seek').value=position;$('#elapsed').textContent=time(position)}
-function renderList(){const visible=tracks.map((t,i)=>({t,i})).filter(x=>!filter||favorites.has(x.i));$('#count').textContent=visible.length+' 首';$('#list').replaceChildren();visible.forEach(({t,i})=>{const b=document.createElement('button');b.className='song';b.setAttribute('aria-current',String(i===current));b.innerHTML='<span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="song-info"><strong>'+t.title+'</strong><small>'+t.artist+'</small></span><span class="duration">'+time(t.duration)+'</span>';b.onclick=()=>select(i);$('#list').appendChild(b)});if(!visible.length){const p=document.createElement('p');p.className='empty';p.textContent='点一下爱心，把喜欢的歌留下。';$('#list').appendChild(p)}}
+function rows(container,ids,removeFrom){const box=$(container);box.replaceChildren();ids.forEach(i=>{const t=tracks[i],row=document.createElement('div');row.className='song-row';const b=document.createElement('button');b.className='song';b.setAttribute('aria-current',String(i===current));const num=document.createElement('span');num.className='num';num.textContent=String(i+1).padStart(2,'0');const info=document.createElement('span');info.className='song-info';const title=document.createElement('strong');title.textContent=t.title;const artist=document.createElement('small');artist.textContent=t.artist;info.append(title,artist);const duration=document.createElement('span');duration.className='duration';duration.textContent=time(t.duration);b.append(num,info,duration);b.onclick=()=>{select(i);toast('已选中「'+t.title+'」· 演示曲目')};const add=document.createElement('button');add.className='small-btn';add.textContent=removeFrom?'−':'＋';add.setAttribute('aria-label',(removeFrom?'从歌单移除':'添加到歌单：')+t.title);add.onclick=()=>{if(removeFrom){const p=playlists.find(x=>x.id===removeFrom);if(p){p.ids=p.ids.filter(id=>id!==i);save();renderDetail();renderCollections();toast('已从这张歌单移除')}}else choose(i)};row.append(b,add);box.appendChild(row)});if(!ids.length){const p=document.createElement('p');p.className='empty';p.textContent=container==='#searchResults'?'没找到，换个词试试。':removeFrom?'歌单还是空的，找首歌放进来吧。':'还没有歌曲，点爱心或搜索找一首。';box.appendChild(p)}}
+function renderList(){const ids=tracks.map((_,i)=>i).filter(i=>!filter||favorites.has(i));$('#count').textContent=ids.length+' 首';rows('#list',ids)}
 function render(){const t=tracks[current];$('#title').textContent=t.title;$('#artist').textContent=t.artist;$('#duration').textContent=time(t.duration);$('#seek').max=t.duration;$('#heart').textContent=favorites.has(current)?'♥':'♡';$('#heart').setAttribute('aria-pressed',String(favorites.has(current)));$('#player').classList.toggle('playing',playing);$('#play').setAttribute('aria-pressed',String(playing));$('#play').setAttribute('aria-label',playing?'暂停演示':'演示播放');$('#playIcon').setAttribute('d',playing?'M8 5v14M16 5v14':'m8 5 11 7-11 7z');progress();renderList()}
-function select(i){current=(i+tracks.length)%tracks.length;position=0;render()}
-$('#play').onclick=()=>{playing=!playing;render()};$('#prev').onclick=()=>select(current-1);$('#next').onclick=()=>select(current+1);$('#seek').oninput=e=>{position=Number(e.target.value);progress()};$('#heart').onclick=()=>{favorites.has(current)?favorites.delete(current):favorites.add(current);render()};
+function select(i){current=(i+tracks.length)%tracks.length;position=0;render();refreshOpenRows()}
+function refreshOpenRows(){if($('#searchDialog').open)search();if($('#dailyDialog').open)daily();if($('#detailDialog').open)renderDetail()}
+$('#play').onclick=()=>{playing=!playing;render()};$('#prev').onclick=()=>select(current-1);$('#next').onclick=()=>select(current+1);$('#seek').oninput=e=>{position=Number(e.target.value);progress()};$('#heart').onclick=()=>{favorites.has(current)?favorites.delete(current):favorites.add(current);save();render()};
 function tab(f){filter=f;['allTab','favTab'].forEach((id,i)=>{const active=Boolean(i)===f;$('#'+id).setAttribute('aria-selected',String(active));$('#'+id).tabIndex=active?0:-1});$('#list').setAttribute('aria-labelledby',f?'favTab':'allTab');renderList()}
-$('#allTab').onclick=()=>tab(false);$('#favTab').onclick=()=>tab(true);document.querySelector('.tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();tab(e.key==='Home'?false:e.key==='End'?true:!filter);$(filter?'#favTab':'#allTab').focus()}};
+$('#allTab').onclick=()=>tab(false);$('#favTab').onclick=()=>tab(true);$('.tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();tab(e.key==='Home'?false:e.key==='End'?true:!filter);$(filter?'#favTab':'#allTab').focus()}};
+function search(){const q=$('#query').value.trim().toLocaleLowerCase();rows('#searchResults',tracks.map((_,i)=>i).filter(i=>(tracks[i].title+' '+tracks[i].artist).toLocaleLowerCase().includes(q)))}
+$('#searchForm').onsubmit=e=>{e.preventDefault();search()};$('#query').oninput=search;
+$('#searchOpen').onclick=()=>{search();open('#searchDialog')};
+function daily(){rows('#dailyResults',[0,4,6,3])}
+$('#dailyOpen').onclick=()=>{daily();open('#dailyDialog')};
+function renderCollections(){const box=$('#collections');box.replaceChildren();playlists.forEach(p=>{const b=document.createElement('button');b.className='collection';const name=document.createElement('span');name.textContent=p.name;const count=document.createElement('small');count.textContent=p.ids.length+' 首';b.append(name,count);b.onclick=()=>{detailId=p.id;renderDetail();open('#detailDialog')};box.appendChild(b)});if(!playlists.length){const p=document.createElement('p');p.className='empty';p.textContent='第一张歌单，想叫什么名字？';box.appendChild(p)}}
+$('#listsOpen').onclick=()=>{createWithSong=false;$('#listNotice').textContent='';renderCollections();open('#listsDialog')};
+function renderDetail(){const p=playlists.find(p=>p.id===detailId);if(!p)return;$('#detailHeading').textContent=p.name;rows('#detailResults',p.ids,p.id)}
+$('#findMore').onclick=()=>{search();open('#searchDialog')};
+function choose(i){pendingSong=i;$('#addingTitle').textContent=tracks[i].title;const box=$('#addChoices');box.replaceChildren();playlists.forEach(p=>{const b=document.createElement('button');b.className='collection';const exists=p.ids.includes(i);b.textContent=p.name+(exists?' · 已添加':'');b.disabled=exists;b.onclick=()=>{p.ids.push(i);save();renderCollections();if($('#detailDialog').open)renderDetail();$('#addDialog').close();toast('已收进「'+p.name+'」')};box.appendChild(b)});open('#addDialog')}
+$('#createForSong').onclick=()=>{document.querySelectorAll('dialog').forEach(d=>{if(d.open)d.close()});createWithSong=true;renderCollections();$('#listNotice').textContent='新建后会同时加入「'+tracks[pendingSong].title+'」。';if(!$('#listsDialog').open)open('#listsDialog');$('#listName').focus()};
+$('#newListForm').onsubmit=e=>{e.preventDefault();const name=$('#listName').value.trim();if(!name){$('#listNotice').textContent='先给歌单起个名字吧。';return}if(playlists.some(p=>p.name===name)){$('#listNotice').textContent='这张歌单已经有了，换个名字吧。';return}const p={id:'local-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),name,ids:createWithSong&&valid(pendingSong)?[pendingSong]:[]};playlists.push(p);const ok=save();createWithSong=false;$('#listName').value='';$('#listNotice').textContent=ok?'歌单建好了，保存在当前浏览器。':'歌单建好了，本次页面有效；浏览器未能保存。';renderCollections()};
+$('#listsDialog').addEventListener('close',()=>{createWithSong=false});
 setInterval(()=>{if(!playing||document.hidden)return;position++;if(position>=tracks[current].duration)select(current+1);else progress()},1000);render();
+
 </script>
 </body></html>
