@@ -33,12 +33,15 @@
 <div class="drawer-content">
 <section class="drawer-overview" aria-label="时间与在一起天数">
 <div class="drawer-clock">
-<button class="clock-trigger" id="drawerClockTrigger" type="button" aria-expanded="false" aria-label="修改纪念日">
 <div class="clock-time" id="drawerTime">--:--</div>
-</button>
 <div class="clock-date" id="drawerDate">FRIDAY · AUG 14 · DAY 243</div>
 <div class="clock-motto"><i>✦</i><span>SOFT HOURS · SIDE BY SIDE</span></div>
 <img alt="" class="clock-art" src="https://files.catbox.moe/zans4i.png"/>
+</div>
+<div class="relationship-block">
+<img alt="小漾和声声在一起" class="relationship-art" src="https://files.catbox.moe/4uper3.png"/>
+<button class="relationship-days" id="annivTrigger" type="button" aria-expanded="false" aria-label="修改纪念日"><small>已经</small><strong id="drawerTogetherDays">--</strong><em>天</em></button>
+<div class="relationship-caption"><i>✦</i><span>STAY CLOSE · DAY <b id="drawerTogetherDayCaption">--</b></span></div>
 <div class="anniv-picker" id="annivPicker" aria-hidden="true">
 <div class="picker-head"><strong>纪念日</strong><small id="pickerDateText">2026.06.14</small></div>
 <div class="picker-row">
@@ -48,17 +51,13 @@
 </div>
 </div>
 </div>
-<div class="relationship-block">
-<div class="relationship-names">小漾 <span>&amp;</span> 声声</div>
-<div class="relationship-together">在一起</div>
-<div class="relationship-days"><small>已经</small><strong id="drawerTogetherDays">--</strong><em>天</em></div>
-<div class="relationship-caption"><i>✦</i><span>STAY CLOSE · DAY <b id="drawerTogetherDayCaption">--</b></span></div>
-</div>
 <div class="drawer-rule" aria-hidden="true"><span>·</span></div>
 </section>
-<section class="drawer-menu" aria-label="今日待办">
-<div class="drawer-menu-head"><span>TODAY</span><strong>今日待办</strong></div>
-<nav class="drawer-list">
+<section class="drawer-todo" aria-label="今日待办">
+<div class="drawer-todo-head"><span>TODAY</span><strong>今日待办</strong></div>
+<div class="drawer-todo-list" id="drawerTodoList"></div>
+</section>
+<nav class="drawer-list" aria-label="侧边栏导航">
 <button class="drawer-link" data-route="cron"><span class="drawer-index">01</span><span class="drawer-label">cron</span><span class="drawer-line"></span><span class="drawer-en">schedule</span></button>
 <button class="drawer-link" data-route="回忆"><span class="drawer-index">02</span><span class="drawer-label">回忆</span><span class="drawer-line"></span><span class="drawer-en">memory</span></button>
 <button class="drawer-link" data-route="相册"><span class="drawer-index">03</span><span class="drawer-label">相册</span><span class="drawer-line"></span><span class="drawer-en">album</span></button>
@@ -66,7 +65,6 @@
 <button class="drawer-link" data-route="工作室"><span class="drawer-index">05</span><span class="drawer-label">工作室</span><span class="drawer-line"></span><span class="drawer-en">studio</span></button>
 <button class="drawer-link" data-route="小窝"><span class="drawer-index">06</span><span class="drawer-label">小窝</span><span class="drawer-line"></span><span class="drawer-en">nest</span></button>
 </nav>
-</section>
 <div class="drawer-footer"><button class="drawer-back" id="drawerBack"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg><span>· back</span><img alt="" class="back-sheep" src="https://files.catbox.moe/ge809e.png"/></button></div>
 </div>
 </aside>
