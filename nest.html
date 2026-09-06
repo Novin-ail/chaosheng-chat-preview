@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#f8f1ec">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>潮生 · 小窝</title>
 <style>html,body{margin:0;width:100%;height:100%;background:#fbf5f2}.loading{height:100%;display:grid;place-items:center;color:#b7a8a0;font:12px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}</style>
 </head>
@@ -12,7 +15,7 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-2');
+    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-3',{cache:'no-store'});
     let t=await r.text();
     t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','https://iili.io/ndhHiQI.png');
     t=t.replaceAll('https://files.catbox.moe/qkpuy3.png','https://iili.io/ndhHPhN.png');
@@ -44,7 +47,7 @@
     document.write(t);
     document.close();
   }catch(e){
-    location.replace('nest-runtime-water.html');
+    location.replace('nest-runtime-water.html?v=20260906-water-card-3');
   }
 })();
 </script>
