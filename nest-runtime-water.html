@@ -15,7 +15,7 @@ html,body{margin:0;width:100%;height:100%;background:#fbf5f2}
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-source.html?v=water-20260906-4');
+    const r=await fetch('nest-source.html?v=water-20260906-5');
     let t=await r.text();
 
     t=t.replace("$('#snackBtn').onclick=()=>toast('零食架 · 下一间慢慢做');","$('#snackBtn').onclick=()=>location.href='snacks.html';");
