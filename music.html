@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fbf5f4">
+<title>潮生 · 唱片室</title>
+<style>
+:root{--ink:#6b5b55;--soft:#a08c87;--rose:#bb8793;--line:rgba(125,93,82,.1)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:#eee5e1;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}button,a,input{font:inherit;color:inherit}button{cursor:pointer;border:0}a{text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--rose);outline-offset:4px}
+.page{max-width:520px;margin:auto;min-height:100dvh;background:linear-gradient(#fff8f7dc,#fff9f3ed),url('assets/dear-lamb-bg-v2.svg') center/cover;padding:calc(env(safe-area-inset-top) + 10px) 22px calc(env(safe-area-inset-bottom) + 28px)}
+header{display:flex;justify-content:space-between;align-items:center}.back{width:40px;height:40px;border-radius:50%;background:#fffaf6cb;display:grid;place-items:center}.back svg{width:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.eyebrow{font:italic 12px Georgia,serif;color:var(--soft);letter-spacing:.08em}
+.heading{display:flex;justify-content:space-between;align-items:center;margin:23px 0 0}h1{font-size:23px;letter-spacing:.06em;margin:0}p{margin:7px 0;font-size:12px;color:var(--soft)}.badge{font-size:12px;border:1px solid var(--line);border-radius:20px;padding:7px 10px;color:var(--soft)}
+.player{text-align:center}.art{width:240px;max-width:78vw;aspect-ratio:1;position:relative;margin:15px auto 0;display:grid;place-items:center}.frame{position:absolute;width:100%;height:100%;object-fit:contain;pointer-events:none}.record{width:82%;height:82%;object-fit:contain;z-index:1;border-radius:0;animation:spin 18s linear infinite;animation-play-state:paused;filter:drop-shadow(0 7px 10px #76575d12)}.playing .record{animation-play-state:running}@keyframes spin{to{transform:rotate(360deg)}}
+.track-head{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;margin-top:7px}h2{font-size:19px;font-weight:600;margin:0;letter-spacing:.08em}.heart{width:40px;height:40px;background:transparent;font-size:25px;color:var(--rose)}.artist{font-size:12px;margin-top:8px}.seek{display:block;width:100%;margin:20px 0 4px;accent-color:#cfa6ae;height:14px}.times{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);font-variant-numeric:tabular-nums}.controls{display:flex;align-items:center;justify-content:center;gap:30px;margin:12px 0 8px}.controls button{width:44px;height:44px;background:transparent;display:grid;place-items:center}.controls svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.controls .play{width:55px;height:55px;background:#eed8dd;border-radius:50%;box-shadow:0 5px 20px #ac7f8e13}.preview-note{font-size:12px;color:#a38e89;margin:8px 0 24px}
+.songs{background:#fffaf6b8;border:1px solid var(--line);border-radius:22px 7px 22px 22px;padding:17px 16px;box-shadow:0 8px 26px #80584d06}.list-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.list-head h3{font-size:15px;margin:0}.list-head span{font-size:12px;color:var(--soft)}.tabs{display:flex;gap:16px;border-bottom:1px solid var(--line);margin-bottom:3px}.tabs button{padding:9px 0;background:transparent;color:var(--soft);font-size:13px;border-bottom:2px solid transparent}.tabs button[aria-selected=true]{color:#9f6e7b;border-color:#d5b0b9}.song{width:100%;display:flex;text-align:left;align-items:center;gap:13px;padding:14px 1px;background:transparent;border-bottom:1px dashed var(--line)}.song:last-child{border-bottom:0}.num{font:italic 12px Georgia,serif;color:#b6a19a;width:20px}.song-info{flex:1}.song strong{display:block;font-size:14px;font-weight:500}.song small{display:block;margin-top:5px;font-size:12px;color:var(--soft)}.song .duration{font-size:12px;color:var(--soft)}.song[aria-current=true] strong,.song[aria-current=true] .num{color:#b37e8c}.empty{padding:26px 0;text-align:center;font-size:13px;color:var(--soft)}footer{text-align:center;color:#b8a49d;font:italic 12px Georgia,serif;margin-top:22px;letter-spacing:.08em}
+@media(max-width:370px){.page{padding-left:16px;padding-right:16px}.art{width:210px}.heading{margin-top:16px}}
+@media(prefers-reduced-motion:reduce){.record{animation:none}}
+</style>
+</head>
+<body>
+<main class="page">
+<header><a class="back" href="nest.html?v=music-1" aria-label="返回小窝"><svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></svg></a><span class="eyebrow">a little room for music</span></header>
+<div class="heading"><div><h1>唱片室</h1><p>把喜欢的歌，放在这里。</p></div><span class="badge">小窝 · 音乐</span></div>
+<section class="player" id="player" aria-label="唱片播放器">
+<div class="art"><img class="frame" src="https://iili.io/ndLuGZQ.png" alt=""><img class="record" src="https://iili.io/ndLTEBI.png" alt="旋转唱片"></div>
+<div class="track-head"><span></span><div><h2 id="title"></h2><p class="artist" id="artist"></p></div><button class="heart" id="heart" aria-label="收藏歌曲" aria-pressed="false">♡</button></div>
+<input class="seek" id="seek" type="range" min="0" max="240" value="0" aria-label="演示播放进度">
+<div class="times"><span id="elapsed">0:00</span><span id="duration">4:00</span></div>
+<div class="controls"><button id="prev" aria-label="上一首"><svg viewBox="0 0 24 24"><path d="M5 5v14m14-14L8 12l11 7z"/></svg></button><button class="play" id="play" aria-label="演示播放" aria-pressed="false"><svg viewBox="0 0 24 24"><path id="playIcon" d="m8 5 11 7-11 7z"/></svg></button><button id="next" aria-label="下一首"><svg viewBox="0 0 24 24"><path d="M19 5v14M5 5l11 7-11 7z"/></svg></button></div>
+<p class="preview-note">试听界面预览 · 暂无音源</p>
+</section>
+<section class="songs"><div class="list-head"><h3>唱片架</h3><span id="count"></span></div><div class="tabs" role="tablist" aria-label="歌单"><button id="allTab" role="tab" aria-selected="true" aria-controls="list">全部歌曲</button><button id="favTab" role="tab" aria-selected="false" aria-controls="list" tabindex="-1">喜欢的歌</button></div><div id="list" role="tabpanel" aria-labelledby="allTab"></div></section>
+<footer>♡ &nbsp; stay for one more song &nbsp; ♡</footer>
+</main>
+<script>
+const tracks=[{title:'晚风来信',artist:'示例曲目 · 轻柔钢琴',duration:240},{title:'靠近一点',artist:'示例曲目 · 木吉他',duration:216},{title:'月亮还没睡',artist:'示例曲目 · 夜间轻音乐',duration:258},{title:'慢慢的晴天',artist:'示例曲目 · 午后旋律',duration:192}];
+const $=s=>document.querySelector(s);let current=0,playing=false,position=0,filter=false;const favorites=new Set();
+const time=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function progress(){$('#seek').value=position;$('#elapsed').textContent=time(position)}
+function renderList(){const visible=tracks.map((t,i)=>({t,i})).filter(x=>!filter||favorites.has(x.i));$('#count').textContent=visible.length+' 首';$('#list').replaceChildren();visible.forEach(({t,i})=>{const b=document.createElement('button');b.className='song';b.setAttribute('aria-current',String(i===current));b.innerHTML='<span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="song-info"><strong>'+t.title+'</strong><small>'+t.artist+'</small></span><span class="duration">'+time(t.duration)+'</span>';b.onclick=()=>select(i);$('#list').appendChild(b)});if(!visible.length){const p=document.createElement('p');p.className='empty';p.textContent='点一下爱心，把喜欢的歌留下。';$('#list').appendChild(p)}}
+function render(){const t=tracks[current];$('#title').textContent=t.title;$('#artist').textContent=t.artist;$('#duration').textContent=time(t.duration);$('#seek').max=t.duration;$('#heart').textContent=favorites.has(current)?'♥':'♡';$('#heart').setAttribute('aria-pressed',String(favorites.has(current)));$('#player').classList.toggle('playing',playing);$('#play').setAttribute('aria-pressed',String(playing));$('#play').setAttribute('aria-label',playing?'暂停演示':'演示播放');$('#playIcon').setAttribute('d',playing?'M8 5v14M16 5v14':'m8 5 11 7-11 7z');progress();renderList()}
+function select(i){current=(i+tracks.length)%tracks.length;position=0;render()}
+$('#play').onclick=()=>{playing=!playing;render()};$('#prev').onclick=()=>select(current-1);$('#next').onclick=()=>select(current+1);$('#seek').oninput=e=>{position=Number(e.target.value);progress()};$('#heart').onclick=()=>{favorites.has(current)?favorites.delete(current):favorites.add(current);render()};
+function tab(f){filter=f;['allTab','favTab'].forEach((id,i)=>{const active=Boolean(i)===f;$('#'+id).setAttribute('aria-selected',String(active));$('#'+id).tabIndex=active?0:-1});$('#list').setAttribute('aria-labelledby',f?'favTab':'allTab');renderList()}
+$('#allTab').onclick=()=>tab(false);$('#favTab').onclick=()=>tab(true);document.querySelector('.tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();tab(e.key==='Home'?false:e.key==='End'?true:!filter);$(filter?'#favTab':'#allTab').focus()}};
+setInterval(()=>{if(!playing||document.hidden)return;position++;if(position>=tracks[current].duration)select(current+1);else progress()},1000);render();
+</script>
+</body></html>
