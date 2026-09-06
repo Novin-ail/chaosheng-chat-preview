@@ -15,7 +15,7 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-6',{cache:'no-store'});
+    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-7',{cache:'no-store'});
     let t=await r.text();
 
     t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','https://iili.io/ndhHiQI.png');
@@ -24,7 +24,7 @@
     t=t.replace(
       '.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important}',
       `.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important;position:relative!important;isolation:isolate!important}
-.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:24px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
+.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:8px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
 .room-bottom .water-corner>*{position:relative;z-index:1}`
     );
 
@@ -61,7 +61,7 @@
       `.room-bottom .eight i.done{opacity:.98;transform:scale(1.08);box-shadow:0 1px 4px rgba(108,132,144,.12)}
 .room-bottom .snack-home{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important;position:relative!important;top:-18px!important;justify-content:flex-start!important;padding:0 8px 8px!important}
 .room-bottom .snack-home::before{content:"";display:block;width:96px;height:34px;flex:0 0 34px;margin:0 auto -2px;background:url('https://iili.io/ndsJUFI.png') center/contain no-repeat;pointer-events:none}
-.room-bottom .snack-home .snack-box{margin:-4px auto -5px!important}
+.room-bottom .snack-home .snack-box{margin:-18px auto -5px!important}
 .room-bottom .snack-home b{display:none!important}`
     );
 
@@ -69,7 +69,7 @@
     document.write(t);
     document.close();
   }catch(e){
-    location.replace('nest-runtime-water.html?v=20260906-water-card-6');
+    location.replace('nest-runtime-water.html?v=20260906-water-card-7');
   }
 })();
 </script>
