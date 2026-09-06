@@ -12,10 +12,34 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-iili-1');
+    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-2');
     let t=await r.text();
     t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','https://iili.io/ndhHiQI.png');
     t=t.replaceAll('https://files.catbox.moe/qkpuy3.png','https://iili.io/ndhHPhN.png');
+
+    const waterCardCss=`
+/* hydration card polish */
+.room-bottom .water-corner{position:relative!important;isolation:isolate!important}
+.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:34px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
+.room-bottom .water-corner>*,.room-bottom .water-head{position:relative;z-index:1}
+.room-bottom .cup-btn{width:118px!important;height:104px!important;margin-top:0!important}
+.room-bottom .water-cup-img{width:96px!important;height:96px!important;top:46%!important}
+.room-bottom .cup-status{display:none!important}
+.room-bottom .eight{position:relative;z-index:2;margin-top:-2px!important;gap:5px!important}
+.room-bottom .eight i{width:7px!important;height:7px!important;opacity:.36!important;transition:opacity .28s ease,transform .28s ease!important}
+.room-bottom .eight i:nth-child(1){background:#b7d7ea!important}
+.room-bottom .eight i:nth-child(2){background:#c7dcf4!important}
+.room-bottom .eight i:nth-child(3){background:#d8e3fb!important}
+.room-bottom .eight i:nth-child(4){background:#f3d6e6!important}
+.room-bottom .eight i:nth-child(5){background:#f2d2cf!important}
+.room-bottom .eight i:nth-child(6){background:#e7d7f3!important}
+.room-bottom .eight i:nth-child(7){background:#d6e8df!important}
+.room-bottom .eight i:nth-child(8){background:#f5dfbf!important}
+.room-bottom .eight i.done{opacity:.98!important;transform:scale(1.08)!important;box-shadow:0 1px 4px rgba(108,132,144,.12)!important}
+@media(max-width:370px){.room-bottom .water-corner::before{width:160px;height:160px;top:36px}.room-bottom .water-cup-img{width:91px!important;height:91px!important}}
+`;
+    t=t.replace('</style>',waterCardCss+'</style>');
+
     document.open();
     document.write(t);
     document.close();
