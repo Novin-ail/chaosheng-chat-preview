@@ -10,6 +10,7 @@
 <title>潮生 · Chat Preview</title>
 <link rel="stylesheet" href="styles/base.css"/>
 <link rel="stylesheet" href="styles/drawer.css"/>
+<link rel="stylesheet" href="styles/todo-sheet.css"/>
 <link rel="stylesheet" href="styles/chat.css"/>
 </head>
 <body>
@@ -96,7 +97,22 @@
 </div>
 </footer>
 </main>
+<div class="todo-sheet-layer" id="todoSheetLayer" aria-hidden="true">
+<button class="todo-sheet-backdrop" id="todoSheetBackdrop" type="button" aria-label="关闭今日待办"></button>
+<section class="todo-sheet" id="todoSheet" role="dialog" aria-modal="true" aria-labelledby="todoSheetTitle">
+<div class="todo-handle" id="todoHandle" aria-hidden="true"></div>
+<header class="todo-sheet-head">
+<div><div class="todo-sheet-kicker"><i>✦</i><span>COLOR THE DAY</span></div><div class="todo-sheet-title" id="todoSheetTitle">今日待办</div><div class="todo-sheet-date" id="todoSheetDate">SUN · SEP 06</div></div>
+<button class="todo-sheet-close" id="todoSheetClose" type="button" aria-label="关闭">×</button>
+</header>
+<div class="todo-progress"><div class="todo-progress-track"><i id="todoProgressBar"></i></div><span class="todo-progress-copy" id="todoProgressCopy">0 / 0 彩色了</span></div>
+<div class="todo-tape-scroll"><div class="todo-tape-list" id="todoTapeList"></div></div>
+<div class="todo-add"><button class="todo-author" id="todoAuthorBtn" type="button">小漾</button><input id="todoAddInput" type="text" maxlength="80" placeholder="贴一条新的待办…"/><button class="todo-add-btn" id="todoAddBtn" type="button" aria-label="添加待办">＋</button></div>
+<div class="todo-archive" id="todoArchive"><button class="todo-archive-toggle" id="todoArchiveToggle" type="button" aria-expanded="false"><strong>完成盒子</strong><small>PAST DAYS</small><span class="archive-count" id="todoArchiveCount">0</span><span class="archive-chev">⌄</span></button><div class="todo-archive-list"><div class="todo-archive-inner" id="todoArchiveInner"></div></div></div>
+</section>
+</div>
 <div class="toast" id="toast">这里只是前端预览</div>
+<script src="todo-sheet.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
