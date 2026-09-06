@@ -15,16 +15,27 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-7',{cache:'no-store'});
+    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-8',{cache:'no-store'});
     let t=await r.text();
 
     t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','https://iili.io/ndhHiQI.png');
     t=t.replaceAll('https://files.catbox.moe/qkpuy3.png','https://iili.io/ndhHPhN.png');
 
+    t=t.replace('</style>', \
+      \`/* nest position refinement */
+.room-date{position:relative!important;top:-38px!important;margin-bottom:-26px!important}
+.room-top{position:relative!important;top:-24px!important;margin-bottom:-24px!important}
+.room-top .cat-wall-bg{width:116%!important;height:116%!important;left:-8%!important;top:-8%!important}
+.room-top .notes-board{left:5%!important;right:5%!important;top:17%!important;bottom:5%!important}
+.room-bottom .snack-home{top:-30px!important}
+.room-bottom .snack-home::before{transform:translateY(-8px)!important}
+.room-bottom .snack-home .snack-box{margin:-30px auto -5px!important}
+\`+'</style>');
+
     t=t.replace(
       '.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important}',
       `.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important;position:relative!important;isolation:isolate!important}
-.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:8px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
+.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:-8px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
 .room-bottom .water-corner>*{position:relative;z-index:1}`
     );
 
@@ -69,7 +80,7 @@
     document.write(t);
     document.close();
   }catch(e){
-    location.replace('nest-runtime-water.html?v=20260906-water-card-7');
+    location.replace('nest-runtime-water.html?v=20260906-water-card-8');
   }
 })();
 </script>
