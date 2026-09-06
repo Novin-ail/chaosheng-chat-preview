@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
@@ -9,10 +8,10 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&amp;display=swap" rel="stylesheet"/>
 <title>潮生 · Chat Preview</title>
-
 <link rel="stylesheet" href="styles/base.css"/>
 <link rel="stylesheet" href="styles/drawer.css"/>
-<link rel="stylesheet" href="styles/chat.css"/></head>
+<link rel="stylesheet" href="styles/chat.css"/>
+</head>
 <body>
 <main class="app show-avatar" id="app">
 <header class="topbar">
@@ -32,34 +31,31 @@
 <aside class="side-drawer" id="sideDrawer">
 <div class="drawer-wave"></div>
 <div class="drawer-content">
-<div class="anniv-zone" id="annivZone">
-<div class="love-title"><span>小漾</span><span class="love-title-heart">♡</span><span>声声</span><img alt="" class="love-title-art" src="https://files.catbox.moe/zans4i.png"/></div>
-<button aria-expanded="false" class="love-card" id="annivTrigger">
-<div class="anniv-calendar">
-<div class="date-side prev"><small>昨天</small><span class="date-num" id="prevDate">--.--</span></div>
-<img alt="" class="fish-link left" src="https://files.catbox.moe/s1hvxv.png"/>
-<div class="anniv-center"><div class="anniv-copy">在一起</div><div class="anniv-dayline"><span class="tiny">第</span><span class="anniv-day" id="annivDay">52</span><span class="tiny">天</span></div></div>
-<img alt="" class="fish-link right" src="https://files.catbox.moe/s1hvxv.png"/>
-<div class="date-side next"><small>明天</small><span class="date-num" id="nextDate">--.--</span></div>
+<section class="drawer-overview" aria-label="时间与在一起天数">
+<div class="drawer-clock">
+<div class="clock-time" id="drawerTime">--:--</div>
+<div class="clock-date" id="drawerDate">FRIDAY · AUG 14 · DAY 243</div>
+<img alt="" class="clock-art" src="https://files.catbox.moe/zans4i.png"/>
 </div>
-</button>
-<div aria-hidden="true" class="anniv-picker" id="annivPicker">
-<div class="picker-head"><strong>纪念日</strong><small id="pickerDateText">2026.07.14</small></div>
-<div class="picker-row">
-<div class="cute-select" data-kind="year"><button class="cute-select-btn"><span class="cute-value">2026 年</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button><div class="cute-options"></div></div>
-<div class="cute-select" data-kind="month"><button class="cute-select-btn"><span class="cute-value">07 月</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button><div class="cute-options"></div></div>
-<div class="cute-select" data-kind="day"><button class="cute-select-btn"><span class="cute-value">14 日</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button><div class="cute-options"></div></div>
+<div class="relationship-block">
+<div class="relationship-names">小漾 <span>&amp;</span> 声声</div>
+<div class="relationship-together">在一起</div>
+<div class="relationship-days"><small>已经</small><strong id="drawerTogetherDays">--</strong><em>天</em></div>
+<div class="relationship-caption"><i>✦</i><span>STAY CLOSE · DAY <b id="drawerTogetherDayCaption">--</b></span></div>
 </div>
-</div>
-</div>
-<div class="drawer-grid">
-<button class="drawer-tile" data-route="聊天"><img alt="" class="drawer-art art-star" src="https://files.catbox.moe/sv46yk.png"/><span>聊天</span></button>
-<button class="drawer-tile" data-route="回忆"><img alt="" class="drawer-art art-stars-vertical" src="https://files.catbox.moe/n11nbn.png"/><span>回忆</span></button>
-<button class="drawer-tile" data-route="相册"><img alt="" class="drawer-art art-rain" src="https://files.catbox.moe/zbxuev.png"/><span>相册</span></button>
-<button class="drawer-tile" data-route="日记"><img alt="" class="drawer-art art-full-bubbles" src="https://files.catbox.moe/lu0pwk.png"/><span>日记</span></button>
-<button class="drawer-tile" data-route="收藏"><img alt="" class="drawer-art art-flowers" src="https://files.catbox.moe/ii7ylb.png"/><span>收藏</span></button>
-<button class="drawer-tile" data-route="小窝"><img alt="" class="drawer-art art-paw" src="https://files.catbox.moe/msizzp.png"/><span>小窝</span></button>
-</div>
+<div class="drawer-rule" aria-hidden="true"><span>·</span></div>
+</section>
+<section class="drawer-menu" aria-label="今日待办">
+<div class="drawer-menu-head"><span>TODAY</span><strong>今日待办</strong></div>
+<nav class="drawer-list">
+<button class="drawer-link" data-route="cron"><span class="drawer-index">01</span><span class="drawer-label">cron</span><span class="drawer-line"></span><span class="drawer-en">schedule</span></button>
+<button class="drawer-link" data-route="回忆"><span class="drawer-index">02</span><span class="drawer-label">回忆</span><span class="drawer-line"></span><span class="drawer-en">memory</span></button>
+<button class="drawer-link" data-route="相册"><span class="drawer-index">03</span><span class="drawer-label">相册</span><span class="drawer-line"></span><span class="drawer-en">album</span></button>
+<button class="drawer-link" data-route="日记"><span class="drawer-index">04</span><span class="drawer-label">日记</span><span class="drawer-line"></span><span class="drawer-en">diary</span></button>
+<button class="drawer-link" data-route="工作室"><span class="drawer-index">05</span><span class="drawer-label">工作室</span><span class="drawer-line"></span><span class="drawer-en">studio</span></button>
+<button class="drawer-link" data-route="小窝"><span class="drawer-index">06</span><span class="drawer-label">小窝</span><span class="drawer-line"></span><span class="drawer-en">nest</span></button>
+</nav>
+</section>
 <div class="drawer-footer"><button class="drawer-back" id="drawerBack"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg><span>· back</span><img alt="" class="back-sheep" src="https://files.catbox.moe/ge809e.png"/></button></div>
 </div>
 </aside>
@@ -92,7 +88,6 @@
 </footer>
 </main>
 <div class="toast" id="toast">这里只是前端预览</div>
-
-
-<script src="app.js"></script></body>
+<script src="app.js"></script>
+</body>
 </html>
