@@ -15,7 +15,7 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-5',{cache:'no-store'});
+    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-6',{cache:'no-store'});
     let t=await r.text();
 
     t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','https://iili.io/ndhHiQI.png');
@@ -23,7 +23,9 @@
 
     t=t.replace(
       '.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important}',
-      '.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important;position:relative!important;isolation:isolate!important}\\n.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:24px;width:174px;height:174px;transform:translateX(-50%);background:url(\'https://iili.io/ndPxJZF.png\') center/contain no-repeat;opacity:.96}\\n.room-bottom .water-corner>*{position:relative;z-index:1}'
+      `.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important;position:relative!important;isolation:isolate!important}
+.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:24px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
+.room-bottom .water-corner>*{position:relative;z-index:1}`
     );
 
     t=t.replace(
@@ -42,15 +44,32 @@
     );
 
     t=t.replace(
-      '.room-bottom .eight i{width:6px;height:6px;background:rgba(144,178,191,.16)}\\n.room-bottom .eight i.done{background:rgba(130,181,202,.62)}',
-      '.room-bottom .eight i{width:7px;height:7px;opacity:.38;transition:opacity .28s ease,transform .28s ease}\\n.room-bottom .eight i:nth-child(1){background:#b7d7ea}\\n.room-bottom .eight i:nth-child(2){background:#c7dcf4}\\n.room-bottom .eight i:nth-child(3){background:#d8e3fb}\\n.room-bottom .eight i:nth-child(4){background:#f3d6e6}\\n.room-bottom .eight i:nth-child(5){background:#f2d2cf}\\n.room-bottom .eight i:nth-child(6){background:#e7d7f3}\\n.room-bottom .eight i:nth-child(7){background:#d6e8df}\\n.room-bottom .eight i:nth-child(8){background:#f5dfbf}\\n.room-bottom .eight i.done{opacity:.98;transform:scale(1.08);box-shadow:0 1px 4px rgba(108,132,144,.12)}\\n.room-bottom .snack-home{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important;position:relative!important;top:-14px!important;justify-content:flex-start!important;padding:0 8px 8px!important}\\n.room-bottom .snack-home::before{content:"";display:block;width:92px;height:32px;flex:0 0 32px;margin:0 auto -1px;background:url(\'https://iili.io/ndsJUFI.png\') center/contain no-repeat;pointer-events:none}\\n.room-bottom .snack-home .snack-box{margin:-1px auto -5px!important}\\n.room-bottom .snack-home b{display:none!important}'
+      '.room-bottom .eight i{width:6px;height:6px;background:rgba(144,178,191,.16)}',
+      `.room-bottom .eight i{width:7px;height:7px;opacity:.38;transition:opacity .28s ease,transform .28s ease}
+.room-bottom .eight i:nth-child(1){background:#b7d7ea}
+.room-bottom .eight i:nth-child(2){background:#c7dcf4}
+.room-bottom .eight i:nth-child(3){background:#d8e3fb}
+.room-bottom .eight i:nth-child(4){background:#f3d6e6}
+.room-bottom .eight i:nth-child(5){background:#f2d2cf}
+.room-bottom .eight i:nth-child(6){background:#e7d7f3}
+.room-bottom .eight i:nth-child(7){background:#d6e8df}
+.room-bottom .eight i:nth-child(8){background:#f5dfbf}`
+    );
+
+    t=t.replace(
+      '.room-bottom .eight i.done{background:rgba(130,181,202,.62)}',
+      `.room-bottom .eight i.done{opacity:.98;transform:scale(1.08);box-shadow:0 1px 4px rgba(108,132,144,.12)}
+.room-bottom .snack-home{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important;position:relative!important;top:-18px!important;justify-content:flex-start!important;padding:0 8px 8px!important}
+.room-bottom .snack-home::before{content:"";display:block;width:96px;height:34px;flex:0 0 34px;margin:0 auto -2px;background:url('https://iili.io/ndsJUFI.png') center/contain no-repeat;pointer-events:none}
+.room-bottom .snack-home .snack-box{margin:-4px auto -5px!important}
+.room-bottom .snack-home b{display:none!important}`
     );
 
     document.open();
     document.write(t);
     document.close();
   }catch(e){
-    location.replace('nest-runtime-water.html?v=20260906-water-card-5');
+    location.replace('nest-runtime-water.html?v=20260906-water-card-6');
   }
 })();
 </script>
