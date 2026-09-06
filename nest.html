@@ -15,39 +15,42 @@
 <script>
 (async()=>{
   try{
-    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-3',{cache:'no-store'});
+    const r=await fetch('nest-runtime-water.html?v=20260906-water-card-4',{cache:'no-store'});
     let t=await r.text();
+
     t=t.replaceAll('https://files.catbox.moe/wsm2qn.png','https://iili.io/ndhHiQI.png');
     t=t.replaceAll('https://files.catbox.moe/qkpuy3.png','https://iili.io/ndhHPhN.png');
 
-    const waterCardCss=`
-/* hydration card polish */
-.room-bottom .water-corner{position:relative!important;isolation:isolate!important}
-.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:34px;width:174px;height:174px;transform:translateX(-50%);background:url('https://iili.io/ndPxJZF.png') center/contain no-repeat;opacity:.96}
-.room-bottom .water-corner>*,.room-bottom .water-head{position:relative;z-index:1}
-.room-bottom .cup-btn{width:118px!important;height:104px!important;margin-top:0!important}
-.room-bottom .water-cup-img{width:96px!important;height:96px!important;top:46%!important}
-.room-bottom .cup-status{display:none!important}
-.room-bottom .eight{position:relative;z-index:2;margin-top:-2px!important;gap:5px!important}
-.room-bottom .eight i{width:7px!important;height:7px!important;opacity:.36!important;transition:opacity .28s ease,transform .28s ease!important}
-.room-bottom .eight i:nth-child(1){background:#b7d7ea!important}
-.room-bottom .eight i:nth-child(2){background:#c7dcf4!important}
-.room-bottom .eight i:nth-child(3){background:#d8e3fb!important}
-.room-bottom .eight i:nth-child(4){background:#f3d6e6!important}
-.room-bottom .eight i:nth-child(5){background:#f2d2cf!important}
-.room-bottom .eight i:nth-child(6){background:#e7d7f3!important}
-.room-bottom .eight i:nth-child(7){background:#d6e8df!important}
-.room-bottom .eight i:nth-child(8){background:#f5dfbf!important}
-.room-bottom .eight i.done{opacity:.98!important;transform:scale(1.08)!important;box-shadow:0 1px 4px rgba(108,132,144,.12)!important}
-@media(max-width:370px){.room-bottom .water-corner::before{width:160px;height:160px;top:36px}.room-bottom .water-cup-img{width:91px!important;height:91px!important}}
-`;
-    t=t.replace('</style>',waterCardCss+'</style>');
+    t=t.replace(
+      '.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important}',
+      '.room-bottom .water-corner{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;padding-top:9px!important;position:relative!important;isolation:isolate!important}\\n.room-bottom .water-corner::before{content:"";position:absolute;z-index:0;pointer-events:none;left:50%;top:34px;width:174px;height:174px;transform:translateX(-50%);background:url(\'https://iili.io/ndPxJZF.png\') center/contain no-repeat;opacity:.96}\\n.room-bottom .water-corner>*{position:relative;z-index:1}'
+    );
+
+    t=t.replace(
+      '.room-bottom .cup-btn{width:126px!important;height:112px!important;margin-top:-1px!important;background:transparent!important;border:0!important;position:relative!important;overflow:visible!important}',
+      '.room-bottom .cup-btn{width:118px!important;height:104px!important;margin-top:0!important;background:transparent!important;border:0!important;position:relative!important;overflow:visible!important}'
+    );
+
+    t=t.replace(
+      '.water-cup-img{position:absolute;left:50%;top:47%;width:104px;height:104px;transform:translate(-50%,-50%);object-fit:contain;transition:opacity .72s ease,transform .72s cubic-bezier(.2,.82,.2,1);filter:drop-shadow(0 1px 1px rgba(102,137,151,.24)) drop-shadow(0 8px 13px rgba(99,132,146,.10));pointer-events:none}',
+      '.water-cup-img{position:absolute;left:50%;top:46%;width:96px;height:96px;transform:translate(-50%,-50%);object-fit:contain;transition:opacity .72s ease,transform .72s cubic-bezier(.2,.82,.2,1);filter:drop-shadow(0 1px 1px rgba(102,137,151,.24)) drop-shadow(0 8px 13px rgba(99,132,146,.10));pointer-events:none}'
+    );
+
+    t=t.replace(
+      '.room-bottom .cup-status{bottom:-1px!important;color:#8fa5ae!important;font-size:6.4px!important}',
+      '.room-bottom .cup-status{display:none!important}'
+    );
+
+    t=t.replace(
+      '.room-bottom .eight i{width:6px;height:6px;background:rgba(144,178,191,.16)}\\n.room-bottom .eight i.done{background:rgba(130,181,202,.62)}',
+      '.room-bottom .eight i{width:7px;height:7px;opacity:.38;transition:opacity .28s ease,transform .28s ease}\\n.room-bottom .eight i:nth-child(1){background:#b7d7ea}\\n.room-bottom .eight i:nth-child(2){background:#c7dcf4}\\n.room-bottom .eight i:nth-child(3){background:#d8e3fb}\\n.room-bottom .eight i:nth-child(4){background:#f3d6e6}\\n.room-bottom .eight i:nth-child(5){background:#f2d2cf}\\n.room-bottom .eight i:nth-child(6){background:#e7d7f3}\\n.room-bottom .eight i:nth-child(7){background:#d6e8df}\\n.room-bottom .eight i:nth-child(8){background:#f5dfbf}\\n.room-bottom .eight i.done{opacity:.98;transform:scale(1.08);box-shadow:0 1px 4px rgba(108,132,144,.12)}'
+    );
 
     document.open();
     document.write(t);
     document.close();
   }catch(e){
-    location.replace('nest-runtime-water.html?v=20260906-water-card-3');
+    location.replace('nest-runtime-water.html?v=20260906-water-card-4');
   }
 })();
 </script>
