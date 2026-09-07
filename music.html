@@ -39,7 +39,7 @@ dialog{color:var(--ink);border:1px solid var(--line);border-radius:24px 8px 24px
 <button class="search-open" id="searchOpen">⌕ &nbsp; 找一首歌，收进小窝</button>
 <section class="player" id="player" aria-label="唱片播放器">
 <button class="art" id="artToggle" aria-label="查看歌词" aria-controls="lyricsView" aria-expanded="false"><img class="frame" src="https://iili.io/ndLuGZQ.png" alt=""><img class="record" src="https://iili.io/ndLTEBI.png" alt="旋转唱片"></button><section id="lyricsView" class="lyrics-view" aria-label="歌词" hidden><strong id="lyricsTitle"></strong><p>歌词还没来到小窝</p><p>接入音源后，在这里看歌词。</p><button class="pill" id="backToRecord">返回唱片</button></section>
-<div class="track-head"><span></span><div><h2 id="title"></h2><p class="artist" id="artist"></p></div><button class="heart" id="heart" aria-label="收藏歌曲" aria-pressed="false">♡</button></div>
+<div class="track-head"><button class="heart" id="shareToChat" aria-label="分享给声声" style="font-size:13px">分享</button><div><h2 id="title"></h2><p class="artist" id="artist"></p></div><button class="heart" id="heart" aria-label="收藏歌曲" aria-pressed="false">♡</button></div>
 <input class="seek" id="seek" type="range" min="0" max="240" value="0" aria-label="演示播放进度">
 <div class="times"><span id="elapsed">0:00</span><span id="duration">4:00</span></div>
 <div class="controls"><button id="prev" aria-label="上一首"><svg viewBox="0 0 24 24"><path d="M5 5v14m14-14L8 12l11 7z"/></svg></button><button class="play" id="play" aria-label="演示播放" aria-pressed="false"><svg viewBox="0 0 24 24"><path id="playIcon" d="m8 5 11 7-11 7z"/></svg></button><button id="next" aria-label="下一首"><svg viewBox="0 0 24 24"><path d="M19 5v14M5 5l11 7-11 7z"/></svg></button></div>
@@ -114,5 +114,9 @@ $('#newListForm').onsubmit=e=>{e.preventDefault();const name=$('#listName').valu
 $('#listsDialog').addEventListener('close',()=>{createWithSong=false});
 setInterval(()=>{if(!playing||document.hidden)return;position++;if(position>=tracks[current].duration)select(current+1);else progress()},1000);render();
 
+
+$('#shareToChat').onclick=()=>{try{sessionStorage.setItem('chaosheng-song-share-preview',JSON.stringify({title:tracks[current].title,artist:tracks[current].artist}));location.href='index.html?v=chat-special-1'}catch{toast('暂时无法准备分享，请从聊天的分享歌曲入口添加')}};
+const sharedTitle=new URLSearchParams(location.search).get('previewSong');
+if(sharedTitle){const found=tracks.findIndex(t=>t.title===sharedTitle);if(found>=0)select(found);else toast('示例曲库暂时没有这首歌，接入音源后再听。')}
 </script>
 </body></html>
