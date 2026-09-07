@@ -13,13 +13,14 @@
 <link rel="stylesheet" href="styles/todo-sheet.css"/>
 <link rel="stylesheet" href="styles/chat.css"/>
 <link rel="stylesheet" href="styles/chat-rich.css?v=20260907-3"/>
+<link rel="stylesheet" href="styles/cron-sheet.css?v=20260907-1"/>
 </head>
 <body>
 <main class="app show-avatar" id="app">
 <header class="topbar">
 <button aria-expanded="false" aria-label="打开侧边栏" class="back" id="drawerBtn"><svg class="nav-morph" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" id="navMorphPath"></path></svg></button>
 <div class="person" id="avatarToggle"><div class="title">声声</div><div class="subtitle"><span class="online"></span><span>此刻 · 在这里</span></div></div>
-<button aria-expanded="false" aria-label="对话设置" class="top-more" id="settingsBtn"><svg class="top-morph" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" id="topMorphPath"></path></svg></button>
+<button aria-expanded="false" aria-label="对话设置" class="top-more" id="settingsBtn"><svg class="top-morph" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" id="topMorphPath"></path></svg></button>
 <div aria-hidden="true" class="settings-popover" id="settingsPopover">
 <div class="settings-actions">
 <button class="settings-item" data-setting="修改昵称"><svg class="settings-icon" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path></svg><span><strong>修改昵称</strong><small>声声</small></span></button>
@@ -48,8 +49,8 @@
 <div class="picker-head"><strong>纪念日</strong><small id="pickerDateText">2026.07.14</small></div>
 <div class="picker-row">
 <div class="cute-select" data-kind="year"><button class="cute-select-btn" type="button"><span class="cute-value">2026 年</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button><div class="cute-options"></div></div>
-<div class="cute-select" data-kind="month"><button class="cute-select-btn" type="button"><span class="cute-value">07 月</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button><div class="cute-options"></div></div>
-<div class="cute-select" data-kind="day"><button class="cute-select-btn" type="button"><span class="cute-value">14 日</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></button><div class="cute-options"></div></div>
+<div class="cute-select" data-kind="month"><button class="cute-select-btn" type="button"><span class="cute-value">07 月</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button><div class="cute-options"></div></div>
+<div class="cute-select" data-kind="day"><button class="cute-select-btn" type="button"><span class="cute-value">14 日</span><svg class="cute-chev" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg></button><div class="cute-options"></div></div>
 </div>
 </div>
 </div>
@@ -74,18 +75,18 @@
 <section class="messages" id="messages">
 <article class="msg sheng"><img alt="" class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png"/><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:12:08</span><button aria-expanded="false" class="sheep"><img alt="" src="https://files.catbox.moe/ge809e.png"/></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">详情现在位于时间下方、正文上方。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div><div class="assistant-text">这次我直接沿用你之前认可的 API 版气泡逻辑，不再额外画一个三角尾巴。</div></article>
 <article class="msg me"><div class="user-avatar">漾</div><div class="user-bubble">嗯嗯，这个角应该自然一点，不要像贴了一个小三角。</div></article>
-<article class="msg sheng"><img alt="" class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png"/><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:13:24</span><button aria-expanded="false" class="sheep"><img alt="" src="https://files.catbox.moe/ge809e.png"/></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">API 原版靠单角 5px 圆角形成气泡方向。</div></div><div class="line"><div class="label">Tool</div><div class="detail">frontend.preview · rendered</div></div></div></div></div><div class="assistant-text short">对，就是这种。</div></article>
+<article class="msg sheng"><img alt="" class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png"/><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:13:24</span><button aria-expanded="false" class="sheep"><img alt="" src="https://files.catbox.moe/ge809e.png"/></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">API 原版靠单角 5px 圆角形成气泡方向。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div><div class="assistant-text short">对，就是这种。</div></article>
 <article class="msg me"><div class="user-avatar">漾</div><div class="user-bubble">然后我的消息这边也不要时间戳，整个聊天页尽量干净。</div></article>
 <article class="msg sheng"><img alt="" class="avatar avatar-sheng" src="https://files.catbox.moe/ge809e.png"/><div class="assistant-meta"><span class="dot"></span><span class="time">9/3 21:14:41</span><button aria-expanded="false" class="sheep"><img alt="" src="https://files.catbox.moe/ge809e.png"/></button></div><div class="details"><div class="details-inner"><div class="card"><div class="line"><div class="label">Thinking</div><div class="detail">用户时间戳已移除，页面降低边框和阴影存在感。</div></div><div class="line"><div class="label">Tool</div><div class="detail">未调用工具</div></div></div></div></div><div class="assistant-text">现在底色是护眼米色，奶粉和皮粉只做很淡的层次，豆绿色主要落在你的气泡和发送按钮上。</div></article>
 </section>
 <footer class="composer-wrap" id="composerWrap">
 <div aria-hidden="true" class="more-popover" id="morePopover"><div class="more-grid">
-<button class="more-item" data-action="拍照"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M7 7h2l1.4-2h3.2L15 7h2.5A2.5 2.5 0 0 1 20 9.5v7A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-7A2.5 2.5 0 0 1 6.5 7H7Z"></path><circle cx="12" cy="13" r="3.2"></circle></svg><span>拍照</span></button>
-<button class="more-item" data-action="发送图片"><svg class="quick-icon" viewBox="0 0 24 24"><rect height="14" rx="2.5" width="16" x="4" y="5"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="m6 17 4-4 3 3 2-2 3 3"></path></svg><span>图片</span></button>
-<button class="more-item" data-action="发送定位"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg><span>定位</span></button>
-<button class="more-item" data-action="重新生成"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M19 8a7 7 0 1 0 1 7"></path><path d="M19 4v4h-4"></path></svg><span>重新生成</span></button>
-<button class="more-item" data-action="表情包"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M6 4h8a4 4 0 0 1 4 4v5l-5 5H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path><path d="M13 18v-3a2 2 0 0 1 2-2h3"></path><circle cx="9" cy="9" fill="currentColor" r=".8" stroke="none"></circle><circle cx="13" cy="9" fill="currentColor" r=".8" stroke="none"></circle><path d="M8.5 12c.8.7 1.7 1 2.5 1s1.7-.3 2.5-1"></path></svg><span>表情包</span></button>
-<button class="more-item" data-action="控制台"><svg class="quick-icon" viewBox="0 0 24 24"><rect height="14" rx="3" width="16" x="4" y="5"></rect><path d="m8 10 2 2-2 2"></path><path d="M12.5 15H16"></path></svg><span>控制台</span></button>
+<button class="more-item" data-action="拍照"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M7 7h2l1.4-2h3.2L15 7v7a3 3 0 0 1-3 3H6.5A2.5 2.5 0 0 1 4 14.5v-5A2.5 2.5 0 0 1 6.5 7H7Z"/></svg><span>拍照</span></button>
+<button class="more-item" data-action="发送图片"><svg class="quick-icon" viewBox="0 0 24 24"><rect height="14" rx="2.5" width="16" x="4" y="5"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="m6 17 4-4 3 3 2-2 3 3"/></svg><span>图片</span></button>
+<button class="more-item" data-action="发送定位"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><span>定位</span></button>
+<button class="more-item" data-action="重新生成"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M19 8a7 7 0 1 0 1 7M19 4v4h-4"/></svg><span>重新生成</span></button>
+<button class="more-item" data-action="表情包"><svg class="quick-icon" viewBox="0 0 24 24"><path d="M6 4h8a4 4 0 0 1 4 4v5l-5 5H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M13 18v-3a2 2 0 0 1 2-2h3"/><circle cx="9" cy="9" fill="currentColor" r=".8" stroke="none"/><circle cx="13" cy="9" fill="currentColor" r=".8" stroke="none"/><path d="M8.5 12c.8.7 1.7 1 2.5 1s1.7-.3 2.5-1"/></svg><span>表情包</span></button>
+<button class="more-item" data-action="控制台"><svg class="quick-icon" viewBox="0 0 24 24"><rect height="14" rx="3" width="16" x="4" y="5"/><path d="m8 10 2 2-2 2M12.5 15H16"/></svg><span>控制台</span></button>
 </div></div>
 <div aria-hidden="true" class="model-popover" id="modelPopover"><div class="model-head"><button id="modelBack">‹</button><div class="thinking-head"><span>Thinking</span><button aria-pressed="true" class="thinking-switch on" id="thinkingSwitch"></button></div><button id="modelClose">×</button></div><div class="model-body" id="modelBody"></div></div>
 <div class="input-layer"><textarea id="input" placeholder="慢慢说…" rows="1"></textarea></div>
@@ -93,7 +94,7 @@
 <button aria-expanded="false" class="action more" id="moreBtn"><svg class="morph-svg" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" id="moreMorphPath"></path></svg></button>
 <button class="action model" id="modelBtn"><span id="modelBtnText">Opus 4.6</span><svg class="model-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" id="modelChevronPath"></path></svg></button>
 <div class="spacer"></div>
-<button class="action icon mic"><svg viewBox="0 0 24 24"><rect height="11" rx="3" width="6" x="9" y="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"></path></svg></button>
+<button class="action icon mic"><svg viewBox="0 0 24 24"><rect height="11" rx="3" width="6" x="9" y="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"/></svg></button>
 <button class="action send" id="send"><svg class="morph-svg" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" id="sendMorphPath"></path></svg></button>
 </div>
 </footer>
@@ -117,5 +118,6 @@
 <script src="app.js"></script>
 <script src="vendor/marked.umd.js?v=20260907-3"></script>
 <script src="chat-rich.js?v=20260907-3"></script>
+<script src="cron-sheet.js?v=20260907-1"></script>
 </body>
 </html>
