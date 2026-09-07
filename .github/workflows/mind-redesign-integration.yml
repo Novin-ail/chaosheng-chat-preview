@@ -1,0 +1,68 @@
+name: One-time Mind redesign integration
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/mind-redesign-integration.yml']
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify source and update only Mind asset versions
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          expected = {
+              'index.html': '609caac936fbf82bdebf3af35d250af57c955bb3',
+              'mind-sheet.js': 'f339dd36990ee4eaea82952ad8ba89c51ea28e93',
+              'styles/mind-sheet.css': '5791ae58807588abaef8bfa7def50442a00f542f',
+          }
+          for path, sha in expected.items():
+              actual = subprocess.check_output(['git','hash-object',path], text=True).strip()
+              if actual != sha:
+                  raise SystemExit(f'{path} changed unexpectedly; refusing to overwrite')
+          path = Path('index.html')
+          source = path.read_text(encoding='utf-8')
+          text = source
+          for old, new in [
+              ('styles/mind-sheet.css?v=20260907-1', 'styles/mind-sheet.css?v=20260907-2'),
+              ('mind-sheet.js?v=20260907-1', 'mind-sheet.js?v=20260907-2'),
+          ]:
+              if text.count(old) != 1:
+                  raise SystemExit(f'Expected one asset reference: {old}')
+              text = text.replace(old,new,1)
+          assert source.count('data-route="mind"') == 1
+          assert source.count('<section class="messages" id="messages">') == 1
+          assert source.count('id="todoSheetLayer"') == 1
+          assert source.count('cron-sheet.js?v=20260907-1') == 1
+          assert source.count('styles/cron-sheet.css?v=20260907-2') == 1
+          path.write_text(text,encoding='utf-8')
+          print('PASS: only Mind asset versions changed; Chat, Todo, and Cron preserved.')
+          PY
+      - name: Check JavaScript and integration
+        run: |
+          node --check mind-sheet.js
+          node --check cron-sheet.js
+          node --check app.js
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('mind-sheet.js').read_text()
+          for name in ['renderSnapshot','showEmpty','connect','refresh','loadSnapshot','loadMore','openSource']:
+              assert name in s, name
+          css=Path('styles/mind-sheet.css').read_text()
+          for name in ['.mind-current','.mind-thought-slip','.mind-memory-stack','.mind-home-ledger','.mind-activity-list','.mind-detail-panel']:
+              assert name in css, name
+          print('PASS: Mind syntax, data adapter, and distinct layout sections.')
+          PY
+      - name: Commit the asset references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Load redesigned Mind assets"
+          git push origin HEAD:main
