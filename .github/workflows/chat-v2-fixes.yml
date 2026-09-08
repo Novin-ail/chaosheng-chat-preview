@@ -1,0 +1,45 @@
+name: One-time Chat v2 corrections
+on:
+  push:
+    branches: [preview/chat-special-v2]
+    paths: ['.github/workflows/chat-v2-fixes.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply exact-source fixes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          expected={
+              'chat-special-v2-timer.js':'139585959cf8ce924dbbdde387ab624289ceb180',
+              'chat-special-v2-music.js':'22bf75b5f1eac7aa15ad408587d6a1b26582fb0c',
+          }
+          # These files were changed by the first guarded integration; check exact snippets below.
+          def replace(path,old,new):
+              p=Path(path);s=p.read_text(encoding='utf-8')
+              if s.count(old)!=1:raise SystemExit('Unexpected source: '+path+' '+old[:60])
+              p.write_text(s.replace(old,new,1),encoding='utf-8')
+          replace('chat-special-v2-timer.js',
+              'const p=Number(localStorage.getItem(POS));if(Number.isFinite(p))position=clamp(p,0,1)',
+              'const stored=localStorage.getItem(POS);if(stored!==null){const p=Number(stored);if(Number.isFinite(p))position=clamp(p,0,1)}')
+          replace('chat-special-v2-music.js',
+              "audioUrl:validUrl(t.audioUrl||t.url)||''",
+              "audioUrl:validUrl(t.audioUrl||t.url,provider==='local')||''")
+          print('PASS: default dock position and local audio URL are corrected.')
+          PY
+          node --check chat-special-v2-timer.js
+          node --check chat-special-v2-music.js
+      - name: Commit corrections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github-actions.com"
+          git add chat-special-v2-timer.js chat-special-v2-music.js
+          git commit -m "Fix persisted dock position and local audio playback"
+          git push origin HEAD:preview/chat-special-v2
