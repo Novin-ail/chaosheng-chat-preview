@@ -1,0 +1,33 @@
+name: Chat v2 browser regression
+on:
+  push:
+    branches: [preview/chat-special-v2]
+    paths: ['.github/workflows/chat-v2-browser-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser runner
+        run: |
+          npm install --no-save @playwright/test@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Run browser tests
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/chat-preview-server.log 2>&1 &
+          sleep 2
+          npx playwright test tests/chat-v2.spec.cjs --workers=1 --reporter=line --timeout=30000
+      - name: Upload failure traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chat-v2-failures
+          path: test-results/
+          if-no-files-found: ignore
