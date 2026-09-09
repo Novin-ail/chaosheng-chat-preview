@@ -42,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html chat-special-v2-core.js chat-special-v2-music.js chat-special-v2-timer.js styles/chat-special-feedback.css tests/chat-v2.spec.cjs
+          git add index.html chat-special-v2-core.js chat-special-v2-music.js chat-special-v2-timer.js styles/chat-special-feedback.css tests/chat-v2.spec.cjs tests/chat-feedback.spec.cjs
           git diff --cached --check
           git commit -m "Restore original Chat shell, fix countdown expiry and image fallbacks"
           git push origin HEAD:fix/chat-special-feedback-20260909
