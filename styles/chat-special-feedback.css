@@ -1,0 +1,30 @@
+/* Only attachment messages are affected. The original Chat metadata, avatars and user bubbles remain authoritative. */
+.msg.sheng.cs2-msg .assistant-text{padding:0;background:transparent;border:0;box-shadow:none;width:auto;max-width:100%}
+.msg.sheng.cs2-msg .cs2-message .rich-md{padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit}
+.msg.sheng.cs2-msg .cs2-message .rich-md:first-child{margin-top:0}
+.msg.sheng.cs2-msg .cs2-message .rich-md+.cs2-attachment{margin-top:9px}
+.msg.cs2-msg .assistant-meta{gap:7px;margin:0 0 8px 1px;font-size:11px;letter-spacing:.025em}
+.msg.cs2-msg .sheep{width:22px;height:22px;padding:2px;border-radius:8px}
+.msg.cs2-msg .sheep img{width:17px;height:17px}
+.msg.cs2-msg .details{width:min(100%,360px)}
+.msg.cs2-msg .details .card{font-size:inherit}
+.app.show-avatar .msg.sheng.cs2-msg{padding-left:43px}
+.app.show-avatar .msg.sheng.cs2-msg>.avatar-sheng{display:block!important}
+.app.show-avatar .msg.me.cs2-msg{padding-right:43px}
+.app.show-avatar .msg.me.cs2-msg>.user-avatar{display:grid!important}
+.msg.me.cs2-msg .user-bubble{width:fit-content;max-width:100%;padding:8px 12px 9px;border:1px solid var(--bubble-border);border-radius:16px 5px 16px 16px;background:color-mix(in srgb,var(--bean) 88%,var(--paper-2));box-shadow:0 4px 14px var(--bubble-shadow)}
+.msg.me.cs2-msg .rich-md{padding:0;background:transparent;border-radius:0}
+.cs2-msg .cs2-message>.cs2-attachment{width:100%;max-width:100%;font-size:13px;line-height:1.5}
+.cs2-msg .cs2-message>.cs2-attachment:first-child{margin-top:0}
+.cs2-song .cs2-cover,.cs2-song .cs2-cover.fallback{width:48px;height:48px;flex:0 0 48px}
+.cs2-song .cs2-cover.fallback{display:grid;place-items:center}
+.cs2-song .cs2-cover img{object-fit:cover}
+/* A single horizontal home: the right edge. */
+.cs2.cs2-dock{left:auto!important;right:0!important;bottom:auto!important;transform:none!important;max-width:calc(100vw - 20px)}
+.cs2-dock .cs2-dock-tab{border-left:1px solid rgba(108,91,80,.12);border-right:0;border-radius:12px 0 0 12px;flex-direction:row-reverse;padding:8px 7px 8px 10px}
+.cs2-dock .cs2-dock-panel{border-left:1px solid var(--cs2-line);border-right:0;border-radius:17px 0 0 17px}
+.cs2-dock .cs2-dock-grip{flex-shrink:0}
+.cs2-dock [hidden]{display:none!important}
+.cs2-cover.fallback,.cs2-web-fallback{overflow:hidden}
+.cs2-cover.fallback svg,.cs2-web-fallback svg{display:block}
+@media(prefers-reduced-motion:reduce){.cs2-dock,.cs2-dock *{transition:none!important}}
