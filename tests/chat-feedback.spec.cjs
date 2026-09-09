@@ -11,7 +11,7 @@ test('original avatars, timestamps, sheep and plain assistant text are preserved
  const m=page.locator('[data-message-id="shell-test"]');
  expect(await m.locator('.assistant-meta').evaluate(n=>[...n.children].map(x=>x.className))).toEqual(expected.classes);
  expect(await m.locator('.sheep img').getAttribute('src')).toBe(expected.sheep);
- await expect(m.locator('.assistant-meta .time')).toContainText('12:34:56');
+ const expectedTime=await page.evaluate(()=>{const d=new Date('2026-09-09T12:34:56+08:00');return [d.getHours(),d.getMinutes(),d.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':')});await expect(m.locator('.assistant-meta .time')).toContainText(expectedTime);
  await expect(m.locator('.avatar-sheng')).toBeVisible();
  expect(await m.locator('.rich-md').evaluate(n=>getComputedStyle(n).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
  await m.locator('.sheep').click();await expect(m.locator('.details')).toHaveClass(/open/);await expect(m.locator('.details')).toContainText('share_song');

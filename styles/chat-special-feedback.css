@@ -27,7 +27,7 @@
 .cs2-image-preview>img,.cs2-image-large>img{object-fit:contain}
 .cs2-image-large{width:100%;max-height:65dvh;aspect-ratio:4/3;margin:auto;border-radius:9px}
 /* A single horizontal home: the right edge. */
-.cs2.cs2-dock{left:auto!important;right:0!important;bottom:auto!important;transform:none!important;max-width:calc(100vw - 20px)}
+.cs2.cs2-dock{left:auto!important;right:0;bottom:auto!important;transform:none!important;max-width:calc(100vw - 20px)}
 .cs2-dock .cs2-dock-tab{border-left:1px solid rgba(108,91,80,.12);border-right:0;border-radius:12px 0 0 12px;flex-direction:row-reverse;padding:8px 7px 8px 10px}
 .cs2-dock .cs2-dock-panel{border-left:1px solid var(--cs2-line);border-right:0;border-radius:17px 0 0 17px}
 .cs2-dock .cs2-dock-grip{flex-shrink:0}

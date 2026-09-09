@@ -19,16 +19,16 @@ test('music uses real audio and opens immersive player',async({page})=>{
  await page.locator('#cs2Player .cs2-sheet-close').click();await expect(page.locator('#cs2Player')).toBeHidden();
 });
 
-test('local countdown pause resume and left-edge docking',async({page})=>{
+test('local countdown pause resume and right-edge docking',async({page})=>{
  await page.setViewportSize({width:390,height:844});const card=page.locator('.cs2-timer').first();await card.locator('.cs2-timer-action').click();
  const dock=page.locator('#cs2TimerDock');await expect(dock).toBeVisible();await dock.locator('.cs2-dock-panel .cs2-soft').first().click();
  const state=await page.evaluate(()=>window.ChaoshengChatV2.services.timers.get('local-demo-timer'));expect(state.status).toBe('paused');
  await dock.locator('.cs2-dock-panel .cs2-soft').first().click();await expect.poll(async()=>page.evaluate(()=>window.ChaoshengChatV2.services.timers.get('local-demo-timer').status)).toBe('running');
  await dock.locator('.cs2-dock-panel .cs2-icon').click();const tab=dock.locator('.cs2-dock-tab');
- const before=await dock.boundingBox();const app=await page.locator('#app').boundingBox();expect(Math.abs(before.x-app.x)).toBeLessThan(2);
+ const before=await dock.boundingBox();const app=await page.locator('#app').boundingBox();expect(Math.abs(before.x+before.width-app.x-app.width)).toBeLessThan(2);
  const point={x:before.x+25,y:before.y+20};await page.mouse.move(point.x,point.y);await page.mouse.down();await page.waitForTimeout(350);await page.mouse.move(point.x+170,point.y-100,{steps:6});await page.mouse.up();
- const after=await dock.boundingBox();expect(Math.abs(after.x-app.x)).toBeLessThan(2);expect(after.y).toBeLessThan(before.y-20);
- await page.reload();const persisted=await dock.boundingBox();expect(Math.abs(persisted.x-app.x)).toBeLessThan(2);expect(Math.abs(persisted.y-after.y)).toBeLessThan(12);
+ const after=await dock.boundingBox();expect(Math.abs(after.x+after.width-app.x-app.width)).toBeLessThan(2);expect(after.y).toBeLessThan(before.y-20);
+ await page.reload();const persisted=await dock.boundingBox();expect(Math.abs(persisted.x+persisted.width-app.x-app.width)).toBeLessThan(2);expect(Math.abs(persisted.y-after.y)).toBeLessThan(12);
  await tab.focus();const old=await dock.boundingBox();await page.keyboard.press('ArrowDown');const moved=await dock.boundingBox();expect(moved.y).toBeGreaterThan(old.y);
 });
 
