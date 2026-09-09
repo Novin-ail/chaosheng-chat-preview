@@ -19,7 +19,9 @@ jobs:
         with:
           node-version: '22'
       - name: Apply exact-source repairs
-        run: python3 scripts/repair-chat-feedback.py
+        run: |
+          python3 scripts/repair-chat-feedback.py
+          python3 scripts/repair-chat-finalize.py
       - name: Check JavaScript syntax
         run: |
           node --check chat-special-v2-core.js
@@ -30,16 +32,17 @@ jobs:
         run: |
           npm install --no-save @playwright/test@1.58.2
           npx playwright install chromium
-      - name: Run focused browser regression
+      - name: Run browser regression
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/chat-feedback-server.log 2>&1 &
           sleep 2
           npx playwright test tests/chat-feedback.spec.cjs --workers=1 --reporter=line --timeout=30000
+          npx playwright test tests/chat-v2.spec.cjs --workers=1 --reporter=line --timeout=30000
       - name: Commit verified changes to repair branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html chat-special-v2-core.js chat-special-v2-music.js chat-special-v2-timer.js
+          git add index.html chat-special-v2-core.js chat-special-v2-music.js chat-special-v2-timer.js styles/chat-special-feedback.css tests/chat-v2.spec.cjs
           git diff --cached --check
           git commit -m "Restore original Chat shell, fix countdown expiry and image fallbacks"
           git push origin HEAD:fix/chat-special-feedback-20260909
